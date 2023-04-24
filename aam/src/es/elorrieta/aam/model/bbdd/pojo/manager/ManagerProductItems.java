@@ -9,9 +9,9 @@ public abstract class ManagerProductItems<T> extends ManagerAbstract<T> {
 	public abstract T select(T t);
 
 	@Override
-	public  abstract void update(T t);
+	public abstract void update(T t);
 
 	@Override
-	public   abstract void delete(T t);
+	public abstract void delete(T t);
 
 }

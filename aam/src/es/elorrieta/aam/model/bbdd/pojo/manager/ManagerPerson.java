@@ -1,6 +1,6 @@
 package es.elorrieta.aam.model.bbdd.pojo.manager;
 
-public abstract class ManagerPersones<T> extends ManagerAbstract<T>{
+public abstract class ManagerPerson<T> extends ManagerAbstract<T>{
 
 	@Override
 	public abstract void insert(T t);
