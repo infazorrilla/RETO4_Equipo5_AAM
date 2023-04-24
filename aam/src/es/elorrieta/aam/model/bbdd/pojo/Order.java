@@ -1,11 +1,14 @@
 package es.elorrieta.aam.model.bbdd.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 import es.elorrieta.aam.model.bbdd.pojo.manager.ManagerOrders;
 
-public class Order extends ManagerOrders<Order> {
+public class Order extends ManagerOrders<Order> implements Serializable {
+
+	private static final long serialVersionUID = 7011816090907660930L;
 
 	// PK
 	private int id = 0;

@@ -1,10 +1,13 @@
 package es.elorrieta.aam.model.bbdd.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class Product {
+public class Product implements Serializable {
+
+	private static final long serialVersionUID = -4377536014361082572L;
 
 	// PK
 	private int id = 0;

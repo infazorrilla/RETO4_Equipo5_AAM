@@ -1,24 +1,25 @@
 package es.elorrieta.aam.model.bbdd.pojo;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Address {
-	
-	//PK
-	private int id= 0;
-	
-	//Attributes
-	
+public class Address implements Serializable {
+
+	private static final long serialVersionUID = 166467952426775958L;
+
+	// PK
+	private int id = 0;
+
+	// Attributes
+
 	private String street = null;
 	private String codPostal = null;
 	private String city = null;
 	private String province = null;
 	private Country country = null;
-	
-	
-	
-	public enum Country{
-		GERMANY , FRANCE , ITALY , SPAIN
+
+	public enum Country {
+		GERMANY, FRANCE, ITALY, SPAIN
 	}
 
 	public int getId() {
@@ -93,6 +94,5 @@ public class Address {
 		return "Address [id=" + id + ", street=" + street + ", codPostal=" + codPostal + ", city=" + city
 				+ ", province=" + province + ", country=" + country + "]";
 	}
-	
-	
+
 }

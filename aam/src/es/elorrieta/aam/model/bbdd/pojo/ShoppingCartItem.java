@@ -1,10 +1,13 @@
 package es.elorrieta.aam.model.bbdd.pojo;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import es.elorrieta.aam.model.bbdd.pojo.manager.ManagerShoppingCartItems;
 
-public class ShoppingCartItem extends ManagerShoppingCartItems<ShoppingCartItem> {
+public class ShoppingCartItem extends ManagerShoppingCartItems<ShoppingCartItem> implements Serializable {
+
+	private static final long serialVersionUID = 8903949143647177682L;
 
 	// PK
 	private int id = 0;

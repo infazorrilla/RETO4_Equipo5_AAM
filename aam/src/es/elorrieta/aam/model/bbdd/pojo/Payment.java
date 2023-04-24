@@ -1,16 +1,19 @@
 package es.elorrieta.aam.model.bbdd.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 import es.elorrieta.aam.model.bbdd.pojo.manager.ManagerPayments;
 
-public class Payment extends ManagerPayments<Payment> {
+public class Payment extends ManagerPayments<Payment> implements Serializable {
+
+	private static final long serialVersionUID = -6152476064974115544L;
 
 	// PK
 	private int id = 0;
 
-	// FK:  the relationship between payment and order is 1 to 1.
+	// FK: the relationship between payment and order is 1 to 1.
 	private Order order = null;
 
 	// ATTRIBUTES

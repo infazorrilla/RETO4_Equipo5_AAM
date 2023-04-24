@@ -4,37 +4,37 @@ public class Customer extends Person implements CustomerAccountOrderActions {
 
 	@Override
 	public void insert(Person person) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public Person select(Person person) {
-		// TODO Auto-generated method stub
+	
 		return null;
 	}
 
 	@Override
 	public void update(Person person) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public void delete(Person person) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public boolean addItemToTheShoppingCart(ShoppingCartItem shoppingCartItem) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 	@Override
 	public boolean cancelOrder(Order order) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 

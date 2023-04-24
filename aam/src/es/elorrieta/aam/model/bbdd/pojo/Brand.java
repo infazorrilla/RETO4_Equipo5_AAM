@@ -1,9 +1,13 @@
 package es.elorrieta.aam.model.bbdd.pojo;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class Brand {
+public class Brand implements Serializable {
+
+	private static final long serialVersionUID = -2589051523281319846L;
+
 	// PK
 	private int id = 0;
 

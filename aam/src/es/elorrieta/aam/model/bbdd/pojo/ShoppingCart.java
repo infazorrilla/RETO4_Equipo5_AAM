@@ -1,28 +1,27 @@
 package es.elorrieta.aam.model.bbdd.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 import es.elorrieta.aam.model.bbdd.pojo.manager.ManagerShoppingCart;
 
-public class ShoppingCart extends ManagerShoppingCart<ShoppingCart> {
-	
-	
-    //PK
+public class ShoppingCart extends ManagerShoppingCart<ShoppingCart> implements Serializable {
+
+	private static final long serialVersionUID = 364133639081960563L;
+
+	// PK
 	private int id = 0;
-	
-	//FK: the relationship between ShoppingCart and Order is 1 to 1.
-	
+
+	// FK: the relationship between ShoppingCart and Order is 1 to 1.
+
 	private Order order = null;
-	
-	//FK: the relationship between ShoppingCart and ShoppingCartItem is 1 to Many.
-	
+
+	// FK: the relationship between ShoppingCart and ShoppingCartItem is 1 to Many.
+
 	private List<ShoppingCartItem> shoppingCartItems = null;
-	
-	
-	
-	
+
 	@Override
 	public void insert(ShoppingCart t) {
 
@@ -43,14 +42,11 @@ public class ShoppingCart extends ManagerShoppingCart<ShoppingCart> {
 	public void delete(ShoppingCart t) {
 
 	}
- 
-	
+
 	// ATTRIBUTES
 	private double totalPrice = 0;
 	private double descount = 0;
 	private Date dateOfPurchase = null;
-
-	
 
 	// Getters and setters
 	public int getId() {
