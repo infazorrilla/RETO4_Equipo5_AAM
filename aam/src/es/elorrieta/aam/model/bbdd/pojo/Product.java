@@ -21,9 +21,14 @@ public class Product implements Serializable {
 	// ATTRIBUTES
 	private Category category = null;
 	private Date date = null;
+	private Genders gender = null;
 
 	public enum Category {
 		Dress, Jeans, Tshirt, Shoes
+	}
+
+	public enum Genders {
+		M, H
 	}
 
 	// Getters and setters
@@ -69,7 +74,15 @@ public class Product implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(brand, category, date, id, productItems);
+		return Objects.hash(brand, category, date, gender, id, productItems);
+	}
+
+	public Genders getGender() {
+		return gender;
+	}
+
+	public void setGender(Genders gender) {
+		this.gender = gender;
 	}
 
 	@Override
@@ -82,13 +95,15 @@ public class Product implements Serializable {
 			return false;
 		Product other = (Product) obj;
 		return Objects.equals(brand, other.brand) && category == other.category && Objects.equals(date, other.date)
-				&& id == other.id && Objects.equals(productItems, other.productItems);
+				&& gender == other.gender && id == other.id && Objects.equals(productItems, other.productItems);
 	}
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", category=" + category + ", date=" + date + ", productItems=" + productItems
-				+ ", brand=" + brand + "]";
+		return "Product [id=" + id + ", productItems=" + productItems + ", brand=" + brand + ", category=" + category
+				+ ", date=" + date + ", gender=" + gender + "]";
 	}
+
+	
 
 }
