@@ -4,16 +4,16 @@ import java.io.File;
 import java.util.List;
 import java.util.Objects;
 
-import es.elorrieta.aam.model.bbdd.pojo.manager.ManagerProductItems;
-
-public abstract class ProductItem {
+public class ProductItem {
+	
 	private int id = 0;
 	private double price = 0;
 	private int stock = 0;
+	
 	private List<File> images = null;
 	private Product product = null;
 
-	public abstract List<String> getSizes();
+	
 
 	public int getId() {
 		return id;

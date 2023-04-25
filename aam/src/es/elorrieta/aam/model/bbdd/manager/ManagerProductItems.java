@@ -1,4 +1,4 @@
-package es.elorrieta.aam.model.bbdd.pojo.manager;
+package es.elorrieta.aam.model.bbdd.manager;
 
 import java.util.List;
 
