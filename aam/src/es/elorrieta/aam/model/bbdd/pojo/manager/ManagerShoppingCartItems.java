@@ -1,17 +1,30 @@
 package es.elorrieta.aam.model.bbdd.pojo.manager;
 
-public abstract class ManagerShoppingCartItems<T> extends ManagerAbstract<T>{
+import java.util.List;
+
+import es.elorrieta.aam.model.bbdd.pojo.ShoppingCartItem;
+
+public class ManagerShoppingCartItems extends ManagerAbstract<ShoppingCartItem> {
 
 	@Override
-	public abstract void insert(T t);
+	public void insert(ShoppingCartItem t) {
+
+	}
 
 	@Override
-	public abstract  T select(T t);
+	public List<ShoppingCartItem> select(ShoppingCartItem t) {
+
+		return null;
+	}
 
 	@Override
-	public   abstract void update(T t);
+	public void update(ShoppingCartItem t) {
+
+	}
 
 	@Override
-	public  abstract void delete(T t);
+	public void delete(ShoppingCartItem t) {
+
+	}
 
 }

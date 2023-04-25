@@ -1,18 +1,30 @@
 package es.elorrieta.aam.model.bbdd.pojo.manager;
 
-public abstract  class ManagerPayments<T> extends ManagerAbstract<T>{
+import java.util.List;
+
+import es.elorrieta.aam.model.bbdd.pojo.Payment;
+
+public class ManagerPayments extends ManagerAbstract<Payment> {
 
 	@Override
-	public abstract void insert(T t);
+	public void insert(Payment t) {
+
+	}
 
 	@Override
-	public abstract T select(T t);
+	public List<Payment> select(Payment t) {
+
+		return null;
+	}
 
 	@Override
-	public abstract void update(T t);
+	public void update(Payment t) {
+
+	}
 
 	@Override
-	public abstract void delete(T t);
+	public void delete(Payment t) {
 
-	
+	}
+
 }
