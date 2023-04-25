@@ -7,7 +7,7 @@ public class Tshirt extends ClothesWithoutFootWear{
 
 	@Override
 	public List<String> getSizes() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

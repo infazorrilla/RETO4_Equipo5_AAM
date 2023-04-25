@@ -7,6 +7,8 @@ import java.util.Objects;
 public class Shoe extends ProductItem implements Serializable {
 
 	private static final long serialVersionUID = 2113231108574792260L;
+	
+	
 	private ShoesSize size = null;
 
 	public enum ShoesSize {
