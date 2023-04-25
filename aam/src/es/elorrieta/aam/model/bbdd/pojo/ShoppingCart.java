@@ -7,7 +7,7 @@ import java.util.Objects;
 
 import es.elorrieta.aam.model.bbdd.pojo.manager.ManagerShoppingCart;
 
-public class ShoppingCart extends ManagerShoppingCart<ShoppingCart> implements Serializable {
+public class ShoppingCart  implements Serializable {
 
 	private static final long serialVersionUID = 364133639081960563L;
 
@@ -22,26 +22,7 @@ public class ShoppingCart extends ManagerShoppingCart<ShoppingCart> implements S
 
 	private List<ShoppingCartItem> shoppingCartItems = null;
 
-	@Override
-	public void insert(ShoppingCart t) {
-
-	}
-
-	@Override
-	public ShoppingCart select(ShoppingCart t) {
-
-		return null;
-	}
-
-	@Override
-	public void update(ShoppingCart t) {
-
-	}
-
-	@Override
-	public void delete(ShoppingCart t) {
-
-	}
+	
 
 	// ATTRIBUTES
 	private double totalPrice = 0;

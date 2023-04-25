@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import es.elorrieta.aam.model.bbdd.pojo.manager.ManagerPerson;
 
-public abstract class Person extends ManagerPerson<Person> {
+public abstract class Person  {
 	private int id = 0;
 	private String name = null;
 	private String lastName = null;
@@ -17,17 +17,7 @@ public abstract class Person extends ManagerPerson<Person> {
 	private boolean status = true;
 	private File image = null;
 
-	@Override
-	public abstract void insert(Person person);
-
-	@Override
-	public abstract Person select(Person person);
-
-	@Override
-	public abstract void update(Person person);
-
-	@Override
-	public abstract void delete(Person person);
+	
 
 	public int getId() {
 		return id;

@@ -6,24 +6,12 @@ import java.util.Objects;
 
 import es.elorrieta.aam.model.bbdd.pojo.manager.ManagerProductItems;
 
-public abstract class ProductItem extends ManagerProductItems<ProductItem> {
+public abstract class ProductItem {
 	private int id = 0;
 	private double price = 0;
 	private int stock = 0;
 	private List<File> images = null;
 	private Product product = null;
-
-	@Override
-	public abstract void insert(ProductItem t);
-
-	@Override
-	public abstract ProductItem select(ProductItem t);
-
-	@Override
-	public abstract void update(ProductItem t);
-
-	@Override
-	public abstract void delete(ProductItem t);
 
 	public abstract List<String> getSizes();
 

@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import es.elorrieta.aam.model.bbdd.pojo.manager.ManagerShoppingCartItems;
 
-public class ShoppingCartItem extends ManagerShoppingCartItems<ShoppingCartItem> implements Serializable {
+public class ShoppingCartItem  implements Serializable {
 
 	private static final long serialVersionUID = 8903949143647177682L;
 
@@ -24,26 +24,7 @@ public class ShoppingCartItem extends ManagerShoppingCartItems<ShoppingCartItem>
 	private double price = 0;
 	private int quantity = 0;
 
-	@Override
-	public void insert(ShoppingCartItem t) {
-
-	}
-
-	@Override
-	public ShoppingCartItem select(ShoppingCartItem t) {
-
-		return null;
-	}
-
-	@Override
-	public void update(ShoppingCartItem t) {
-
-	}
-
-	@Override
-	public void delete(ShoppingCartItem t) {
-
-	}
+	
 
 	// Getters and setters
 

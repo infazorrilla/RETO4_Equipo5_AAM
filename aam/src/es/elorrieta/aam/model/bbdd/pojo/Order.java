@@ -6,7 +6,7 @@ import java.util.Objects;
 
 import es.elorrieta.aam.model.bbdd.pojo.manager.ManagerOrders;
 
-public class Order extends ManagerOrders<Order> implements Serializable {
+public class Order  implements Serializable {
 
 	private static final long serialVersionUID = 7011816090907660930L;
 
@@ -39,26 +39,6 @@ public class Order extends ManagerOrders<Order> implements Serializable {
 
 	}
 
-	@Override
-	public void insert(Order t) {
-
-	}
-
-	@Override
-	public Order select(Order t) {
-
-		return null;
-	}
-
-	@Override
-	public void update(Order t) {
-
-	}
-
-	@Override
-	public void delete(Order t) {
-
-	}
 
 	// Getters and Setters
 

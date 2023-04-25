@@ -6,18 +6,7 @@ public abstract class Employee extends Person {
 
 	private int employeeType = 0;
 
-	@Override
-	public abstract void insert(Person person);
-
-	@Override
-	public abstract Person select(Person person);
-
-	@Override
-	public abstract void update(Person person);
-
-	@Override
-	public abstract void delete(Person person);
-
+	
 	public int getEmployeeType() {
 		return employeeType;
 	}

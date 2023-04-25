@@ -6,7 +6,7 @@ import java.util.Objects;
 
 import es.elorrieta.aam.model.bbdd.pojo.manager.ManagerPayments;
 
-public class Payment extends ManagerPayments<Payment> implements Serializable {
+public class Payment  implements Serializable {
 
 	private static final long serialVersionUID = -6152476064974115544L;
 
@@ -21,26 +21,7 @@ public class Payment extends ManagerPayments<Payment> implements Serializable {
 	private String cvv = null;
 	private Date expirationDate = null;
 
-	@Override
-	public void insert(Payment t) {
-
-	}
-
-	@Override
-	public Payment select(Payment t) {
-
-		return null;
-	}
-
-	@Override
-	public void update(Payment t) {
-
-	}
-
-	@Override
-	public void delete(Payment t) {
-
-	}
+	
 
 	// GETTERS AND SETTERES
 	public int getId() {

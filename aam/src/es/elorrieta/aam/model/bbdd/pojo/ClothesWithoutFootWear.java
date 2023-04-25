@@ -11,17 +11,7 @@ public abstract class ClothesWithoutFootWear extends ProductItem {
 		S, M, L
 	}
 
-	@Override
-	public abstract void insert(ProductItem t);
-
-	@Override
-	public abstract ProductItem select(ProductItem t);
-
-	@Override
-	public abstract void update(ProductItem t);
-
-	@Override
-	public abstract void delete(ProductItem t);
+	
 
 	@Override
 	public abstract List<String> getSizes();

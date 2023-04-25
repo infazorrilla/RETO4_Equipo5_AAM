@@ -1,48 +1,9 @@
 package es.elorrieta.aam.model.bbdd.pojo;
 
-public class Customer extends Person implements CustomerAccountOrderActions {
+public class Customer extends Person  {
 
-	@Override
-	public void insert(Person person) {
-		
-		
-	}
-
-	@Override
-	public Person select(Person person) {
 	
-		return null;
-	}
-
-	@Override
-	public void update(Person person) {
-		
-		
-	}
-
-	@Override
-	public void delete(Person person) {
-		
-		
-	}
-
-	@Override
-	public boolean addItemToTheShoppingCart(ShoppingCartItem shoppingCartItem) {
-		
-		return false;
-	}
-
-	@Override
-	public boolean cancelOrder(Order order) {
-		
-		return false;
-	}
-
-	@Override
-	public boolean removeItem(ShoppingCartItem shoppingCartItem) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 	@Override
 	public int hashCode() {

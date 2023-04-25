@@ -24,26 +24,7 @@ public class Shoe extends ProductItem implements Serializable {
 
 	}
 
-	@Override
-	public void insert(ProductItem t) {
-
-	}
-
-	@Override
-	public ProductItem select(ProductItem t) {
-
-		return null;
-	}
-
-	@Override
-	public void update(ProductItem t) {
-
-	}
-
-	@Override
-	public void delete(ProductItem t) {
-
-	}
+	
 
 	@Override
 	public List<String> getSizes() {
