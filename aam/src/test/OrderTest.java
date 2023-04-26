@@ -83,7 +83,7 @@ class OrderTest {
 		shoppingCart.setDescount(descount);
 		shoppingCart.setTotalPrice(totalPrice);
 		try {
-			shoppingCart.setDateOfPurchase(new SimpleDateFormat("dd/mm/yyyy").parse(dateOfPurchase));
+			shoppingCart.setCreatedAt(new SimpleDateFormat("dd/mm/yyyy").parse(dateOfPurchase));
 		} catch (ParseException e) {
 			System.out.println("Format incorret");
 		}
@@ -245,7 +245,7 @@ class OrderTest {
 		shoppingCart.setDescount(descount);
 		shoppingCart.setTotalPrice(totalPrice);
 		try {
-			shoppingCart.setDateOfPurchase(new SimpleDateFormat("dd/mm/yyyy").parse(dateOfPurchase));
+			shoppingCart.setCreatedAt(new SimpleDateFormat("dd/mm/yyyy").parse(dateOfPurchase));
 		} catch (ParseException e) {
 			System.out.println("Format incorret");
 		}
@@ -318,10 +318,9 @@ class OrderTest {
 				+ "totalPrice=138.12, "
 				+ "status=Pending, "
 				+ "payment=Payment [id=1, iban=123456789012345, cvv=123456, expirationDate=Thu Jan 15 00:08:00 CET 2026, order=null], "
-				+ "shoppingCart=ShoppingCart [id=1, totalPrice=105.99, descount=0.5, dateOfPurchase=Wed Jan 08 00:10:00 CET 2025, order=null, shoppingCartItems=null], "
+				+ "shoppingCart=ShoppingCart [id=1, order=null, shoppingCartItems=null, totalPrice=105.99, descount=0.5, createdAt=Wed Jan 08 00:10:00 CET 2025], "
 				+ "customer=Customer [Id()=1,Name()=Carlos,LastName()=Lopez Diaz, NumberPhone()=123456789, Email()=lodi@gmail.com,Address()=null, Password()=123456, isStatus()=true,Image()=foto.txt,Profile()=null], "
-				+ "address=Address [id=1, street=Calle San Ignacio 12, codPostal=48004, city=Bilbao, province=Bizkaia, country=SPAIN], "
-				+ "EmployeeManagedOrders=EmployeeManagedOrders [orders=null, getEmployeeType()=0 getId()=1, getName()=null, getLastName()=null, getNumberPhone()=null, getEmail()=employee@gmail.com, getAddress()=null, getPassword()=123456, isStatus()=true, getImage()=null, getProfile()=null]]";
+				+ "address=Address [id=1, street=Calle San Ignacio 12, codPostal=48004, city=Bilbao, province=Bizkaia, country=SPAIN], EmployeeManagedOrders=EmployeeManagedOrders [orders=null, getEmployeeType()=0 getId()=1, getName()=null, getLastName()=null, getNumberPhone()=null, getEmail()=employee@gmail.com, getAddress()=null, getPassword()=123456, isStatus()=true, getImage()=null, getProfile()=null]]";
 		assertEquals(order.toString(), expected);
 	}
 
