@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import es.elorrieta.aam.model.bbdd.pojo.manager.ManagerShoppingCart;
+
 
 public class ShoppingCart  implements Serializable {
 
@@ -27,7 +27,8 @@ public class ShoppingCart  implements Serializable {
 	// ATTRIBUTES
 	private double totalPrice = 0;
 	private double descount = 0;
-	private Date dateOfPurchase = null;
+	private Date createdAt = null;
+	
 
 	// Getters and setters
 	public int getId() {
@@ -54,12 +55,13 @@ public class ShoppingCart  implements Serializable {
 		this.descount = descount;
 	}
 
-	public Date getDateOfPurchase() {
-		return dateOfPurchase;
+	
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setDateOfPurchase(Date dateOfPurchase) {
-		this.dateOfPurchase = dateOfPurchase;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	public Order getOrder() {
@@ -80,7 +82,7 @@ public class ShoppingCart  implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dateOfPurchase, descount, id, order, shoppingCartItems, totalPrice);
+		return Objects.hash(createdAt, descount, id, order, shoppingCartItems, totalPrice);
 	}
 
 	@Override
@@ -92,7 +94,7 @@ public class ShoppingCart  implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ShoppingCart other = (ShoppingCart) obj;
-		return Objects.equals(dateOfPurchase, other.dateOfPurchase)
+		return Objects.equals(createdAt, other.createdAt)
 				&& Double.doubleToLongBits(descount) == Double.doubleToLongBits(other.descount) && id == other.id
 				&& Objects.equals(order, other.order) && Objects.equals(shoppingCartItems, other.shoppingCartItems)
 				&& Double.doubleToLongBits(totalPrice) == Double.doubleToLongBits(other.totalPrice);
@@ -100,8 +102,10 @@ public class ShoppingCart  implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ShoppingCart [id=" + id + ", totalPrice=" + totalPrice + ", descount=" + descount + ", dateOfPurchase="
-				+ dateOfPurchase + ", order=" + order + ", shoppingCartItems=" + shoppingCartItems + "]";
+		return "ShoppingCart [id=" + id + ", order=" + order + ", shoppingCartItems=" + shoppingCartItems
+				+ ", totalPrice=" + totalPrice + ", descount=" + descount + ", createdAt=" + createdAt + "]";
 	}
+
+
 
 }

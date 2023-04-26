@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-import es.elorrieta.aam.model.bbdd.pojo.manager.ManagerOrders;
+
 
 public class Order  implements Serializable {
 
