@@ -3,8 +3,14 @@ package es.elorrieta.aam.model.bbdd.manager;
 import java.util.List;
 
 import es.elorrieta.aam.model.bbdd.pojo.Customer;
+import es.elorrieta.aam.model.bbdd.utils.DBUtils;
 
 public class ManagerCustomers extends ManagerAbstract<Customer> {
+
+	public ManagerCustomers() {
+		super(new DBUtils());
+		
+	}
 
 	@Override
 	public void insert(Customer t) {

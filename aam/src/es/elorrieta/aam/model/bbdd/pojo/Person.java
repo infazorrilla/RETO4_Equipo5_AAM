@@ -3,7 +3,7 @@ package es.elorrieta.aam.model.bbdd.pojo;
 import java.io.File;
 import java.util.Objects;
 
-import es.elorrieta.aam.model.bbdd.pojo.manager.ManagerPerson;
+
 
 public abstract class Person  {
 	private int id = 0;

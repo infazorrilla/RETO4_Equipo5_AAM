@@ -3,9 +3,7 @@ package es.elorrieta.aam.model.bbdd.pojo;
 import java.io.Serializable;
 import java.util.Objects;
 
-import es.elorrieta.aam.model.bbdd.pojo.manager.ManagerShoppingCartItems;
-
-public class ShoppingCartItem  implements Serializable {
+public class ShoppingCartItem implements Serializable {
 
 	private static final long serialVersionUID = 8903949143647177682L;
 
@@ -23,8 +21,6 @@ public class ShoppingCartItem  implements Serializable {
 	// ATTRIBUTES
 	private double price = 0;
 	private int quantity = 0;
-
-	
 
 	// Getters and setters
 

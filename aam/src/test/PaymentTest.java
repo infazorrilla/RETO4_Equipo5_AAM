@@ -1,4 +1,4 @@
-package es.elorrieta.aam.model.bbdd.jUnit;
+package test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

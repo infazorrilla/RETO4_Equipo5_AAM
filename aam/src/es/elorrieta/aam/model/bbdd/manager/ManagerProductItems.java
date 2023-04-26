@@ -3,8 +3,14 @@ package es.elorrieta.aam.model.bbdd.manager;
 import java.util.List;
 
 import es.elorrieta.aam.model.bbdd.pojo.ProductItem;
+import es.elorrieta.aam.model.bbdd.utils.DBUtils;
 
 public class ManagerProductItems extends ManagerAbstract<ProductItem> {
+
+	public ManagerProductItems(){
+		super(new DBUtils());
+		
+	}
 
 	@Override
 	public void insert(ProductItem t) {
