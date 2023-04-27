@@ -10,6 +10,7 @@ public abstract class ManagerAbstract<T> implements ManagerInterface<T> {
 	protected DBUtils dbUtils = null;
 	protected static final String TABLE_SHOPPINGCARTITEMS = "shoppingcartitems";
 	protected static final String TABLE_SHOPPINGCART = "shoppingcart";
+	protected static final String TABLE_CUSTOMERS = "customers";
 
 	public ManagerAbstract(DBUtils dbUtils) {
 		this.dbUtils = dbUtils;

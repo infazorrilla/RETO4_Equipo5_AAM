@@ -58,20 +58,19 @@ public class ManagerShoppingCart extends ManagerAbstract<ShoppingCart> {
 			statement = dbUtils.connection.createStatement();
 			String query = "SELECT `id_shoppingcart`, `totalPrice`, `descount` , `created_at` FROM "
 					+ ManagerAbstract.TABLE_SHOPPINGCART + " WHERE `created_at` = '"
-					+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(shoppingCart.getCreatedAt()) + "''"
-					+ shoppingCart.getId() + "' ";
+					+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(shoppingCart.getCreatedAt()) + "'";
 			resultSet = statement.executeQuery(query);
 			if (resultSet.next()) {
 				if (ret == null) {
 					ret = new ShoppingCart();
 				}
-				
+
 				ret.setId(resultSet.getInt("id_shoppingcart"));
 				ret.setTotalPrice(resultSet.getDouble("totalPrice"));
 				ret.setDescount(resultSet.getDouble("descount"));
 				Timestamp createdAt = resultSet.getTimestamp("created_at");
 				ret.setCreatedAt(new Date(createdAt.getTime()));
-				
+
 			}
 		} finally {
 			if (resultSet != null) {
@@ -142,7 +141,7 @@ public class ManagerShoppingCart extends ManagerAbstract<ShoppingCart> {
 
 	@Override
 	public List<ShoppingCart> selectAll(ShoppingCart t) throws SQLException, Exception {
-		
+
 		return null;
 	}
 
