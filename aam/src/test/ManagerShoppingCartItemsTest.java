@@ -51,9 +51,9 @@ class ManagerShoppingCartItemsTest {
 
 		// hacemos el select buscandolo por id_shoppingcart y id_product_item
 
-		List<ShoppingCartItem> shoppingCartItems = new ArrayList<ShoppingCartItem>();
+		ShoppingCartItem result = new ShoppingCartItem();
 		try {
-			shoppingCartItems = managerShoppingCartItems.select(shoppingCartItem);
+			result = managerShoppingCartItems.select(shoppingCartItem);
 		} catch (SQLException e) {
 			System.out.println("SQLException:  " + e);
 		} catch (Exception e) {
@@ -61,14 +61,14 @@ class ManagerShoppingCartItemsTest {
 		}
 		// ahora comprobamos que se ha insertado correctamente
 
-		assertEquals(shoppingCartItems.get(0).getShoppingCart().getId(), shoppingCartItem.getShoppingCart().getId());
-		assertEquals(shoppingCartItems.get(0).getProductItem().getId(), shoppingCartItem.getProductItem().getId());
-		assertEquals(shoppingCartItems.get(0).getPrice(), 132, shoppingCartItem.getPrice());
-		assertEquals(shoppingCartItems.get(0).getQuantity(), shoppingCartItem.getQuantity());
+		assertEquals(result.getShoppingCart().getId(), shoppingCartItem.getShoppingCart().getId());
+		assertEquals(result.getProductItem().getId(), shoppingCartItem.getProductItem().getId());
+		assertEquals(result.getPrice(), 132, shoppingCartItem.getPrice());
+		assertEquals(result.getQuantity(), shoppingCartItem.getQuantity());
 
 		// updateTest()
 
-		shoppingCartItem.setId(shoppingCartItems.get(0).getId());
+		shoppingCartItem.setId(result.getId());
 
 		// update
 
@@ -86,7 +86,7 @@ class ManagerShoppingCartItemsTest {
 
 		// hacemos el select
 		try {
-			shoppingCartItems = managerShoppingCartItems.select(shoppingCartItem);
+			result = managerShoppingCartItems.select(shoppingCartItem);
 		} catch (SQLException e) {
 			System.out.println("SQLException:  " + e);
 		} catch (Exception e) {
@@ -95,12 +95,12 @@ class ManagerShoppingCartItemsTest {
 
 		// comprobamos si los 2 objetos son iguales
 
-		assertEquals(shoppingCartItems.get(0).toString(), shoppingCartItem.toString());
-		assertEquals(shoppingCartItems.get(0).getPrice(), 250, shoppingCartItem.getPrice());
-		assertEquals(shoppingCartItems.get(0).getQuantity(), shoppingCartItem.getQuantity());
+		assertEquals(result.toString(), shoppingCartItem.toString());
+		assertEquals(result.getPrice(), 250, shoppingCartItem.getPrice());
+		assertEquals(result.getQuantity(), shoppingCartItem.getQuantity());
 
 		// DeleteTest()
-		// se espera shoppingCartItems --> null.
+		// se espera result --> null.
 
 		// borramos shoppingCartItem de la base de datos
 
@@ -115,15 +115,15 @@ class ManagerShoppingCartItemsTest {
 		// hacemos el select
 
 		try {
-			shoppingCartItems = managerShoppingCartItems.select(shoppingCartItem);
+			result = managerShoppingCartItems.select(shoppingCartItem);
 		} catch (SQLException e) {
 			System.out.println("SQLException:  " + e);
 		} catch (Exception e) {
 			System.out.println("NO se ha podido conectar ala base de datos:  " + e);
 		}
 
-		// comprobamos que shoppingCartItems = null
-		assertNull(shoppingCartItems);
+		// comprobamos que result = null
+		assertNull(result);
 	}
 
 }

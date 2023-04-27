@@ -1,5 +1,6 @@
 package es.elorrieta.aam.model.bbdd.manager;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import es.elorrieta.aam.model.bbdd.pojo.Order;
@@ -18,7 +19,7 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 	}
 
 	@Override
-	public List<Order> select(Order t) {
+	public Order select(Order t) {
 
 		return null;
 	}
@@ -31,6 +32,12 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 	@Override
 	public void delete(Order t) {
 
+	}
+
+	@Override
+	public List<Order> selectAll(Order t) throws SQLException, Exception {
+		
+		return null;
 	}
 
 }

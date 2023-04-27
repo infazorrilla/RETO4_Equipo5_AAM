@@ -47,10 +47,10 @@ public class ManagerShoppingCart extends ManagerAbstract<ShoppingCart> {
 	}
 
 	@Override
-	public List<ShoppingCart> select(ShoppingCart shoppingCart) throws SQLException, Exception {
+	public ShoppingCart select(ShoppingCart shoppingCart) throws SQLException, Exception {
 		if (!dbUtils.isConnected())
 			dbUtils.connect();
-		List<ShoppingCart> ret = null;
+		ShoppingCart ret = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
 		try {
@@ -63,15 +63,15 @@ public class ManagerShoppingCart extends ManagerAbstract<ShoppingCart> {
 			resultSet = statement.executeQuery(query);
 			if (resultSet.next()) {
 				if (ret == null) {
-					ret = new ArrayList<ShoppingCart>();
+					ret = new ShoppingCart();
 				}
-				ShoppingCart shopCart = new ShoppingCart();
-				shopCart.setId(resultSet.getInt("id_shoppingcart"));
-				shopCart.setTotalPrice(resultSet.getDouble("totalPrice"));
-				shopCart.setDescount(resultSet.getDouble("descount"));
+				
+				ret.setId(resultSet.getInt("id_shoppingcart"));
+				ret.setTotalPrice(resultSet.getDouble("totalPrice"));
+				ret.setDescount(resultSet.getDouble("descount"));
 				Timestamp createdAt = resultSet.getTimestamp("created_at");
-				shopCart.setCreatedAt(new Date(createdAt.getTime()));
-				ret.add(shopCart);
+				ret.setCreatedAt(new Date(createdAt.getTime()));
+				
 			}
 		} finally {
 			if (resultSet != null) {
@@ -138,6 +138,12 @@ public class ManagerShoppingCart extends ManagerAbstract<ShoppingCart> {
 			}
 			dbUtils.disconnect();
 		}
+	}
+
+	@Override
+	public List<ShoppingCart> selectAll(ShoppingCart t) throws SQLException, Exception {
+		
+		return null;
 	}
 
 }

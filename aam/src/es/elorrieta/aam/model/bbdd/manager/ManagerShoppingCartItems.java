@@ -45,10 +45,10 @@ public class ManagerShoppingCartItems extends ManagerAbstract<ShoppingCartItem> 
 	}
 
 	@Override
-	public List<ShoppingCartItem> select(ShoppingCartItem shoppingCartItem) throws SQLException, Exception {
+	public ShoppingCartItem select(ShoppingCartItem shoppingCartItem) throws SQLException, Exception {
 		if (!dbUtils.isConnected())
 			dbUtils.connect();
-		List<ShoppingCartItem> ret = null;
+		ShoppingCartItem ret = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
 		try {
@@ -58,19 +58,18 @@ public class ManagerShoppingCartItems extends ManagerAbstract<ShoppingCartItem> 
 			resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
 				if (ret == null) {
-					ret = new ArrayList<ShoppingCartItem>();
+					ret = new ShoppingCartItem();
 				}
-				ShoppingCartItem shopCartItem = new ShoppingCartItem();
-				shopCartItem.setId(resultSet.getInt("id_shoppingCartItem"));
+				ret.setId(resultSet.getInt("id_shoppingCartItem"));
 				ShoppingCart shoppingCart = new ShoppingCart();
 				shoppingCart.setId(resultSet.getInt("id_shoppingcart"));
-				shopCartItem.setShoppingCart(shoppingCart);
+				ret.setShoppingCart(shoppingCart);
 				ProductItem productItem = new ProductItem();
 				productItem.setId(resultSet.getInt("id_product_item"));
-				shopCartItem.setProductItem(productItem);
-				shopCartItem.setPrice(resultSet.getDouble("price"));
-				shopCartItem.setQuantity(resultSet.getInt("quantity"));
-				ret.add(shopCartItem);
+				ret.setProductItem(productItem);
+				ret.setPrice(resultSet.getDouble("price"));
+				ret.setQuantity(resultSet.getInt("quantity"));
+				
 			}
 		} finally {
 			if (resultSet != null) {
@@ -137,6 +136,12 @@ public class ManagerShoppingCartItems extends ManagerAbstract<ShoppingCartItem> 
 			}
 			dbUtils.disconnect();
 		}
+	}
+
+	@Override
+	public List<ShoppingCartItem> selectAll(ShoppingCartItem t) throws SQLException, Exception {
+		
+		return null;
 	}
 
 }

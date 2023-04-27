@@ -1,5 +1,7 @@
 package es.elorrieta.aam.model.bbdd.manager;
 
+
+import java.sql.SQLException;
 import java.util.List;
 
 import es.elorrieta.aam.model.bbdd.pojo.Customer;
@@ -13,24 +15,35 @@ public class ManagerCustomers extends ManagerAbstract<Customer> {
 	}
 
 	@Override
-	public void insert(Customer t) {
-
-	}
-
-	@Override
-	public List<Customer> select(Customer t) {
-
+	public List<Customer> selectAll(Customer t) throws SQLException, Exception {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void update(Customer t) {
-
+	public void insert(Customer t) throws SQLException, Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void delete(Customer t) {
-
+	public Customer select(Customer t) throws SQLException, Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
+	@Override
+	public void update(Customer t) throws SQLException, Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Customer t) throws SQLException, Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	
 }

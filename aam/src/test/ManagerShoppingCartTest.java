@@ -6,8 +6,6 @@ import static org.junit.Assert.assertNull;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
@@ -40,10 +38,10 @@ class ManagerShoppingCartTest {
 			System.out.println("NO se ha podido conectar ala base de datos:  " + e);
 		}
 //hacer el select buscandolo por fecha de creacion
-		List<ShoppingCart> shoppingcart = new ArrayList<ShoppingCart>();
+		ShoppingCart result = new ShoppingCart();
 
 		try {
-			shoppingcart = managerShoppingCart.select(shoppingCart);
+			result = managerShoppingCart.select(shoppingCart);
 		} catch (SQLException e) {
 			System.out.println("SQLException:  " + e);
 		} catch (Exception e) {
@@ -52,16 +50,14 @@ class ManagerShoppingCartTest {
 
 		// comprobamos comparando los atributos de los objetos son iguales
 
-		assertEquals(shoppingcart.size(), 1);
-
-		assertEquals(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(shoppingcart.get(0).getCreatedAt()),
+		assertEquals(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(result.getCreatedAt()),
 				new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(createdAt));
-		assertEquals(shoppingcart.get(0).getTotalPrice(), 125.68, shoppingCart.getTotalPrice());
-		assertEquals(shoppingcart.get(0).getDescount(), 0.3, shoppingCart.getDescount());
+		assertEquals(result.getTotalPrice(), 125.68, shoppingCart.getTotalPrice());
+		assertEquals(result.getDescount(), 0.3, shoppingCart.getDescount());
 
 		// updateTest()
 
-		shoppingCart.setId(shoppingcart.get(0).getId());
+		shoppingCart.setId(result.getId());
 
 		shoppingCart.setTotalPrice(50);
 		shoppingCart.setDescount(0.2);
@@ -78,21 +74,21 @@ class ManagerShoppingCartTest {
 		// hacer el select
 
 		try {
-			shoppingcart = managerShoppingCart.select(shoppingCart);
+			result = managerShoppingCart.select(shoppingCart);
 		} catch (SQLException e) {
 			System.out.println("SQLException:  " + e);
 		} catch (Exception e) {
 			System.out.println("  " + e);
 		}
 //comprobamos que los datos se han modificado correctamente 
-		assertEquals(shoppingcart.get(0).toString(), shoppingCart.toString());
-		assertEquals(shoppingcart.get(0).getTotalPrice(), 50, shoppingCart.getTotalPrice());
-		assertEquals(shoppingcart.get(0).getDescount(), 0.1, shoppingCart.getDescount());
-		assertEquals(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(shoppingcart.get(0).getCreatedAt()),
+		assertEquals(result.toString(), shoppingCart.toString());
+		assertEquals(result.getTotalPrice(), 50, shoppingCart.getTotalPrice());
+		assertEquals(result.getDescount(), 0.1, shoppingCart.getDescount());
+		assertEquals(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(result.getCreatedAt()),
 				new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(shoppingCart.getCreatedAt()));
 //deleteTest()
 		// borramos shoppingcart por id
-		// se espera shoppingcart --> null
+		// se espera result --> null
 		try {
 			managerShoppingCart.delete(shoppingCart);
 		} catch (SQLException e) {
@@ -102,14 +98,14 @@ class ManagerShoppingCartTest {
 		}
 
 		try {
-			shoppingcart = managerShoppingCart.select(shoppingCart);
+			result = managerShoppingCart.select(shoppingCart);
 		} catch (SQLException e) {
 			System.out.println("SQLException:  " + e);
 		} catch (Exception e) {
 			System.out.println(" " + e);
 		}
-// comprobamos que shoppingcart = null
-		assertNull(shoppingcart);
+// comprobamos que result = null
+		assertNull(result);
 
 	}
 
