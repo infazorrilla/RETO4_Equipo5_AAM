@@ -139,11 +139,11 @@ public class EmployeesTab {
 	private void doInsertInfoCustIntoTable()
 			throws SQLException, AccessToDataBaseException, NotFoundException, Exception {
 
-		List<EmployeeManagedOrders> employees = null;
 		ManagerEmployee managerEmployees = new ManagerEmployee();
-		employees = managerEmployees.selectAll();
-
-		insertInfoCustIntoTable(employees);
+		List<EmployeeManagedOrders> employees = managerEmployees.selectAll();
+		if (employees != null) {
+			insertInfoCustIntoTable(employees);
+		}
 	}
 
 	private void insertInfoCustIntoTable(List<EmployeeManagedOrders> employees) {

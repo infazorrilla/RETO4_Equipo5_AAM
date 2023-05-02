@@ -128,6 +128,7 @@ public class ManagerEmployee extends ManagerAbstract<EmployeeManagedOrders> {
 		EmployeeManagedOrders ret = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
+		ResultSet resultSet2 = null;
 		try {
 
 			statement = dbUtils.connection.createStatement();
@@ -153,13 +154,44 @@ public class ManagerEmployee extends ManagerAbstract<EmployeeManagedOrders> {
 						ret.setStatus(resultSet.getBoolean("status"));
 
 					} else {
-						// new query
+						String query2 = "SELECT e.id_employee, e.id_address, e.id_employee_type ,e.name, e.lastname, e.email, e.password, e.birthDate, e.image, e.status , a.country , a.street , a.cod_postal , a.city , a.province FROM `employees` AS e JOIN address AS a ON e.id_address = a.id_address WHERE e.email = '"
+								+ employeeManagedOrders.getEmail() + "' AND e.password = '"
+								+ employeeManagedOrders.getPassword() + "'";
+						resultSet2 = statement.executeQuery(query2);
+
+						if (resultSet2.next()) {
+							ret.setId(resultSet2.getInt("id_employee"));
+							ret.setEmployeeType(resultSet2.getInt("id_employee_type"));
+							ret.setName(resultSet2.getString("name"));
+							ret.setLastName(resultSet2.getString("lastname"));
+							ret.setEmail(resultSet2.getString("email"));
+							if (null != resultSet2.getDate("birthDate")) {
+								Date date = resultSet2.getDate("birthDate");
+								ret.setBirthDate(new Date(date.getTime()));
+							}
+							ret.setPassword(resultSet2.getString("password"));
+							ret.setImage(userFoto(resultSet2.getBlob("image")));
+							ret.setStatus(resultSet2.getBoolean("status"));
+							Address address = new Address();
+							address.setId(resultSet2.getInt("id_address"));
+							address.setCity(resultSet2.getString("city"));
+							address.setCountry(resultSet2.getString("country"));
+							address.setStreet(resultSet2.getString("street"));
+							address.setCodPostal(resultSet2.getString("cod_postal"));
+							address.setProvince(resultSet2.getString("province"));
+							ret.setAddress(address);
+						}
+
 					}
-
 				}
-
 			}
 		} finally {
+			if (resultSet2 != null) {
+				try {
+					resultSet2.close();
+				} catch (SQLException e) {
+				}
+			}
 			if (resultSet != null) {
 				try {
 					resultSet.close();

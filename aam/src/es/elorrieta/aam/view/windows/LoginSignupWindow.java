@@ -91,6 +91,7 @@ public class LoginSignupWindow extends JFrame {
 						checkLogin(email, pass, order);
 
 					} catch (SQLException e1) {
+						System.out.println(e1);
 						JOptionPane.showMessageDialog(contentPane, "Data Base Error. Contents cannot be displayed",
 								"ERROR!!", JOptionPane.ERROR_MESSAGE);
 
@@ -113,6 +114,7 @@ public class LoginSignupWindow extends JFrame {
 					try {
 						checkSigUp(email, date, pass);
 					} catch (SQLException e1) {
+						System.out.println(e1);
 						JOptionPane.showMessageDialog(contentPane, "Data Base Error. Contents cannot be displayed",
 								"ERROR!!", JOptionPane.ERROR_MESSAGE);
 
@@ -293,10 +295,20 @@ public class LoginSignupWindow extends JFrame {
 		boolean isCustomer = checkCustomerLogin(email, pass, order);
 
 		if (!isCustomer) {
-			checkEmployeeLogin(email, pass, order);
+			if(checkEmployeeLogin(email, pass, order)) {
 			textField.setText("");
 			passwordField.setText("");
+			JOptionPane.showMessageDialog(null, "Bienvenido");
+			dispose();
+			GenderWindow genderWidow = new GenderWindow(order);
+			genderWidow.setVisible(true);
+			}
 
+		} else {
+			JOptionPane.showMessageDialog(null, "Bienvenido");
+			dispose();
+			GenderWindow genderWidow = new GenderWindow(order);
+			genderWidow.setVisible(true);
 		}
 
 	}

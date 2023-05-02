@@ -277,11 +277,10 @@ public class ManagerCustomers extends ManagerAbstract<Customer> {
 
 			Address address = checkAddress(customer.getAddress());
 
-			String query = "UPDATE `customers` SET `id_address`= ? ,`name`= ?,`lastname`= ? ,`email`= ? , `password`= ? , `birthDate`= ?  WHERE `id_customer` = ?";
+			String query = "UPDATE `customers` SET  id_address = ? ,`name`= ?,`lastname`= ? ,`email`= ? , `password`= ? , `birthDate`= ?  WHERE `id_customer` = ?";
 
 			preparedStatement = dbUtils.connection.prepareStatement(query);
-
-			preparedStatement.setInt(1, address.getId());
+			preparedStatement.setInt(1, address == null ? 0 : address.getId());
 			preparedStatement.setString(2, customer.getName());
 			preparedStatement.setString(3, customer.getLastName());
 			preparedStatement.setString(4, customer.getEmail());
@@ -328,15 +327,16 @@ public class ManagerCustomers extends ManagerAbstract<Customer> {
 
 	private Address checkAddress(Address address)
 			throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
-		Address ret = new Address();
-		if (address != null && address.getId() != 0) {
-			doUpdateAdress(address);
-			ret = address;
-		} else {
-			doInsertAddress(address);
-			ret = doSelectAdress(address);
+		Address ret = null;
+		if (address != null) {
+			if (address.getId() != 0) {
+				doUpdateAdress(address);
+				ret = address;
+			} else {
+				doInsertAddress(address);
+				ret = doSelectAdress(address);
+			}
 		}
-
 		return ret;
 	}
 

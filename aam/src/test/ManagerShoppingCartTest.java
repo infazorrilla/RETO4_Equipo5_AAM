@@ -35,7 +35,7 @@ class ManagerShoppingCartTest {
 		} catch (SQLException e) {
 			System.out.println("SQLException:  " + e);
 		} catch (Exception e) {
-			System.out.println("NO se ha podido conectar ala base de datos:  " + e);
+			System.out.println("NO se ha podido conectar a la base de datos:  " + e);
 		}
 //hacer el select buscandolo por fecha de creacion
 		ShoppingCart result = new ShoppingCart();

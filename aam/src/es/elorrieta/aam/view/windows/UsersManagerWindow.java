@@ -19,7 +19,6 @@ import es.elorrieta.aam.view.windows.UserManagerWindowComponents.EmployeesTab;
 
 public class UsersManagerWindow extends JFrame {
 
-	
 	private static final long serialVersionUID = 377100524628466154L;
 	private JPanel contentPane;
 
@@ -37,10 +36,11 @@ public class UsersManagerWindow extends JFrame {
 		tabbedPane.setBackground(new Color(255, 255, 255));
 		tabbedPane.setBounds(0, 49, 1300, 566);
 		contentPane.add(tabbedPane);
-
+		JPanel tempPanel = new JPanel();
+		contentPane.add(tempPanel);
 		tabbedPane.addTab("Clientes", null, new CustomersTab().panelCustomers(), null);
 
-		tabbedPane.addTab("Empleados", null, new EmployeesTab().panelEmployees(), null);
+		tabbedPane.addTab("Empleados", null, tempPanel, null);
 
 		JPanel panelHeader = new JPanel();
 		panelHeader.setBackground(new Color(255, 204, 51));
@@ -76,7 +76,9 @@ public class UsersManagerWindow extends JFrame {
 					new CustomersTab().panelCustomers();
 					break;
 				case 1:
+					contentPane.remove(tempPanel);
 					new EmployeesTab().panelEmployees();
+					
 					break;
 				}
 			}
