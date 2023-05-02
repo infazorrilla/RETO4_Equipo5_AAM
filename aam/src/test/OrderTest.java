@@ -1,6 +1,7 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
 import java.text.ParseException;
@@ -15,7 +16,6 @@ import es.elorrieta.aam.model.bbdd.pojo.Order;
 import es.elorrieta.aam.model.bbdd.pojo.Order.Status;
 import es.elorrieta.aam.model.bbdd.pojo.Payment;
 import es.elorrieta.aam.model.bbdd.pojo.ShoppingCart;
-import es.elorrieta.aam.model.bbdd.pojo.Address.Country;
 
 class OrderTest {
 
@@ -137,12 +137,12 @@ class OrderTest {
 		address.setCodPostal(codPostar);
 		address.setCity(city);
 		address.setProvince(province);
-		address.setCountry(Country.SPAIN);
+
 		order.setAddress(address);
 		
 		assertNotNull(order.getAddress());
 		assertEquals(order.getAddress(), address);
-		assertEquals(order.getAddress().getCountry(), Country.SPAIN);
+
 	}
 	
 	@Test
@@ -281,7 +281,7 @@ class OrderTest {
 		address.setCodPostal(codPostarAddress);
 		address.setCity(cityAddress);
 		address.setProvince(provinceAddress);
-		address.setCountry(Country.SPAIN);
+	
 		order.setAddress(address);
 		
 		EmployeeManagedOrders employeeManagedOrders = new EmployeeManagedOrders();

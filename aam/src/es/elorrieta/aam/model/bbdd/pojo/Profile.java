@@ -5,6 +5,8 @@ public class Profile {
 	private Person user = null;
 
 	private boolean isOn = false;
+	
+	private int userType = 0;
 
 	public boolean isOn() {
 		return isOn;
@@ -20,6 +22,14 @@ public class Profile {
 
 	public void setUser(Person user) {
 		this.user = user;
+	}
+
+	public int getUserType() {
+		return userType;
+	}
+
+	public void setUserType(int userType) {
+		this.userType = userType;
 	}
 
 }
