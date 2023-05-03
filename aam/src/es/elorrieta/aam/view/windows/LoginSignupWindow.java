@@ -102,7 +102,7 @@ public class LoginSignupWindow extends JFrame {
 						checkLogin(email, pass, order);
 
 					} catch (SQLException e1) {
-						
+
 						JOptionPane.showMessageDialog(contentPane, "Data Base Error. Contents cannot be displayed",
 								"ERROR!!", JOptionPane.ERROR_MESSAGE);
 
@@ -125,7 +125,7 @@ public class LoginSignupWindow extends JFrame {
 					try {
 						checkSigUp(email, date, pass);
 					} catch (SQLException e1) {
-						
+
 						JOptionPane.showMessageDialog(contentPane, "Data Base Error. Contents cannot be displayed",
 								"ERROR!!", JOptionPane.ERROR_MESSAGE);
 
@@ -197,6 +197,7 @@ public class LoginSignupWindow extends JFrame {
 		panel.add(panelFooter);
 
 		passwordField = new JPasswordField();
+
 		passwordField.setBackground(new Color(255, 201, 147));
 		passwordField.setBounds(145, 344, 284, 46);
 		panel.add(passwordField);
@@ -217,6 +218,7 @@ public class LoginSignupWindow extends JFrame {
 	private void changesForSignUp() {
 		lblGif.setBounds(0, 53, 553, 559);
 		textField.setBounds(674, 285, 284, 46);
+		textField.setText("");
 
 		MaskFormatter fmt = null;
 		try {
@@ -232,6 +234,7 @@ public class LoginSignupWindow extends JFrame {
 		lblHeader.setBounds(615, 116, 396, 46);
 		lblHeader.setText("Sign Up");
 		passwordField.setBounds(674, 365, 284, 46);
+		passwordField.setText("");
 		btnLogin.setBounds(754, 468, 104, 38);
 		btnLogin.setText("Signup");
 		btnLogin.setActionCommand("Signup");

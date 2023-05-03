@@ -42,9 +42,9 @@ public class LoginSignupValidation {
 
 	private boolean isValidYear(Date date) {
 		boolean ret = true;
-		Calendar c = Calendar.getInstance();
-		c.setTime(date);
-		int year = c.get(Calendar.YEAR);
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		int year = calendar.get(Calendar.YEAR);
 		int actual = Calendar.getInstance().get(Calendar.YEAR);
 
 		if ((year < 1970) || (year > actual)) {

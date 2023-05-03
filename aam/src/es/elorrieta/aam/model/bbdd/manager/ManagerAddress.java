@@ -20,7 +20,7 @@ public class ManagerAddress extends ManagerAbstract<Address> {
 	}
 
 	@Override
-	public List<Address> selectAll() throws SQLException ,NotFoundException, AccessToDataBaseException, Exception {
+	public List<Address> selectAll() throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 
 		return null;
 	}
@@ -37,7 +37,7 @@ public class ManagerAddress extends ManagerAbstract<Address> {
 			String query = "INSERT INTO `address`(`country`, `street`, `cod_postal`, `city`, `province`, `created_at`) VALUES ('"
 					+ address.getCountry() + "','" + address.getStreet() + "','" + address.getCodPostal() + "','    "
 					+ address.getCity() + "','" + address.getProvince() + "','"
-					+ new SimpleDateFormat("yyyy-MM-dd").format(address.getCreatedAt()) + "')";
+					+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(address.getCreatedAt()) + "')";
 			preparedStatement = dbUtils.connection.prepareStatement(query);
 			preparedStatement.execute();
 
@@ -53,7 +53,8 @@ public class ManagerAddress extends ManagerAbstract<Address> {
 	}
 
 	@Override
-	public Address select(Address address) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
+	public Address select(Address address)
+			throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		if (!dbUtils.isConnected())
 			dbUtils.connect();
 		if (dbUtils.connection == null) {
@@ -66,7 +67,7 @@ public class ManagerAddress extends ManagerAbstract<Address> {
 
 			statement = dbUtils.connection.createStatement();
 			String query = "SELECT `id_address`, `country`, `street`, `cod_postal`, `city`, `province`, `created_at` FROM `address` WHERE `created_at` = '"
-					+ new SimpleDateFormat("yyyy-MM-dd").format(address.getCreatedAt()) + "'";
+					+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(address.getCreatedAt()) + "'";
 			resultSet = statement.executeQuery(query);
 			if (resultSet.next()) {
 				if (ret == null) {
@@ -176,7 +177,6 @@ public class ManagerAddress extends ManagerAbstract<Address> {
 
 	@Override
 	public void delete(Address t) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
-		
 
 	}
 

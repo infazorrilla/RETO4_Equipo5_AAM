@@ -1,9 +1,11 @@
 package es.elorrieta.aam.model.bbdd.pojo;
 
-public class Customer extends Person  {
+import java.io.Serializable;
 
-	
-	
+public class Customer extends Person  implements Serializable{
+
+
+	private static final long serialVersionUID = -3269494051008982311L;
 
 	@Override
 	public int hashCode() {

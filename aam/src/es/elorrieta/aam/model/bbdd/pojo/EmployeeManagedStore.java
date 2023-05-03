@@ -1,10 +1,13 @@
 package es.elorrieta.aam.model.bbdd.pojo;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class EmployeeManagedStore extends Employee {
+public class EmployeeManagedStore extends Employee   implements Serializable{
 
+	
+	private static final long serialVersionUID = 5838275838591637199L;
 	private List<Brand> brands = null;
 
 	public List<Brand> getBrands() {

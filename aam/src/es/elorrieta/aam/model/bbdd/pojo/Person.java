@@ -1,10 +1,13 @@
 package es.elorrieta.aam.model.bbdd.pojo;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public abstract class Person {
+public abstract class Person   implements Serializable {
+	
+	private static final long serialVersionUID = 1930280177261108198L;
 	private int id = 0;
 	private String name = null;
 	private String lastName = null;

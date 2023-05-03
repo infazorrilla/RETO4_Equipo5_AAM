@@ -1,9 +1,11 @@
 package es.elorrieta.aam.model.bbdd.pojo;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Employee extends Person {
+public abstract class Employee extends Person  implements Serializable{
 
+	private static final long serialVersionUID = 5538779851442362348L;
 	private int employeeType = 0;
 
 	
