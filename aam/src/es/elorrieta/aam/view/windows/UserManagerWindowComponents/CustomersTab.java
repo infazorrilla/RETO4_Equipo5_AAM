@@ -143,7 +143,7 @@ public class CustomersTab {
 		insertInfoCustIntoTable(customers);
 	}
 
-	private void insertInfoCustIntoTable(List<Customer> customers) {
+	private JTable insertInfoCustIntoTable(List<Customer> customers) {
 
 		DefaultTableModel model = (DefaultTableModel) customersTable.getModel();
 		customersTable.removeAll();
@@ -162,6 +162,8 @@ public class CustomersTab {
 					customer.getAddress() == null ? "" : customer.getAddress().getCountry(),
 					customer.isStatus() == false ? "NO" : "SI" });
 		}
+		customersTable.setModel(model);
+		return this.customersTable;
 	}
 
 	private boolean isBlockedUser() {
@@ -180,4 +182,33 @@ public class CustomersTab {
 		ManagerCustomers managerCustomers = new ManagerCustomers();
 		managerCustomers.updateCustomerStatus(customer);
 	}
+
+	// esta funcion es para el test del junit
+	public JTable insertIntoTable(List<Customer> customers) {
+		customersTable = new JTable();
+		customersTable.setModel(new DefaultTableModel(
+				new Object[][] { { null, null, null, null, null, null, null, null, null, null, null, null }, },
+				new String[] { "ID", "nombre", "Apellidos", "Email", "Contrase\u00F1a", "Fecha De Necimiento",
+						"Direccion", "CodPostal", "Ciudad", "Provincia", "Pais", "\u00BFEsta Bloqueado?" }));
+		DefaultTableModel model = (DefaultTableModel) customersTable.getModel();
+		customersTable.removeAll();
+		model.setRowCount(0);
+		for (Customer customer : customers) {
+			model.addRow(new String[] { customer.getId() + "", customer.getName() == null ? "" : customer.getName(),
+					customer.getLastName() == null ? "" : customer.getLastName(),
+					customer.getEmail() == null ? "" : customer.getEmail(),
+					customer.getPassword() == null ? "" : customer.getPassword(),
+					customer.getBirthDate() == null ? ""
+							: new SimpleDateFormat("dd-MM-yyyy").format(customer.getBirthDate()),
+					customer.getAddress() == null ? "" : customer.getAddress().getStreet(),
+					customer.getAddress() == null ? "" : customer.getAddress().getCodPostal(),
+					customer.getAddress() == null ? "" : customer.getAddress().getCity(),
+					customer.getAddress() == null ? "" : customer.getAddress().getProvince(),
+					customer.getAddress() == null ? "" : customer.getAddress().getCountry(),
+					customer.isStatus() == false ? "NO" : "SI" });
+		}
+
+		return customersTable;
+	}
+
 }

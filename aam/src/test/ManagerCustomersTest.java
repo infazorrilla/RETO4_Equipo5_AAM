@@ -52,24 +52,27 @@ class ManagerCustomersTest {
 		assertEquals(customers.size(), 3);
 
 		// comprobamos los ides de los clientes ,
-		// cliente 1 -> ID= 9 , email = user123@gmail.com , password = User1234/
+		// cliente 1 -> ID= 11 , email = susi123@gmail.com , password = Susi1234/
 
-		// cliente 2 -> ID = 10 ,email = user12@gmail.com , password = User12A/
-		// cliente 3 -> ID= 11, email = susi123@gmail.com , password = Susi1234/
+		// cliente 2 -> ID = 12 ,email = user12@gmail.com , password = Customer123/
+		// cliente 3 -> ID= 13, email = lily123@gmail.com , password = Lily1234/
 
 		// cliente 1
-		assertEquals(customers.get(0).getId(), 9);
-		assertEquals(customers.get(0).getEmail(), "user123@gmail.com");
-		assertEquals(customers.get(0).getPassword(), "User1234/");
+
+		assertEquals(customers.get(0).getId(), 11);
+		assertEquals(customers.get(0).getEmail(), "susi123@gmail.com");
+		assertEquals(customers.get(0).getPassword(), "Susi1234/");
 
 		// cliente 2
-		assertEquals(customers.get(1).getId(), 10);
-		assertEquals(customers.get(1).getEmail(), "user12@gmail.com");
-		assertEquals(customers.get(1).getPassword(), "User12A/");
+
+		assertEquals(customers.get(1).getId(), 12);
+		assertEquals(customers.get(1).getEmail(), "customer2@gmail.com");
+		assertEquals(customers.get(1).getPassword(), "Customer123/");
+
 		// cliente 3
-		assertEquals(customers.get(2).getId(), 11);
-		assertEquals(customers.get(2).getEmail(), "susi123@gmail.com");
-		assertEquals(customers.get(2).getPassword(), "Susi1234/");
+		assertEquals(customers.get(2).getId(), 13);
+		assertEquals(customers.get(2).getEmail(), "lily123@gmail.com");
+		assertEquals(customers.get(2).getPassword(), "Lily1234/");
 
 		// guardamos el contenido del array en un fichero LOG.txt
 		readWriteFromFile.writeToFile(customers);
