@@ -70,12 +70,12 @@ public class Order  implements Serializable {
 		this.totalPrice = totalPrice;
 	}
 	
-	public Status getStatus() {
-		return status;
+	public String getStatus() {
+		return this.status.name();
 	}
 	
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setStatus(String status) {
+		this.status = Status.valueOf(status);
 	}
 	
 	public Payment getPayment() {
