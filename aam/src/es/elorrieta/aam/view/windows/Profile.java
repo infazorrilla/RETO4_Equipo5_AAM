@@ -8,7 +8,11 @@ import java.io.File;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -78,34 +82,7 @@ public class Profile extends JFrame {
 
 						try {
 							managerCustomer.delete((Customer) order.getCustomer().getProfile().getUser());
-						} catch (SQLException e1) {
-							JOptionPane.showMessageDialog(contentPane, "Data Base Error. Contents cannot be displayed",
-									"ERROR!!", JOptionPane.ERROR_MESSAGE);
-							e1.printStackTrace();
-						} catch (AccessToDataBaseException e1) {
-							JOptionPane.showMessageDialog(contentPane,
-									"Data Base Access. Coundn't connect to data base  ", "ERROR!!",
-									JOptionPane.ERROR_MESSAGE);
-						} catch (NotFoundException e1) {
-							JOptionPane.showMessageDialog(contentPane, "Data Base is empty", "ERROR!!",
-									JOptionPane.ERROR_MESSAGE);
-							e1.printStackTrace();
-						} catch (Exception e1) {
-							JOptionPane.showMessageDialog(contentPane, "Generic error...", "ERROR!!",
-									JOptionPane.ERROR_MESSAGE);
-						}
-						JOptionPane.showMessageDialog(null, "Se ha borrado la cuenta correctamente");
-						order.getCustomer().getProfile().setOn(false);
-						order.setCustomer(null);
-
-						dispose();
-						new GenderWindow(order).setVisible(true);
-
-					} else {
-						ManagerEmployee managerEmployee = new ManagerEmployee();
-						try {
-							managerEmployee.delete((EmployeeManagedOrders) order.getCustomer().getProfile().getUser());
-							JOptionPane.showMessageDialog(null, "Se ha borrado la cuenta correctamente");
+							JOptionPane.showMessageDialog(null, "Se ha borrado la cuenta correctamente!!");
 							order.getCustomer().getProfile().setOn(false);
 							order.setCustomer(null);
 							dispose();
@@ -121,7 +98,33 @@ public class Profile extends JFrame {
 						} catch (NotFoundException e1) {
 							JOptionPane.showMessageDialog(contentPane, "Data Base is empty", "ERROR!!",
 									JOptionPane.ERROR_MESSAGE);
-							e1.printStackTrace();
+
+						} catch (Exception e1) {
+							JOptionPane.showMessageDialog(contentPane, "Generic error...", "ERROR!!",
+									JOptionPane.ERROR_MESSAGE);
+						}
+
+					} else {
+						ManagerEmployee managerEmployee = new ManagerEmployee();
+						try {
+							managerEmployee.delete((EmployeeManagedOrders) order.getCustomer().getProfile().getUser());
+							JOptionPane.showMessageDialog(null, "Se ha borrado la cuenta correctamente");
+							order.getCustomer().getProfile().setOn(false);
+							order.setCustomer(null);
+							dispose();
+							new GenderWindow(order).setVisible(true);
+						} catch (SQLException e1) {
+							JOptionPane.showMessageDialog(contentPane, "Data Base Error. Contents cannot be displayed",
+									"ERROR!!", JOptionPane.ERROR_MESSAGE);
+
+						} catch (AccessToDataBaseException e1) {
+							JOptionPane.showMessageDialog(contentPane,
+									"Data Base Access. Coundn't connect to data base  ", "ERROR!!",
+									JOptionPane.ERROR_MESSAGE);
+						} catch (NotFoundException e1) {
+							JOptionPane.showMessageDialog(contentPane, "Data Base is empty", "ERROR!!",
+									JOptionPane.ERROR_MESSAGE);
+
 						} catch (Exception e1) {
 							JOptionPane.showMessageDialog(contentPane, "Generic error...", "ERROR!!",
 									JOptionPane.ERROR_MESSAGE);
@@ -150,58 +153,74 @@ public class Profile extends JFrame {
 				} else {
 
 					try {
-						if (getUserInfo(order) instanceof Customer) {
+						List<Object> user = getUserInfo(order);
+						if ((Object) user.get(0) instanceof Customer) {
 							ManagerCustomers managerCustomer = new ManagerCustomers();
-							order.getCustomer().getProfile().setUser((Customer) getUserInfo(order));
+							order.getCustomer().getProfile().setUser((Customer) user.get(0));
 
-							try {
-								managerCustomer.update((Customer) getUserInfo(order));
-							} catch (SQLException e1) {
-								JOptionPane.showMessageDialog(contentPane,
-										"Data Base Error. Contents cannot be displayed", "ERROR!!",
-										JOptionPane.ERROR_MESSAGE);
-								e1.printStackTrace();
-							} catch (AccessToDataBaseException e1) {
-								JOptionPane.showMessageDialog(contentPane,
-										"Data Base Access. Coundn't connect to data base  ", "ERROR!!",
-										JOptionPane.ERROR_MESSAGE);
-							} catch (NotFoundException e1) {
-								JOptionPane.showMessageDialog(contentPane, "Data Base is empty", "ERROR!!",
-										JOptionPane.ERROR_MESSAGE);
-								e1.printStackTrace();
-							} catch (Exception e1) {
-								System.out.println(e1);
-								JOptionPane.showMessageDialog(contentPane, "Generic error...", "ERROR!!",
-										JOptionPane.ERROR_MESSAGE);
-							}
-
-							JOptionPane.showMessageDialog(null, "Se han realizado correctamente las modificaiones ");
-							new Profile(order);
-
-//updateCustomer
-						} else {
-							ManagerEmployee managerEmployee = new ManagerEmployee();
-							try {
-								managerEmployee.update((EmployeeManagedOrders) getUserInfo(order));
+							if (user.get(1) == (Object) false) {
 								JOptionPane.showMessageDialog(null,
-										"Se han reakizado correctamente las modificaiones ");
+										"No se han podido realizar las modificaciones , campo vacio!! ");
+								setInfoUser(order);
+							} else {
+								try {
+									managerCustomer.update((Customer) user.get(0));
+								} catch (SQLException e1) {
+									JOptionPane.showMessageDialog(contentPane,
+											"Data Base Error. Contents cannot be displayed", "ERROR!!",
+											JOptionPane.ERROR_MESSAGE);
+
+								} catch (AccessToDataBaseException e1) {
+									JOptionPane.showMessageDialog(contentPane,
+											"Data Base Access. Coundn't connect to data base  ", "ERROR!!",
+											JOptionPane.ERROR_MESSAGE);
+								} catch (NotFoundException e1) {
+									JOptionPane.showMessageDialog(contentPane, "Data Base is empty", "ERROR!!",
+											JOptionPane.ERROR_MESSAGE);
+
+								} catch (Exception e1) {
+
+									JOptionPane.showMessageDialog(contentPane, "Generic error...", "ERROR!!",
+											JOptionPane.ERROR_MESSAGE);
+								}
+
+								JOptionPane.showMessageDialog(null,
+										"Se han realizado correctamente las modificaiones ");
 								new Profile(order);
-							} catch (SQLException e1) {
-								JOptionPane.showMessageDialog(contentPane,
-										"Data Base Error. Contents cannot be displayed", "ERROR!!",
-										JOptionPane.ERROR_MESSAGE);
-								e1.printStackTrace();
-							} catch (AccessToDataBaseException e1) {
-								JOptionPane.showMessageDialog(contentPane,
-										"Data Base Access. Coundn't connect to data base  ", "ERROR!!",
-										JOptionPane.ERROR_MESSAGE);
-							} catch (NotFoundException e1) {
-								JOptionPane.showMessageDialog(contentPane, "Data Base is empty", "ERROR!!",
-										JOptionPane.ERROR_MESSAGE);
-								e1.printStackTrace();
-							} catch (Exception e1) {
-								JOptionPane.showMessageDialog(contentPane, "Generic error...", "ERROR!!",
-										JOptionPane.ERROR_MESSAGE);
+
+//updateCustomer}
+							}
+						} else {
+
+							ManagerEmployee managerEmployee = new ManagerEmployee();
+							order.getCustomer().getProfile().setUser((EmployeeManagedOrders) user.get(0));
+							if (user.get(1) == (Object) false) {
+								JOptionPane.showMessageDialog(null,
+										"No se han podido realizar las modificaciones , campo vacio!! ");
+								setInfoUser(order);
+							} else {
+								try {
+									managerEmployee.update((EmployeeManagedOrders) user.get(0));
+									JOptionPane.showMessageDialog(null,
+											"Se han reakizado correctamente las modificaiones ");
+									new Profile(order);
+								} catch (SQLException e1) {
+									JOptionPane.showMessageDialog(contentPane,
+											"Data Base Error. Contents cannot be displayed", "ERROR!!",
+											JOptionPane.ERROR_MESSAGE);
+									
+								} catch (AccessToDataBaseException e1) {
+									JOptionPane.showMessageDialog(contentPane,
+											"Data Base Access. Coundn't connect to data base  ", "ERROR!!",
+											JOptionPane.ERROR_MESSAGE);
+								} catch (NotFoundException e1) {
+									JOptionPane.showMessageDialog(contentPane, "Data Base is empty", "ERROR!!",
+											JOptionPane.ERROR_MESSAGE);
+									
+								} catch (Exception e1) {
+									JOptionPane.showMessageDialog(contentPane, "Generic error...", "ERROR!!",
+											JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}
 					} catch (ParseException e1) {
@@ -449,6 +468,13 @@ public class Profile extends JFrame {
 			textFieldProvince.setText(order.getCustomer().getProfile().getUser().getAddress().getProvince() == null ? ""
 					: order.getCustomer().getProfile().getUser().getAddress().getProvince());
 
+		} else {
+			textFieldAddress.setText("");
+			textFieldzip.setText("");
+			textFieldCity.setText("");
+			textFieldCountry.setText("");
+			textFieldProvince.setText("");
+
 		}
 		setUserFoto(order);
 	}
@@ -464,23 +490,27 @@ public class Profile extends JFrame {
 	private <T> T getUserInfo(Order order) throws ParseException {
 		T ret = null;
 		if (3 != order.getCustomer().getProfile().getUserType()) {
-			EmployeeManagedOrders employee = getEmployeeInfo(order);
-			ret = (T) employee;
+			List<Object> employee = getEmployeeInfo(order);
+			ret = ((T) employee);
 		} else {
-			Customer customer = getCustomerInfo(order);
+			List<Object> customer = getCustomerInfo(order);
 			ret = ((T) customer);
 		}
 		return (T) ret;
 	}
 
-	private EmployeeManagedOrders getEmployeeInfo(Order order) throws ParseException {
-		EmployeeManagedOrders ret = new EmployeeManagedOrders();
-		ret.setId(order.getCustomer().getProfile().getUser().getId());
-		ret.setName(textFieldName.getText());
-		ret.setLastName(textFieldLastName.getText());
-		ret.setEmail(textFieldEmail.getText());
-		ret.setPassword(new String(passwordField.getPassword()));
-		ret.setBirthDate(new SimpleDateFormat("dd/MM/yyyy").parse(textFieldBirthDate.getText()));
+	private List<Object> getEmployeeInfo(Order order) throws ParseException {
+		List<Object> ret = new ArrayList<>();
+
+		EmployeeManagedOrders employee = new EmployeeManagedOrders();
+		ret.add(employee);
+		ret.add(false);
+		employee.setId(order.getCustomer().getProfile().getUser().getId());
+		employee.setName(textFieldName.getText());
+		employee.setLastName(textFieldLastName.getText());
+		employee.setEmail(textFieldEmail.getText());
+		employee.setPassword(new String(passwordField.getPassword()));
+		employee.setBirthDate(new SimpleDateFormat("dd/MM/yyyy").parse(textFieldBirthDate.getText()));
 
 		if (areAllAddressFieldsCompleted()) {
 			Address address = new Address();
@@ -495,24 +525,32 @@ public class Profile extends JFrame {
 			address.setCity(textFieldCity.getText());
 			address.setCountry(textFieldCountry.getText());
 			address.setProvince(textFieldProvince.getText());
-			ret.setAddress(address);
+			employee.setAddress(address);
+			ret.set(1, true);
+		} else if (order.getCustomer().getProfile().getUser().getAddress() != null
+				&& order.getCustomer().getProfile().getUser().getAddress().getId() != 0) {
+			employee.setAddress(order.getCustomer().getProfile().getUser().getAddress());
 		}
-		ret.setImage(order.getCustomer().getProfile().getUser().getImage());
-		ret.setEmployeeType(order.getCustomer().getProfile().getUserType());
-
+		File file = order.getCustomer().getProfile().getUser().getImage();
+		employee.setImage(file);
+		employee.setEmployeeType(order.getCustomer().getProfile().getUserType());
+		ret.set(0, employee);
 		return ret;
 	}
 
-	private Customer getCustomerInfo(Order order) throws ParseException {
-		Customer ret = new Customer();
-		ret.setId(order.getCustomer().getProfile().getUser().getId());
-		ret.setName(textFieldName.getText());
-		ret.setLastName(textFieldLastName.getText());
-		ret.setEmail(textFieldEmail.getText());
-		ret.setEmail(textFieldEmail.getText());
-		ret.setPassword(new String(passwordField.getPassword()));
-		ret.setBirthDate(new SimpleDateFormat("dd/MM/yyyy").parse(textFieldBirthDate.getText()));
+	private List<Object> getCustomerInfo(Order order) throws ParseException {
+		List<Object> ret = new ArrayList<>();
 
+		Customer customer = new Customer();
+		ret.add(customer);
+		ret.add(false);
+
+		customer.setId(order.getCustomer().getProfile().getUser().getId());
+		customer.setName(textFieldName.getText());
+		customer.setLastName(textFieldLastName.getText());
+		customer.setEmail(textFieldEmail.getText());
+		customer.setPassword(new String(passwordField.getPassword()));
+		customer.setBirthDate(new SimpleDateFormat("dd/MM/yyyy").parse(textFieldBirthDate.getText()));
 		if (areAllAddressFieldsCompleted()) {
 			Address address = new Address();
 			if (order.getCustomer().getProfile().getUser().getAddress() != null) {
@@ -527,17 +565,23 @@ public class Profile extends JFrame {
 			address.setCity(textFieldCity.getText());
 			address.setCountry(textFieldCountry.getText());
 			address.setProvince(textFieldProvince.getText());
-			ret.setAddress(address);
+			customer.setAddress(address);
+			ret.set(1, true);
+		} else if (order.getCustomer().getProfile().getUser().getAddress() != null
+				&& order.getCustomer().getProfile().getUser().getAddress().getId() != 0) {
+			customer.setAddress(order.getCustomer().getProfile().getUser().getAddress());
 		}
-		ret.setImage(order.getCustomer().getProfile().getUser().getImage());
-
+		File file = order.getCustomer().getProfile().getUser().getImage();
+		customer.setImage(file);
+		ret.set(0, customer);
 		return ret;
 	}
 
 	private boolean areAllAddressFieldsCompleted() {
 		boolean ret = false;
 		if (!textFieldAddress.getText().isEmpty() && !textFieldzip.getText().isEmpty()
-				&& !textFieldCity.getText().isEmpty() && !textFieldCountry.getText().isEmpty()) {
+				&& !textFieldCity.getText().isEmpty() && !textFieldCountry.getText().isEmpty()
+				&& !textFieldProvince.getText().isEmpty()) {
 			ret = true;
 		}
 		return ret;

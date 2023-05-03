@@ -48,7 +48,7 @@ public class ManagerEmployee extends ManagerAbstract<EmployeeManagedOrders> {
 		List<EmployeeManagedOrders> ret = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		ResultSet resultSet2 = null;
+
 		try {
 
 			statement = dbUtils.connection.createStatement();
@@ -84,12 +84,7 @@ public class ManagerEmployee extends ManagerAbstract<EmployeeManagedOrders> {
 				ret.add(employee);
 			}
 		} finally {
-			if (resultSet2 != null) {
-				try {
-					resultSet2.close();
-				} catch (SQLException e) {
-				}
-			}
+
 			if (resultSet != null) {
 				try {
 					resultSet.close();
@@ -271,7 +266,9 @@ public class ManagerEmployee extends ManagerAbstract<EmployeeManagedOrders> {
 			preparedStatement.setInt(7, employee.getId());
 
 			preparedStatement.executeUpdate();
-			updateImage(preparedStatement, file, employee.getId());
+			if (file != null) {
+				updateImage(preparedStatement, file, employee.getId());
+			}
 		} finally {
 			if (preparedStatement != null) {
 				try {

@@ -46,7 +46,7 @@ public class ManagerCustomers extends ManagerAbstract<Customer> {
 		List<Customer> ret = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		ResultSet resultSet2 = null;
+
 		try {
 
 			statement = dbUtils.connection.createStatement();
@@ -82,12 +82,7 @@ public class ManagerCustomers extends ManagerAbstract<Customer> {
 				ret.add(customer);
 			}
 		} finally {
-			if (resultSet2 != null) {
-				try {
-					resultSet2.close();
-				} catch (SQLException e) {
-				}
-			}
+
 			if (resultSet != null) {
 				try {
 					resultSet.close();

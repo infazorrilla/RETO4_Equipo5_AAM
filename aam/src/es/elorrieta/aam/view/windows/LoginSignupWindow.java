@@ -5,9 +5,12 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -76,6 +79,15 @@ public class LoginSignupWindow extends JFrame {
 		panel.add(lblGif);
 
 		textField = new JTextField();
+		textField.addKeyListener(new java.awt.event.KeyAdapter() {
+			public void keyTyped(java.awt.event.KeyEvent evt) {
+				if (textField.getText().length() >= 40
+						&& !(evt.getKeyChar() == KeyEvent.VK_DELETE || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+					getToolkit().beep();
+					evt.consume();
+				}
+			}
+		});
 		textField.setBounds(145, 255, 284, 46);
 		panel.add(textField);
 		textField.setColumns(10);
@@ -91,7 +103,7 @@ public class LoginSignupWindow extends JFrame {
 						checkLogin(email, pass, order);
 
 					} catch (SQLException e1) {
-						System.out.println(e1);
+						
 						JOptionPane.showMessageDialog(contentPane, "Data Base Error. Contents cannot be displayed",
 								"ERROR!!", JOptionPane.ERROR_MESSAGE);
 
@@ -114,7 +126,7 @@ public class LoginSignupWindow extends JFrame {
 					try {
 						checkSigUp(email, date, pass);
 					} catch (SQLException e1) {
-						System.out.println(e1);
+						
 						JOptionPane.showMessageDialog(contentPane, "Data Base Error. Contents cannot be displayed",
 								"ERROR!!", JOptionPane.ERROR_MESSAGE);
 
@@ -292,23 +304,29 @@ public class LoginSignupWindow extends JFrame {
 	private void checkLogin(String email, String pass, Order order)
 			throws SQLException, AccessToDataBaseException, NotFoundException, Exception {
 
-		boolean isCustomer = checkCustomerLogin(email, pass, order);
+		ArrayList<Boolean> isCustomer = checkCustomerLogin(email, pass, order);
 
-		if (!isCustomer) {
-			if(checkEmployeeLogin(email, pass, order)) {
-			textField.setText("");
-			passwordField.setText("");
-			JOptionPane.showMessageDialog(null, "Bienvenido");
-			dispose();
-			GenderWindow genderWidow = new GenderWindow(order);
-			genderWidow.setVisible(true);
+		if (isCustomer.get(0) == false && isCustomer.get(1) == false) {
+			ArrayList<Boolean> isEmployee = checkEmployeeLogin(email, pass, order);
+			if (isEmployee.get(0) == false && isEmployee.get(1) == false) {
+				JOptionPane.showMessageDialog(null, "Usuario o contraseña incorreacta");
+			} else if (isEmployee.get(0) != null && isEmployee.get(0) == true) {
+				textField.setText("");
+				passwordField.setText("");
+				JOptionPane.showMessageDialog(null, "Bienvenido");
+				dispose();
+				GenderWindow genderWidow = new GenderWindow(order);
+				genderWidow.setVisible(true);
+			} else {
+				JOptionPane.showMessageDialog(null, " no puedes iniciar sesion , esta cuenta esta bloqueada");
 			}
-
-		} else {
+		} else if (isCustomer.get(0) != null && isCustomer.get(0) == true) {
 			JOptionPane.showMessageDialog(null, "Bienvenido");
 			dispose();
 			GenderWindow genderWidow = new GenderWindow(order);
 			genderWidow.setVisible(true);
+		} else {
+			JOptionPane.showMessageDialog(null, " no puedes iniciar sesion , esta cuenta esta bloqueada");
 		}
 
 	}
@@ -326,9 +344,11 @@ public class LoginSignupWindow extends JFrame {
 
 	}
 
-	private boolean checkCustomerLogin(String email, String pass, Order order)
+	private ArrayList<Boolean> checkCustomerLogin(String email, String pass, Order order)
 			throws SQLException, AccessToDataBaseException, NotFoundException, Exception {
-		boolean ret = false;
+		ArrayList<Boolean> ret = new ArrayList<Boolean>();
+		ret.add(false);
+		ret.add(false);
 		Customer customer = isCustomerExist(email, pass);
 		if (customer != null) {
 			if (!customer.isStatus()) {
@@ -339,10 +359,10 @@ public class LoginSignupWindow extends JFrame {
 
 				order.getCustomer().getProfile().setOn(true);
 				order.getCustomer().getProfile().setUserType(3);
-				ret = true;
+				ret.set(0, true);
 			} else {
-				JOptionPane.showMessageDialog(null, "Usted no puede iniciar sesion , esta cuenta esta bloqueada");
-				ret = true;
+
+				ret.set(1, true);
 			}
 		}
 
@@ -363,9 +383,11 @@ public class LoginSignupWindow extends JFrame {
 
 	}
 
-	private boolean checkEmployeeLogin(String email, String pass, Order order)
+	private ArrayList<Boolean> checkEmployeeLogin(String email, String pass, Order order)
 			throws SQLException, AccessToDataBaseException, NotFoundException, Exception {
-		boolean ret = false;
+		ArrayList<Boolean> ret = new ArrayList<Boolean>();
+		ret.add(false);
+		ret.add(false);
 		EmployeeManagedOrders employee = isEmployeeExist(email, pass);
 
 		if (employee != null) {
@@ -376,12 +398,11 @@ public class LoginSignupWindow extends JFrame {
 				profile.setUserType(employee.getEmployeeType());
 				order.setCustomer(new Customer());
 				order.getCustomer().setProfile(profile);
-				ret = true;
+				ret.set(0, true);
 			} else {
-				JOptionPane.showMessageDialog(null, "Usted no puede iniciar sesion , esta cuenta esta bloqueada");
+
+				ret.set(1, true);
 			}
-		} else {
-			JOptionPane.showMessageDialog(null, "Usuario o contraseña incorreacta");
 		}
 		return ret;
 	}

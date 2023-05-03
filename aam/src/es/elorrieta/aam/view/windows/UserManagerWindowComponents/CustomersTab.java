@@ -56,14 +56,14 @@ public class CustomersTab {
 						} catch (SQLException e1) {
 							JOptionPane.showMessageDialog(panel, "Data Base Error. Contents cannot be displayed",
 									"ERROR!!", JOptionPane.ERROR_MESSAGE);
-							e1.printStackTrace();
+
 						} catch (AccessToDataBaseException e1) {
 							JOptionPane.showMessageDialog(panel, "Data Base Access. Coundn't connect to data base  ",
 									"ERROR!!", JOptionPane.ERROR_MESSAGE);
 						} catch (NotFoundException e1) {
 							JOptionPane.showMessageDialog(panel, "Data Base is empty", "ERROR!!",
 									JOptionPane.ERROR_MESSAGE);
-							e1.printStackTrace();
+
 						} catch (Exception e1) {
 							JOptionPane.showMessageDialog(panel, "Generic error...", "ERROR!!",
 									JOptionPane.ERROR_MESSAGE);
@@ -92,14 +92,14 @@ public class CustomersTab {
 						} catch (SQLException e1) {
 							JOptionPane.showMessageDialog(panel, "Data Base Error. Contents cannot be displayed",
 									"ERROR!!", JOptionPane.ERROR_MESSAGE);
-							e1.printStackTrace();
+
 						} catch (AccessToDataBaseException e1) {
 							JOptionPane.showMessageDialog(panel, "Data Base Access. Coundn't connect to data base  ",
 									"ERROR!!", JOptionPane.ERROR_MESSAGE);
 						} catch (NotFoundException e1) {
 							JOptionPane.showMessageDialog(panel, "Data Base is empty", "ERROR!!",
 									JOptionPane.ERROR_MESSAGE);
-							e1.printStackTrace();
+
 						} catch (Exception e1) {
 							JOptionPane.showMessageDialog(panel, "Generic error...", "ERROR!!",
 									JOptionPane.ERROR_MESSAGE);
@@ -117,22 +117,28 @@ public class CustomersTab {
 
 		try {
 			doInsertInfoCustIntoTable();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SQLException e1) {
+			JOptionPane.showMessageDialog(panel, "Data Base Error. Contents cannot be displayed", "ERROR!!",
+					JOptionPane.ERROR_MESSAGE);
+
+		} catch (AccessToDataBaseException e1) {
+			JOptionPane.showMessageDialog(panel, "Data Base Access. Coundn't connect to data base  ", "ERROR!!",
+					JOptionPane.ERROR_MESSAGE);
+		} catch (NotFoundException e1) {
+			JOptionPane.showMessageDialog(panel, "Data Base is empty", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+
+		} catch (Exception e1) {
+			JOptionPane.showMessageDialog(panel, "Generic error...", "ERROR!!", JOptionPane.ERROR_MESSAGE);
 		}
+
 		return panel;
 	}
 
 	private void doInsertInfoCustIntoTable()
 			throws SQLException, AccessToDataBaseException, NotFoundException, Exception {
 
-		List<Customer> customers = null;
 		ManagerCustomers managerCustomers = new ManagerCustomers();
-		customers = managerCustomers.selectAll();
+		List<Customer> customers = managerCustomers.selectAll();
 
 		insertInfoCustIntoTable(customers);
 	}

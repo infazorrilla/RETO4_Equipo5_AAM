@@ -58,14 +58,14 @@ public class EmployeesTab {
 						} catch (SQLException e1) {
 							JOptionPane.showMessageDialog(panel, "Data Base Error. Contents cannot be displayed",
 									"ERROR!!", JOptionPane.ERROR_MESSAGE);
-							e1.printStackTrace();
+
 						} catch (AccessToDataBaseException e1) {
 							JOptionPane.showMessageDialog(panel, "Data Base Access. Coundn't connect to data base  ",
 									"ERROR!!", JOptionPane.ERROR_MESSAGE);
 						} catch (NotFoundException e1) {
 							JOptionPane.showMessageDialog(panel, "Data Base is empty", "ERROR!!",
 									JOptionPane.ERROR_MESSAGE);
-							e1.printStackTrace();
+
 						} catch (Exception e1) {
 							JOptionPane.showMessageDialog(panel, "Generic error...", "ERROR!!",
 									JOptionPane.ERROR_MESSAGE);
@@ -94,14 +94,14 @@ public class EmployeesTab {
 						} catch (SQLException e1) {
 							JOptionPane.showMessageDialog(panel, "Data Base Error. Contents cannot be displayed",
 									"ERROR!!", JOptionPane.ERROR_MESSAGE);
-							e1.printStackTrace();
+
 						} catch (AccessToDataBaseException e1) {
 							JOptionPane.showMessageDialog(panel, "Data Base Access. Coundn't connect to data base  ",
 									"ERROR!!", JOptionPane.ERROR_MESSAGE);
 						} catch (NotFoundException e1) {
 							JOptionPane.showMessageDialog(panel, "Data Base is empty", "ERROR!!",
 									JOptionPane.ERROR_MESSAGE);
-							e1.printStackTrace();
+
 						} catch (Exception e1) {
 							JOptionPane.showMessageDialog(panel, "Generic error...", "ERROR!!",
 									JOptionPane.ERROR_MESSAGE);
@@ -122,13 +122,13 @@ public class EmployeesTab {
 		} catch (SQLException e1) {
 			JOptionPane.showMessageDialog(panel, "Data Base Error. Contents cannot be displayed", "ERROR!!",
 					JOptionPane.ERROR_MESSAGE);
-			e1.printStackTrace();
+			
 		} catch (AccessToDataBaseException e1) {
 			JOptionPane.showMessageDialog(panel, "Data Base Access. Coundn't connect to data base  ", "ERROR!!",
 					JOptionPane.ERROR_MESSAGE);
 		} catch (NotFoundException e1) {
 			JOptionPane.showMessageDialog(panel, "Data Base is empty", "ERROR!!", JOptionPane.ERROR_MESSAGE);
-			e1.printStackTrace();
+			
 		} catch (Exception e1) {
 			JOptionPane.showMessageDialog(panel, "Generic error...", "ERROR!!", JOptionPane.ERROR_MESSAGE);
 		}
