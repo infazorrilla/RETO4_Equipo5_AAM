@@ -3,6 +3,8 @@ package es.elorrieta.aam.model.bbdd.manager;
 import java.sql.SQLException;
 import java.util.List;
 
+import es.elorrieta.aam.model.bbdd.exception.AccessToDataBaseException;
+import es.elorrieta.aam.model.bbdd.exception.NotFoundException;
 import es.elorrieta.aam.model.bbdd.utils.DBUtils;
 
 public abstract class ManagerAbstract<T> implements ManagerInterface<T> {
@@ -17,18 +19,18 @@ public abstract class ManagerAbstract<T> implements ManagerInterface<T> {
 	}
 
 	@Override
-	public abstract  List<T> selectAll(T t) throws SQLException, Exception;
+	public abstract  List<T> selectAll() throws SQLException , NotFoundException, AccessToDataBaseException, Exception;
 
 	@Override
-	public abstract  void insert(T t) throws SQLException, Exception;
+	public abstract  void insert(T t) throws SQLException , NotFoundException, AccessToDataBaseException, Exception;
 
 	@Override
-	public  abstract T select(T t) throws SQLException, Exception;
+	public  abstract T select(T t) throws SQLException , NotFoundException, AccessToDataBaseException, Exception;
 
 	@Override
-	public abstract  void update(T t) throws SQLException, Exception;
+	public abstract  void update(T t) throws SQLException , NotFoundException, AccessToDataBaseException, Exception;
 
 	@Override
-	public abstract void delete(T t) throws SQLException, Exception;
+	public abstract void delete(T t) throws SQLException, NotFoundException, AccessToDataBaseException, Exception;
 
 }

@@ -6,10 +6,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import es.elorrieta.aam.model.bbdd.exception.AccessToDataBaseException;
+import es.elorrieta.aam.model.bbdd.exception.NotFoundException;
 import es.elorrieta.aam.model.bbdd.pojo.ShoppingCart;
 import es.elorrieta.aam.model.bbdd.utils.DBUtils;
 
@@ -20,7 +21,7 @@ public class ManagerShoppingCart extends ManagerAbstract<ShoppingCart> {
 	}
 
 	@Override
-	public void insert(ShoppingCart shoppingCart) throws SQLException, Exception {
+	public void insert(ShoppingCart shoppingCart) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 
 		if (!dbUtils.isConnected())
 			dbUtils.connect();
@@ -47,7 +48,7 @@ public class ManagerShoppingCart extends ManagerAbstract<ShoppingCart> {
 	}
 
 	@Override
-	public ShoppingCart select(ShoppingCart shoppingCart) throws SQLException, Exception {
+	public ShoppingCart select(ShoppingCart shoppingCart) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		if (!dbUtils.isConnected())
 			dbUtils.connect();
 		ShoppingCart ret = null;
@@ -93,7 +94,7 @@ public class ManagerShoppingCart extends ManagerAbstract<ShoppingCart> {
 	}
 
 	@Override
-	public void update(ShoppingCart shoppingCart) throws SQLException, Exception {
+	public void update(ShoppingCart shoppingCart) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		if (!dbUtils.isConnected())
 			dbUtils.connect();
 		Statement statement = null;
@@ -117,7 +118,7 @@ public class ManagerShoppingCart extends ManagerAbstract<ShoppingCart> {
 	}
 
 	@Override
-	public void delete(ShoppingCart shoppingCart) throws SQLException, Exception {
+	public void delete(ShoppingCart shoppingCart) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		if (!dbUtils.isConnected())
 			dbUtils.connect();
 		PreparedStatement preparedStatement = null;
@@ -140,7 +141,7 @@ public class ManagerShoppingCart extends ManagerAbstract<ShoppingCart> {
 	}
 
 	@Override
-	public List<ShoppingCart> selectAll(ShoppingCart t) throws SQLException, Exception {
+	public List<ShoppingCart> selectAll() throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 
 		return null;
 	}

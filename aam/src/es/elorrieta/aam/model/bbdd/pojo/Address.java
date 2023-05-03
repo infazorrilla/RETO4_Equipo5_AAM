@@ -1,6 +1,7 @@
 package es.elorrieta.aam.model.bbdd.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 public class Address implements Serializable {
@@ -16,11 +17,8 @@ public class Address implements Serializable {
 	private String codPostal = null;
 	private String city = null;
 	private String province = null;
-	private Country country = null;
-
-	public enum Country {
-		GERMANY, FRANCE, ITALY, SPAIN
-	}
+	private String country = null;
+	private Date createdAt = null;
 
 	public int getId() {
 		return id;
@@ -62,17 +60,25 @@ public class Address implements Serializable {
 		this.province = province;
 	}
 
-	public Country getCountry() {
+	public String getCountry() {
 		return country;
 	}
 
-	public void setCountry(Country country) {
+	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(city, codPostal, country, id, province, street);
+		return Objects.hash(city, codPostal, country, createdAt, id, province, street);
 	}
 
 	@Override
@@ -85,14 +91,15 @@ public class Address implements Serializable {
 			return false;
 		Address other = (Address) obj;
 		return Objects.equals(city, other.city) && Objects.equals(codPostal, other.codPostal)
-				&& country == other.country && id == other.id && Objects.equals(province, other.province)
-				&& Objects.equals(street, other.street);
+				&& Objects.equals(country, other.country) && Objects.equals(createdAt, other.createdAt)
+				&& id == other.id && Objects.equals(province, other.province) && Objects.equals(street, other.street);
 	}
 
 	@Override
 	public String toString() {
 		return "Address [id=" + id + ", street=" + street + ", codPostal=" + codPostal + ", city=" + city
-				+ ", province=" + province + ", country=" + country + "]";
+				+ ", province=" + province + ", country=" + country + ", createdAt=" + createdAt + "]";
 	}
 
+	
 }

@@ -4,9 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
+import es.elorrieta.aam.model.bbdd.exception.AccessToDataBaseException;
+import es.elorrieta.aam.model.bbdd.exception.NotFoundException;
 import es.elorrieta.aam.model.bbdd.pojo.ProductItem;
 import es.elorrieta.aam.model.bbdd.pojo.ShoppingCart;
 import es.elorrieta.aam.model.bbdd.pojo.ShoppingCartItem;
@@ -20,7 +21,8 @@ public class ManagerShoppingCartItems extends ManagerAbstract<ShoppingCartItem> 
 	}
 
 	@Override
-	public void insert(ShoppingCartItem shoppingCartItem) throws SQLException, Exception {
+	public void insert(ShoppingCartItem shoppingCartItem)
+			throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		if (!dbUtils.isConnected())
 			dbUtils.connect();
 		PreparedStatement preparedStatement = null;
@@ -45,7 +47,8 @@ public class ManagerShoppingCartItems extends ManagerAbstract<ShoppingCartItem> 
 	}
 
 	@Override
-	public ShoppingCartItem select(ShoppingCartItem shoppingCartItem) throws SQLException, Exception {
+	public ShoppingCartItem select(ShoppingCartItem shoppingCartItem)
+			throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		if (!dbUtils.isConnected())
 			dbUtils.connect();
 		ShoppingCartItem ret = null;
@@ -69,7 +72,7 @@ public class ManagerShoppingCartItems extends ManagerAbstract<ShoppingCartItem> 
 				ret.setProductItem(productItem);
 				ret.setPrice(resultSet.getDouble("price"));
 				ret.setQuantity(resultSet.getInt("quantity"));
-				
+
 			}
 		} finally {
 			if (resultSet != null) {
@@ -91,7 +94,8 @@ public class ManagerShoppingCartItems extends ManagerAbstract<ShoppingCartItem> 
 	}
 
 	@Override
-	public void update(ShoppingCartItem shoppingCartItem) throws SQLException, Exception {
+	public void update(ShoppingCartItem shoppingCartItem)
+			throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		if (!dbUtils.isConnected())
 			dbUtils.connect();
 		Statement statement = null;
@@ -116,7 +120,8 @@ public class ManagerShoppingCartItems extends ManagerAbstract<ShoppingCartItem> 
 	}
 
 	@Override
-	public void delete(ShoppingCartItem shoppingCartItem) throws SQLException, Exception {
+	public void delete(ShoppingCartItem shoppingCartItem)
+			throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		if (!dbUtils.isConnected())
 			dbUtils.connect();
 		PreparedStatement preparedStatement = null;
@@ -139,8 +144,9 @@ public class ManagerShoppingCartItems extends ManagerAbstract<ShoppingCartItem> 
 	}
 
 	@Override
-	public List<ShoppingCartItem> selectAll(ShoppingCartItem t) throws SQLException, Exception {
-		
+	public List<ShoppingCartItem> selectAll()
+			throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
+
 		return null;
 	}
 

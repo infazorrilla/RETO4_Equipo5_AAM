@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import es.elorrieta.aam.model.bbdd.pojo.Address;
 import es.elorrieta.aam.model.bbdd.pojo.Order;
 import es.elorrieta.aam.model.bbdd.pojo.Payment;
-import es.elorrieta.aam.model.bbdd.pojo.Address.Country;
 
 class PaymentTest {
 
@@ -56,7 +55,7 @@ class PaymentTest {
 		address.setCodPostal(codPostar);
 		address.setCity(city);
 		address.setProvince(province);
-		address.setCountry(Country.SPAIN);
+		
 		order.setAddress(address);
 		payment.setOrder(order);
 		
@@ -122,7 +121,7 @@ class PaymentTest {
 		address.setCodPostal(codPostar);
 		address.setCity(city);
 		address.setProvince(province);
-		address.setCountry(Country.SPAIN);
+		
 		order.setAddress(address);
 		payment.setOrder(order);
 		

@@ -1,11 +1,10 @@
 package es.elorrieta.aam.model.bbdd.pojo;
 
 import java.io.File;
+import java.util.Date;
 import java.util.Objects;
 
-
-
-public abstract class Person  {
+public abstract class Person {
 	private int id = 0;
 	private String name = null;
 	private String lastName = null;
@@ -13,11 +12,10 @@ public abstract class Person  {
 	private String email = null;
 	private Address address = null;
 	private String password = null;
+	private Date birthDate = null;
 	private Profile profile = null;
 	private boolean status = true;
 	private File image = null;
-
-	
 
 	public int getId() {
 		return id;
@@ -98,10 +96,21 @@ public abstract class Person  {
 	public void setProfile(Profile profile) {
 		this.profile = profile;
 	}
+	
+	
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(address, email, id, image, lastName, name, numberPhone, password, profile, status);
+		return Objects.hash(address, birthDate, email, id, image, lastName, name, numberPhone, password, profile,
+				status);
 	}
 
 	@Override
@@ -113,18 +122,19 @@ public abstract class Person  {
 		if (getClass() != obj.getClass())
 			return false;
 		Person other = (Person) obj;
-		return Objects.equals(address, other.address) && Objects.equals(email, other.email) && id == other.id
-				&& Objects.equals(image, other.image) && Objects.equals(lastName, other.lastName)
-				&& Objects.equals(name, other.name) && Objects.equals(numberPhone, other.numberPhone)
-				&& Objects.equals(password, other.password) && Objects.equals(profile, other.profile)
-				&& status == other.status;
+		return Objects.equals(address, other.address) && Objects.equals(birthDate, other.birthDate)
+				&& Objects.equals(email, other.email) && id == other.id && Objects.equals(image, other.image)
+				&& Objects.equals(lastName, other.lastName) && Objects.equals(name, other.name)
+				&& Objects.equals(numberPhone, other.numberPhone) && Objects.equals(password, other.password)
+				&& Objects.equals(profile, other.profile) && status == other.status;
 	}
 
 	@Override
 	public String toString() {
 		return "Person [id=" + id + ", name=" + name + ", lastName=" + lastName + ", numberPhone=" + numberPhone
-				+ ", email=" + email + ", address=" + address + ", password=" + password + ", profile=" + profile
-				+ ", status=" + status + ", image=" + image + "]";
+				+ ", email=" + email + ", address=" + address + ", password=" + password + ", birthDate=" + birthDate
+				+ ", profile=" + profile + ", status=" + status + ", image=" + image + "]";
 	}
 
+	
 }
