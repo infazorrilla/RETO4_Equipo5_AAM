@@ -37,8 +37,8 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 			String query = "INSERT INTO orders " 
 					+ "(`id_customer`, `id_address`, `id_shoppingcart`, `id_payment`, `status`, `totalPrice`, `delivery_date`, `orderDate`) "
 					+ "VALUES ('" + order.getCustomer() + "','" + order.getAddress() + "','" + order.getShoppingCart() + "','" + order.getPayment() + "','" 
-					+ order.getStatus() + "','" + order.getTotalPrice() + "','" + order.getDeliveryDate() + "','" 
-					+ new SimpleDateFormat("yyyy-mm-dd hh:mm:ss").format(order.getOrderDate()) + "')";
+					+ order.getStatus() + "','" + order.getTotalPrice() + "','" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(order.getDeliveryDate()) + "','" 
+					+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(order.getOrderDate()) + "')";
 			preparedStatement = dbUtils.connection.prepareStatement(query);
 			preparedStatement.execute();
 		} catch (SQLException sqle) {
@@ -65,8 +65,7 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 		ResultSet resultSet = null;
 		try {
 			statement = dbUtils.connection.createStatement();
-			String query = "SELECT * FROM orders "
-					+ "WHERE `created_at` = " + new SimpleDateFormat("yyyy-mm-dd hh:mm:ss").format(order.getOrderDate()) + "'";
+			String query = "SELECT * FROM orders";
 			/**
 			 * OJO CON EL METODO DE SimpleDateFormat
 			 */
@@ -92,8 +91,8 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 				ret.setTotalPrice(resultSet.getDouble("totalPrice"));
 				Timestamp deliveryDate = resultSet.getTimestamp("delivery_date");
 				ret.setDeliveryDate(new Date(deliveryDate.getTime()));
-				Timestamp createdAt = resultSet.getTimestamp("created_at");
-				ret.setDeliveryDate(new Date(createdAt.getTime()));
+				Timestamp orderDate = resultSet.getTimestamp("orderDate");
+				ret.setOrderDate(new Date(orderDate.getTime()));
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Error con la BBDD - " + sqle.getMessage());

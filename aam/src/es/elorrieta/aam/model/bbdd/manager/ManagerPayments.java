@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class ManagerPayments extends ManagerAbstract<Payment> {
 		try {
 			String query = "INSERT INTO payments " 
 					+ "(`iban`, `cvv`, `expirationDate`) "
-					+ "VALUES ('" + payment.getIban() + "', '" + payment.getCvv() + "', '" + payment.getExpirationDate() + "')";
+					+ "VALUES ('" + payment.getIban() + "', '" + payment.getCvv() + "', '" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(payment.getExpirationDate()) + "')";
 			preparedStatement = dbUtils.connection.prepareStatement(query);
 			preparedStatement.execute();
 		} catch (SQLException sqle) {
@@ -55,8 +56,7 @@ public class ManagerPayments extends ManagerAbstract<Payment> {
 		ResultSet resultSet = null;
 		try {
 			statement = dbUtils.connection.createStatement();
-			String query = "SELECT `id_payment`, `iban`, `cvv`, `expirationDate` "
-					+ "FROM payments "
+			String query = "SELECT * FROM payments "
 					+ "WHERE `id_payment`= " + payment.getId();
 			resultSet = statement.executeQuery(query);
 			if (resultSet.next()) {
@@ -68,7 +68,6 @@ public class ManagerPayments extends ManagerAbstract<Payment> {
 				ret.setCvv(resultSet.getString("cvv"));
 				Timestamp expirationDate = resultSet.getTimestamp("expirationDate");
 				ret.setExpirationDate(new Date(expirationDate.getTime()));
-				
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Error con la BBDD - " + sqle.getMessage());
@@ -100,7 +99,7 @@ public class ManagerPayments extends ManagerAbstract<Payment> {
 		PreparedStatement preparedStatement = null;
 		try {
 			String query = "UPDATE payments "
-					+ "SET `iban`='" + payment.getIban() + "', `cvv`='" + payment.getCvv() + "', `expirationDate`='" + payment.getExpirationDate() + "' "
+					+ "SET `iban`='" + payment.getIban() + "', `cvv`='" + payment.getCvv() + "', `expirationDate`='" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(payment.getExpirationDate()) + "' "
 					+ "WHERE `id_payment` = '" + payment.getId() + "'";
 			preparedStatement = dbUtils.connection.prepareStatement(query);
 			preparedStatement.execute();
