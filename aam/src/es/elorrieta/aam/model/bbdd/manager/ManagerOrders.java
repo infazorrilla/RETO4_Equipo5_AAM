@@ -9,15 +9,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-<<<<<<< HEAD
+
 import es.elorrieta.aam.model.bbdd.pojo.Address;
 import es.elorrieta.aam.model.bbdd.pojo.Customer;
-=======
+
 import es.elorrieta.aam.model.bbdd.exception.AccessToDataBaseException;
 import es.elorrieta.aam.model.bbdd.exception.NotFoundException;
->>>>>>> branch 'sprint2' of https://github.com/infazorrilla/RETO4_Equipo5_AAM.git
+
 import es.elorrieta.aam.model.bbdd.pojo.Order;
-import es.elorrieta.aam.model.bbdd.pojo.Order.Status;
 import es.elorrieta.aam.model.bbdd.pojo.Payment;
 import es.elorrieta.aam.model.bbdd.pojo.ShoppingCart;
 import es.elorrieta.aam.model.bbdd.utils.DBUtils;
@@ -29,8 +28,7 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 	}
 	
 	@Override
-<<<<<<< HEAD
-	public void insert(Order order) throws SQLException, Exception {
+	public void insert(Order order) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		if (!dbUtils.isConnected()) {
 			dbUtils.connect();
 		}
@@ -59,7 +57,7 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 	}
 	
 	@Override
-	public Order select(Order order) throws SQLException, Exception {
+	public Order select(Order order) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		if (!dbUtils.isConnected())
 			dbUtils.connect();
 		Order ret = null;
@@ -91,9 +89,7 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 				Payment payment = new Payment();
 				payment.setId(resultSet.getInt("id_payment"));
 				ret.setPayment(payment);
-				
 				ret.setStatus(resultSet.getString("status"));
-				
 				ret.setTotalPrice(resultSet.getDouble("totalPrice"));
 				Timestamp deliveryDate = resultSet.getTimestamp("delivery_date");
 				ret.setDeliveryDate(new Date(deliveryDate.getTime()));
@@ -120,16 +116,10 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 			}
 		}
 		return ret;
-=======
-	public List<Order> selectAll() throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
-		// TODO Auto-generated method stub
-		return null;
->>>>>>> branch 'sprint2' of https://github.com/infazorrilla/RETO4_Equipo5_AAM.git
 	}
 	
 	@Override
-<<<<<<< HEAD
-	public void update(Order order) throws SQLException, Exception {
+	public void update(Order order) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		if (!dbUtils.isConnected()) {
 			dbUtils.connect();
 		}
@@ -156,7 +146,7 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 	}
 	
 	@Override
-	public void delete(Order order) throws SQLException, Exception {
+	public void delete(Order order) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		if (!dbUtils.isConnected()) {
 			dbUtils.connect();
 		}
@@ -181,36 +171,8 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 	}
 	
 	@Override
-	public List<Order> selectAll(Order order) throws SQLException, Exception {
-=======
-	public void insert(Order t) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
-		// TODO Auto-generated method stub
->>>>>>> branch 'sprint2' of https://github.com/infazorrilla/RETO4_Equipo5_AAM.git
-		
-	}
-
-	@Override
-	public Order select(Order t) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
-		// TODO Auto-generated method stub
+	public List<Order> selectAll() throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		return null;
 	}
-
-<<<<<<< HEAD
-}
-=======
-	@Override
-	public void update(Order t) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
-		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public void delete(Order t) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-
 }
->>>>>>> branch 'sprint2' of https://github.com/infazorrilla/RETO4_Equipo5_AAM.git
