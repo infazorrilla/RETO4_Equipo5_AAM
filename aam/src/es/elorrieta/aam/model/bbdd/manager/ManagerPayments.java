@@ -10,31 +10,31 @@ public class ManagerPayments extends ManagerAbstract<Payment> {
 
 	public ManagerPayments(){
 		super(new DBUtils());
+	}
+	
+	@Override
+	public void insert(Payment payment) throws SQLException, Exception {
+		
+	}
+	
+	@Override
+	public Payment select(Payment payment) throws SQLException, Exception {
+		
+		return null;
+	}
+	
+	@Override
+	public void update(Payment payment) throws SQLException, Exception {
+		
+	}
+	
+	@Override
+	public void delete(Payment payment) throws SQLException, Exception {
 		
 	}
 	@Override
-	public void insert(Payment t) {
-
-	}
-
-	@Override
-	public Payment select(Payment t) {
-
-		return null;
-	}
-
-	@Override
-	public void update(Payment t) {
-
-	}
-
-	@Override
-	public void delete(Payment t) {
-
-	}
-	@Override
-	public List<Payment> selectAll(Payment t) throws SQLException, Exception {
-	
+	public List<Payment> selectAll(Payment payment) throws SQLException, Exception {
+		
 		return null;
 	}
 
