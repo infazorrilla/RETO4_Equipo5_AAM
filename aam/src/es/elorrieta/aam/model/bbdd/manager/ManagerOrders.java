@@ -35,7 +35,7 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 		PreparedStatement preparedStatement = null;
 		try {
 			String query = "INSERT INTO orders " 
-					+ "(`id_customer`, `id_address`, `id_shoppingcart`, `id_payment`, `status`, `totalPrice`, `delivery_date`, `created_at`) "
+					+ "(`id_customer`, `id_address`, `id_shoppingcart`, `id_payment`, `status`, `totalPrice`, `delivery_date`, `orderDate`) "
 					+ "VALUES ('" + order.getCustomer() + "','" + order.getAddress() + "','" + order.getShoppingCart() + "','" + order.getPayment() + "','" 
 					+ order.getStatus() + "','" + order.getTotalPrice() + "','" + order.getDeliveryDate() + "','" 
 					+ new SimpleDateFormat("yyyy-mm-dd hh:mm:ss").format(order.getOrderDate()) + "')";
@@ -65,8 +65,7 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 		ResultSet resultSet = null;
 		try {
 			statement = dbUtils.connection.createStatement();
-			String query = "SELECT `id_order`, `id_customer`, `id_address`, `id_shoppingcart`, `id_payment`, `status`, `totalPrice`, `delivery_date`, `created_at` "
-					+ "FROM orders "
+			String query = "SELECT * FROM orders "
 					+ "WHERE `created_at` = " + new SimpleDateFormat("yyyy-mm-dd hh:mm:ss").format(order.getOrderDate()) + "'";
 			/**
 			 * OJO CON EL METODO DE SimpleDateFormat
@@ -126,7 +125,7 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 		PreparedStatement preparedStatement = null;
 		try {
 			String query = "UPDATE orders "
-					+ "SET `status`='" + order.getStatus() + "', `totalPrice`='" + order.getTotalPrice()
+					+ "SET `status`='" + order.getStatus() + "', `totalPrice`='" + order.getTotalPrice() + "', `orderDate`='" + order.getOrderDate()
 					+ "WHERE `id_order` = '" + order.getId() + "'";
 			preparedStatement = dbUtils.connection.prepareStatement(query);
 			preparedStatement.execute();
