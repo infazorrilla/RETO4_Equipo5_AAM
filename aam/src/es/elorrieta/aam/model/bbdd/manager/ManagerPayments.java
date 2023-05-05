@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class ManagerPayments extends ManagerAbstract<Payment> {
 		ResultSet resultSet = null;
 		try {
 			statement = dbUtils.connection.createStatement();
-			String query = "SELECT * FROM payments ";
+			String query = "SELECT * FROM payments WHERE `id_payment`='" + payment.getId() + "'";
 			resultSet = statement.executeQuery(query);
 			if (resultSet.next()) {
 				if (ret == null) {
@@ -144,7 +145,53 @@ public class ManagerPayments extends ManagerAbstract<Payment> {
 	
 	@Override
 	public List<Payment> selectAll() throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
-		return null;
+		if (!dbUtils.isConnected()) {
+			dbUtils.connect();
+		}
+		if (dbUtils.connection == null) {
+			throw new AccessToDataBaseException("No Se ha podido acceder a la base de datos");
+		}
+		List<Payment> ret = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			statement = dbUtils.connection.createStatement();
+			String query = "SELECT * FROM payments";
+			resultSet = statement.executeQuery(query);
+			if (resultSet.next()) {
+				if (ret == null) {
+					ret = new ArrayList<Payment>();
+				}
+				Payment payment = new Payment();
+				
+				payment.setId(resultSet.getInt("id_payment"));
+				payment.setIban(resultSet.getString("iban"));
+				payment.setCvv(resultSet.getString("cvv"));
+				Timestamp expirationDate = resultSet.getTimestamp("expirationDate");
+				payment.setExpirationDate(new Date(expirationDate.getTime()));
+				
+				ret.add(payment);
+			}
+		} catch (SQLException sqle) {
+			System.out.println("Error con la BBDD - " + sqle.getMessage());
+		} catch (Exception e) {
+			System.out.println("Error generico - " + e.getMessage());
+		} finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+				}
+				dbUtils.disconnect();
+			}
+		}
+		return ret;
 	}
 
 }

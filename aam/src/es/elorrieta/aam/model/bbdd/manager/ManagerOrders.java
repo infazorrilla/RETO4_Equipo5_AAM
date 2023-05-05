@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -58,17 +59,15 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 	
 	@Override
 	public Order select(Order order) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
-		if (!dbUtils.isConnected())
+		if (!dbUtils.isConnected()) {
 			dbUtils.connect();
+		}
 		Order ret = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
 		try {
 			statement = dbUtils.connection.createStatement();
-			String query = "SELECT * FROM orders";
-			/**
-			 * OJO CON EL METODO DE SimpleDateFormat
-			 */
+			String query = "SELECT * FROM orders WHERE `id_order`=" + order.getId() + "'";
 			resultSet = statement.executeQuery(query);
 			if (resultSet.next()) {
 				if (ret == null) {
@@ -170,7 +169,67 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 	
 	@Override
 	public List<Order> selectAll() throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
-		return null;
+		if (!dbUtils.isConnected()) {
+			dbUtils.connect();
+		}
+		if (dbUtils.connection == null) {
+			throw new AccessToDataBaseException("No Se ha podido acceder a la base de datos");
+		}
+		List<Order> ret = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			statement = dbUtils.connection.createStatement();
+			String query = "SELECT * FROM orders";
+			resultSet = statement.executeQuery(query);
+			if (resultSet.next()) {
+				if (ret == null) {
+					ret = new ArrayList<Order>();
+				}
+				Order order = new Order();
+				
+				order.setId(resultSet.getInt("id_order"));
+				Customer customer = new Customer();
+				customer.setId(resultSet.getInt("id_customer"));
+				order.setCustomer(customer);
+				Address address = new Address();
+				address.setId(resultSet.getInt("id_address"));
+				order.setAddress(address);
+				ShoppingCart shoppingCart = new ShoppingCart();
+				shoppingCart.setId(resultSet.getInt("id_shoppingcart"));
+				order.setShoppingCart(shoppingCart);
+				Payment payment = new Payment();
+				payment.setId(resultSet.getInt("id_payment"));
+				order.setPayment(payment);
+				order.setStatus(resultSet.getString("status"));
+				order.setTotalPrice(resultSet.getDouble("totalPrice"));
+				Timestamp deliveryDate = resultSet.getTimestamp("delivery_date");
+				order.setDeliveryDate(new Date(deliveryDate.getTime()));
+				Timestamp orderDate = resultSet.getTimestamp("orderDate");
+				order.setOrderDate(new Date(orderDate.getTime()));
+				
+				ret.add(order);
+			}
+		} catch (SQLException sqle) {
+			System.out.println("Error con la BBDD - " + sqle.getMessage());
+		} catch (Exception e) {
+			System.out.println("Error generico - " + e.getMessage());
+		} finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+				}
+				dbUtils.disconnect();
+			}
+		}
+		return ret;
 	}
 		
 }
