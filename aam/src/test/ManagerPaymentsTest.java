@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
@@ -52,7 +53,7 @@ class ManagerPaymentsTest {
 		// the attributes of the objects are compared to see if they are equal
 		assertEquals(result.getIban(), payment.getIban());
 		assertEquals(result.getCvv(), payment.getCvv());
-		assertEquals(result.getExpirationDate(), payment.getExpirationDate());
+		assertEquals(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(result.getExpirationDate()), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(payment.getExpirationDate()));
 		
 		// testUpdate()
 		payment.setId(result.getId());
@@ -82,7 +83,7 @@ class ManagerPaymentsTest {
 		assertEquals(result.getId(), 1);
 		assertEquals(result.getIban(), payment.getIban());
 		assertEquals(result.getCvv(), payment.getCvv());
-		assertEquals(result.getExpirationDate(), payment.getExpirationDate());
+		assertEquals(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(result.getExpirationDate()), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(payment.getExpirationDate()));
 		
 		// testDelete()
 		// payment is deleted by id

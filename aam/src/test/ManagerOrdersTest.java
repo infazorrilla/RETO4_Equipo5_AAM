@@ -29,15 +29,15 @@ class ManagerOrdersTest {
 	@Test
 	void testInsertSelectUpdateDelete() {
 		// testInsert()
-		// knowing that id_customer = 4, id_address = 10, id_shoppingcart = 40, id_payment = 25
+		// knowing that id_customer = 11, id_address = 10, id_shoppingcart = 1, id_payment = 25
 		Customer customer = new Customer();
-		customer.setId(4);
+		customer.setId(11);
 		order.setCustomer(customer);
 		Address address = new Address();
 		address.setId(10);
 		order.setAddress(address);
 		ShoppingCart shoppingCart = new ShoppingCart();
-		shoppingCart.setId(40);
+		shoppingCart.setId(1);
 		order.setShoppingCart(shoppingCart);
 		Payment payment = new Payment();
 		payment.setId(25);
@@ -70,12 +70,12 @@ class ManagerOrdersTest {
 		
 		// the attributes of the objects are compared to see if they are equal
 		assertEquals(result.getCustomer().getId(), order.getCustomer().getId());
-		assertEquals(result.getAddress().getId(), order.getAddress().getId());
+		assertEquals(result.getAddress().getId(), 1, order.getAddress().getId());
 		assertEquals(result.getShoppingCart().getId(), order.getShoppingCart().getId());
 		assertEquals(result.getPayment().getId(), order.getPayment().getId());
-		assertEquals(result.getStatus(), order.getStatus());
-		assertEquals(new SimpleDateFormat("dd-mm-yyyy HH:mm:ss").format(result.getOrderDate()), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(orderDate));
-		assertEquals(new SimpleDateFormat("dd-mm-yyyy HH:mm:ss").format(result.getDeliveryDate()), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(deliveryDate));
+		assertEquals(result.getStatus(), "Pending", order.getStatus());
+		assertEquals(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(result.getOrderDate()), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(orderDate));
+		assertEquals(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(result.getDeliveryDate()), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(deliveryDate));
 		assertEquals(result.getTotalPrice(), 13.52, order.getTotalPrice());
 		
 		// testUpdate()
@@ -105,14 +105,14 @@ class ManagerOrdersTest {
 		}
 		
 		// the attributes of the objects are compared to see if they are updated
-			assertEquals(result.getId(), 1);
-			assertEquals(result.getCustomer().getId(), 4);
-			assertEquals(result.getAddress().getId(), 10);
-			assertEquals(result.getShoppingCart().getId(), 40);
-			assertEquals(result.getPayment().getId(), 25);
-			assertEquals(result.getStatus(), order.getStatus());
-			assertEquals(new SimpleDateFormat("dd-mm-yyyy HH:mm:ss").format(result.getOrderDate()), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(orderDate));
-			assertEquals(new SimpleDateFormat("dd-mm-yyyy HH:mm:ss").format(result.getDeliveryDate()), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(deliveryDate));
+			assertEquals(result.getId(), 1, order.getId());
+			assertEquals(result.getCustomer().getId(), 11, order.getCustomer().getId());
+			assertEquals(result.getAddress().getId(), 10, order.getAddress().getId());
+			assertEquals(result.getShoppingCart().getId(), 1, order.getShoppingCart().getId());
+			assertEquals(result.getPayment().getId(), 25, order.getPayment().getId());
+			assertEquals(result.getStatus(), "Shipped", order.getStatus());
+			assertEquals(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(result.getOrderDate()), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(orderDate));
+			assertEquals(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(result.getDeliveryDate()), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(deliveryDate));
 			assertEquals(result.getTotalPrice(), 25.56, order.getTotalPrice());
 		
 		// testDelete()

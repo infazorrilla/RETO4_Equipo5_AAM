@@ -12,40 +12,37 @@ public class ManagerProductItems extends ManagerAbstract<ProductItem> {
 
 	public ManagerProductItems(){
 		super(new DBUtils());
-		
 	}
-
-	@Override
-	public List<ProductItem> selectAll() throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public void insert(ProductItem t) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
 	public ProductItem select(ProductItem t)
 			throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public void update(ProductItem t) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
 	public void delete(ProductItem t) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		// TODO Auto-generated method stub
 		
 	}
-
-
+	
+	@Override
+	public List<ProductItem> selectAll() throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
