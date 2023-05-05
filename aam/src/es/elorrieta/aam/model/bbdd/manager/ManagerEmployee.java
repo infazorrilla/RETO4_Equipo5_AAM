@@ -52,7 +52,7 @@ public class ManagerEmployee extends ManagerAbstract<EmployeeManagedOrders> {
 		try {
 
 			statement = dbUtils.connection.createStatement();
-			String query = "SELECT * FROM `employees` WHERE id_employee_type = 2";
+			String query = "SELECT * FROM " + ManagerAbstract.TABLE_EMPLOYEES + " WHERE id_employee_type = 2";
 			resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
 				if (ret == null) {
@@ -127,9 +127,9 @@ public class ManagerEmployee extends ManagerAbstract<EmployeeManagedOrders> {
 		try {
 
 			statement = dbUtils.connection.createStatement();
-			String query = "SELECT `id_employee`, `id_address` , `id_employee_type`, `name`, `lastname`, `email`, `password` , `birthDate` , `image`, `status` FROM `employees`  WHERE email = '"
-					+ employeeManagedOrders.getEmail() + "' AND password =  '" + employeeManagedOrders.getPassword()
-					+ "'";
+			String query = "SELECT `id_employee`, `id_address` , `id_employee_type`, `name`, `lastname`, `email`, `password` , `birthDate` , `image`, `status` FROM "
+					+ ManagerAbstract.TABLE_EMPLOYEES + "  WHERE email = '" + employeeManagedOrders.getEmail()
+					+ "' AND password =  '" + employeeManagedOrders.getPassword() + "'";
 			resultSet = statement.executeQuery(query);
 			if (resultSet.next()) {
 				if (ret == null) {
@@ -149,7 +149,9 @@ public class ManagerEmployee extends ManagerAbstract<EmployeeManagedOrders> {
 						ret.setStatus(resultSet.getBoolean("status"));
 
 					} else {
-						String query2 = "SELECT e.id_employee, e.id_address, e.id_employee_type ,e.name, e.lastname, e.email, e.password, e.birthDate, e.image, e.status , a.country , a.street , a.cod_postal , a.city , a.province FROM `employees` AS e JOIN address AS a ON e.id_address = a.id_address WHERE e.email = '"
+						String query2 = "SELECT e.id_employee, e.id_address, e.id_employee_type ,e.name, e.lastname, e.email, e.password, e.birthDate, e.image, e.status , a.country , a.street , a.cod_postal , a.city , a.province FROM "
+								+ ManagerAbstract.TABLE_EMPLOYEES + " AS e JOIN " + ManagerAbstract.TABLE_ADDRESS
+								+ " AS a ON e.id_address = a.id_address WHERE e.email = '"
 								+ employeeManagedOrders.getEmail() + "' AND e.password = '"
 								+ employeeManagedOrders.getPassword() + "'";
 						resultSet2 = statement.executeQuery(query2);
@@ -249,7 +251,8 @@ public class ManagerEmployee extends ManagerAbstract<EmployeeManagedOrders> {
 
 			Address address = checkAddress(employee.getAddress());
 
-			String query = "UPDATE `employees` SET `id_address`= ? ,`name`= ?,`lastname`= ? ,`email`= ? , `password`= ? , `birthDate`= ?  WHERE `id_employee` = ?";
+			String query = "UPDATE " + ManagerAbstract.TABLE_EMPLOYEES
+					+ " SET `id_address`= ? ,`name`= ?,`lastname`= ? ,`email`= ? , `password`= ? , `birthDate`= ?  WHERE `id_employee` = ?";
 
 			preparedStatement = dbUtils.connection.prepareStatement(query);
 
@@ -314,7 +317,7 @@ public class ManagerEmployee extends ManagerAbstract<EmployeeManagedOrders> {
 
 	private void updateImage(PreparedStatement preparedStatement, File file, int id)
 			throws SQLException, FileNotFoundException, NotFoundException, AccessToDataBaseException, Exception {
-		String query = "UPDATE `employees` SET `image` = ?   WHERE `id_employee` = ?";
+		String query = "UPDATE " + ManagerAbstract.TABLE_EMPLOYEES + " SET `image` = ?   WHERE `id_employee` = ?";
 		preparedStatement = dbUtils.connection.prepareStatement(query);
 		FileInputStream fileInputStream = new FileInputStream(file);
 		preparedStatement.setBinaryStream(1, fileInputStream, (int) file.length());
@@ -333,8 +336,8 @@ public class ManagerEmployee extends ManagerAbstract<EmployeeManagedOrders> {
 		try {
 			statement = dbUtils.connection.createStatement();
 			int value = employee.isStatus() == false ? 0 : 1;
-			String query = "UPDATE `employees` SET `status`= '" + value + "' WHERE `id_employee` = '" + employee.getId()
-					+ "'";
+			String query = "UPDATE " + ManagerAbstract.TABLE_EMPLOYEES + " SET `status`= '" + value
+					+ "' WHERE `id_employee` = '" + employee.getId() + "'";
 			statement.executeUpdate(query);
 
 		} finally {
@@ -359,7 +362,8 @@ public class ManagerEmployee extends ManagerAbstract<EmployeeManagedOrders> {
 		PreparedStatement preparedStatement = null;
 		try {
 
-			String query = "DELETE FROM `employees` WHERE `id_employee` =  '" + emoloyee.getId() + "'";
+			String query = "DELETE FROM " + ManagerAbstract.TABLE_EMPLOYEES + " WHERE `id_employee` =  '"
+					+ emoloyee.getId() + "'";
 			preparedStatement = dbUtils.connection.prepareStatement(query);
 			preparedStatement.execute();
 

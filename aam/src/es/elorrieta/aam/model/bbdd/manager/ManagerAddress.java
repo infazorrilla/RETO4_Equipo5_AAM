@@ -34,7 +34,8 @@ public class ManagerAddress extends ManagerAbstract<Address> {
 		}
 		PreparedStatement preparedStatement = null;
 		try {
-			String query = "INSERT INTO `address`(`country`, `street`, `cod_postal`, `city`, `province`, `created_at`) VALUES ('"
+			String query = "INSERT INTO " + ManagerAbstract.TABLE_ADDRESS
+					+ "(`country`, `street`, `cod_postal`, `city`, `province`, `created_at`) VALUES ('"
 					+ address.getCountry() + "','" + address.getStreet() + "','" + address.getCodPostal() + "','    "
 					+ address.getCity() + "','" + address.getProvince() + "','"
 					+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(address.getCreatedAt()) + "')";
@@ -66,7 +67,8 @@ public class ManagerAddress extends ManagerAbstract<Address> {
 		try {
 
 			statement = dbUtils.connection.createStatement();
-			String query = "SELECT `id_address`, `country`, `street`, `cod_postal`, `city`, `province`, `created_at` FROM `address` WHERE `created_at` = '"
+			String query = "SELECT `id_address`, `country`, `street`, `cod_postal`, `city`, `province`, `created_at` FROM "
+					+ ManagerAbstract.TABLE_ADDRESS + " WHERE `created_at` = '"
 					+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(address.getCreatedAt()) + "'";
 			resultSet = statement.executeQuery(query);
 			if (resultSet.next()) {
@@ -112,8 +114,8 @@ public class ManagerAddress extends ManagerAbstract<Address> {
 		try {
 
 			statement = dbUtils.connection.createStatement();
-			String query = "SELECT `id_address`, `country`, `street`, `cod_postal`, `city`, `province`, `created_at` FROM `address` WHERE `id_address` = '"
-					+ id + "'";
+			String query = "SELECT `id_address`, `country`, `street`, `cod_postal`, `city`, `province`, `created_at` FROM "
+					+ ManagerAbstract.TABLE_ADDRESS + " WHERE `id_address` = '" + id + "'";
 			resultSet = statement.executeQuery(query);
 			if (resultSet.next()) {
 				if (ret == null) {
@@ -157,8 +159,8 @@ public class ManagerAddress extends ManagerAbstract<Address> {
 		try {
 			statement = dbUtils.connection.createStatement();
 
-			String query = "UPDATE `address` SET `country`='" + address.getCountry() + "',`street`='"
-					+ address.getStreet() + "',`cod_postal`='" + address.getCodPostal() + "',`city`= '"
+			String query = "UPDATE " + ManagerAbstract.TABLE_ADDRESS + " SET `country`='" + address.getCountry()
+					+ "',`street`='" + address.getStreet() + "',`cod_postal`='" + address.getCodPostal() + "',`city`= '"
 					+ address.getCity() + "',`province`='" + address.getProvince() + "' WHERE `id_address` = '"
 					+ address.getId() + "' ";
 			statement.executeUpdate(query);

@@ -50,7 +50,7 @@ public class ManagerCustomers extends ManagerAbstract<Customer> {
 		try {
 
 			statement = dbUtils.connection.createStatement();
-			String query = "SELECT * FROM `customers`";
+			String query = "SELECT * FROM " + ManagerAbstract.TABLE_CUSTOMERS + "";
 			resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
 				if (ret == null) {
@@ -144,8 +144,9 @@ public class ManagerCustomers extends ManagerAbstract<Customer> {
 				throw new AccessToDataBaseException("No Se ha podido acceder a la base de datos");
 			} else {
 				statement = dbUtils.connection.createStatement();
-				String query = "SELECT `id_customer`, `id_address`, `name`, `lastname`, `email`, `password`, `birthDate`, `image`, `status` FROM `customers`  WHERE email = '"
-						+ customer.getEmail() + "' AND password =  '" + customer.getPassword() + "'";
+				String query = "SELECT `id_customer`, `id_address`, `name`, `lastname`, `email`, `password`, `birthDate`, `image`, `status` FROM "
+						+ ManagerAbstract.TABLE_CUSTOMERS + "  WHERE email = '" + customer.getEmail()
+						+ "' AND password =  '" + customer.getPassword() + "'";
 				resultSet = statement.executeQuery(query);
 				if (resultSet.next()) {
 					if (ret == null) {
@@ -165,7 +166,9 @@ public class ManagerCustomers extends ManagerAbstract<Customer> {
 						ret.setStatus(resultSet.getBoolean("status"));
 
 					} else {
-						String query2 = "SELECT c.id_customer, c.id_address, c.name, c.lastname, c.email, c.password, c.birthDate, c.image, c.status , a.country , a.street , a.cod_postal , a.city , a.province FROM `customers` AS c JOIN address AS a ON c.id_address = a.id_address WHERE c.email = '"
+						String query2 = "SELECT c.id_customer, c.id_address, c.name, c.lastname, c.email, c.password, c.birthDate, c.image, c.status , a.country , a.street , a.cod_postal , a.city , a.province FROM "
+								+ ManagerAbstract.TABLE_CUSTOMERS
+								+ " AS c JOIN address AS a ON c.id_address = a.id_address WHERE c.email = '"
 								+ customer.getEmail() + "' AND c.password = '" + customer.getPassword() + "'";
 						resultSet2 = statement.executeQuery(query2);
 
@@ -272,7 +275,8 @@ public class ManagerCustomers extends ManagerAbstract<Customer> {
 
 			Address address = checkAddress(customer.getAddress());
 
-			String query = "UPDATE `customers` SET  id_address = ? ,`name`= ?,`lastname`= ? ,`email`= ? , `password`= ? , `birthDate`= ?  WHERE `id_customer` = ?";
+			String query = "UPDATE " + ManagerAbstract.TABLE_CUSTOMERS
+					+ " SET  id_address = ? ,`name`= ?,`lastname`= ? ,`email`= ? , `password`= ? , `birthDate`= ?  WHERE `id_customer` = ?";
 
 			preparedStatement = dbUtils.connection.prepareStatement(query);
 			preparedStatement.setInt(1, address == null ? 0 : address.getId());
@@ -303,7 +307,7 @@ public class ManagerCustomers extends ManagerAbstract<Customer> {
 	}
 
 	private void updateImage(File file, int id) throws SQLException, FileNotFoundException {
-		String query = "UPDATE `customers` SET `image` = ?   WHERE `id_customer` = ?";
+		String query = "UPDATE " + ManagerAbstract.TABLE_CUSTOMERS + " SET `image` = ?   WHERE `id_customer` = ?";
 		PreparedStatement preparedStatement = dbUtils.connection.prepareStatement(query);
 		try {
 			FileInputStream fileInputStream = new FileInputStream(file);
@@ -361,8 +365,8 @@ public class ManagerCustomers extends ManagerAbstract<Customer> {
 		try {
 			statement = dbUtils.connection.createStatement();
 			int value = customer.isStatus() == false ? 0 : 1;
-			String query = "UPDATE `customers` SET `status`= '" + value + "' WHERE `id_customer` = '" + customer.getId()
-					+ "'";
+			String query = "UPDATE " + ManagerAbstract.TABLE_CUSTOMERS + " SET `status`= '" + value
+					+ "' WHERE `id_customer` = '" + customer.getId() + "'";
 			statement.executeUpdate(query);
 
 		} finally {
@@ -386,7 +390,8 @@ public class ManagerCustomers extends ManagerAbstract<Customer> {
 		PreparedStatement preparedStatement = null;
 		try {
 
-			String query = "DELETE FROM `customers` WHERE `id_customer` =  '" + customer.getId() + "'";
+			String query = "DELETE FROM " + ManagerAbstract.TABLE_CUSTOMERS + " WHERE `id_customer` =  '"
+					+ customer.getId() + "'";
 			preparedStatement = dbUtils.connection.prepareStatement(query);
 			preparedStatement.execute();
 

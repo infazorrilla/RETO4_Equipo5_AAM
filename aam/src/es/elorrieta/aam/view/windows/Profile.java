@@ -186,7 +186,7 @@ public class Profile extends JFrame {
 										"Se han realizado correctamente las modificaiones ");
 								new Profile(order);
 
-//updateCustomer}
+
 							}
 						} else {
 
@@ -203,6 +203,7 @@ public class Profile extends JFrame {
 											"Se han reakizado correctamente las modificaiones ");
 									new Profile(order);
 								} catch (SQLException e1) {
+									System.out.println(e1);
 									JOptionPane.showMessageDialog(contentPane,
 											"Data Base Error. Contents cannot be displayed", "ERROR!!",
 											JOptionPane.ERROR_MESSAGE);
@@ -239,7 +240,7 @@ public class Profile extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				File file = getImageFromUser(e);
-				if (null != getImageFromUser(e)) {
+				if (null != file) {
 					order.getCustomer().getProfile().getUser().setImage(file);
 					setUserFoto(order);
 

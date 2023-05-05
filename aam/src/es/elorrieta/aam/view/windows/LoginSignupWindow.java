@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
-
+import java.util.ArrayList;
 import es.elorrieta.aam.controller.LoginSignupValidation;
 import es.elorrieta.aam.model.bbdd.exception.AccessToDataBaseException;
 import es.elorrieta.aam.model.bbdd.exception.NotFoundException;
@@ -204,7 +204,7 @@ public class LoginSignupWindow extends JFrame {
 	private void changesForSignUp() {
 		lblGif.setBounds(0, 53, 553, 559);
 		textField.setBounds(674, 285, 284, 46);
-
+		textField.setText("");
 		MaskFormatter fmt = null;
 		try {
 			fmt = new MaskFormatter("##/##/####");
@@ -219,6 +219,7 @@ public class LoginSignupWindow extends JFrame {
 		lblHeader.setBounds(615, 116, 396, 46);
 		lblHeader.setText("Sign Up");
 		passwordField.setBounds(674, 365, 284, 46);
+		passwordField.setText("");
 		btnLogin.setBounds(754, 468, 104, 38);
 		btnLogin.setText("Signup");
 		btnLogin.setActionCommand("Signup");
@@ -290,13 +291,32 @@ public class LoginSignupWindow extends JFrame {
 	private void checkLogin(String email, String pass, Order order)
 			throws SQLException, AccessToDataBaseException, NotFoundException, Exception {
 
-		boolean isCustomer = checkCustomerLogin(email, pass, order);
+		ArrayList<Object> isCustomer = checkCustomerLogin(email, pass, order);
 
-		if (!isCustomer) {
-			checkEmployeeLogin(email, pass, order);
+		if (isCustomer.get(0) == null) {
+			ArrayList<Object> isEmployee = checkEmployeeLogin(email, pass, order);
+			if (isEmployee.get(0) == null) {
+				JOptionPane.showMessageDialog(null, "Usuario o contraseña incorreacta");
+			} else if ((boolean) isEmployee.get(1)) {
+				JOptionPane.showMessageDialog(null, "No puedes iniciar sesion , esta cuenta esta bloqueada");
+			} else {
+				textField.setText("");
+				passwordField.setText("");
+				JOptionPane.showMessageDialog(null, "Bienvenido");
+				dispose();
+				GenderWindow genderWindow = new GenderWindow(order);
+				genderWindow.setVisible(true);
+			}
+
+		} else if ((boolean) isCustomer.get(1)) {
+			JOptionPane.showMessageDialog(null, "No puedes iniciar sesion , esta cuenta esta bloqueada");
+		} else {
 			textField.setText("");
 			passwordField.setText("");
-
+			JOptionPane.showMessageDialog(null, "Bienvenido");
+			dispose();
+			GenderWindow genderWindow = new GenderWindow(order);
+			genderWindow.setVisible(true);
 		}
 
 	}
@@ -314,10 +334,12 @@ public class LoginSignupWindow extends JFrame {
 
 	}
 
-	private boolean checkCustomerLogin(String email, String pass, Order order)
+	private ArrayList<Object> checkCustomerLogin(String email, String pass, Order order)
 			throws SQLException, AccessToDataBaseException, NotFoundException, Exception {
-		boolean ret = false;
+		ArrayList<Object> ret = new ArrayList<Object>();
 		Customer customer = isCustomerExist(email, pass);
+		ret.add(customer);
+		ret.add(false);
 		if (customer != null) {
 			if (!customer.isStatus()) {
 				order.setCustomer(customer);
@@ -327,10 +349,9 @@ public class LoginSignupWindow extends JFrame {
 
 				order.getCustomer().getProfile().setOn(true);
 				order.getCustomer().getProfile().setUserType(3);
-				ret = true;
+				ret.set(0, customer);
 			} else {
-				JOptionPane.showMessageDialog(null, "Usted no puede iniciar sesion , esta cuenta esta bloqueada");
-				ret = true;
+				ret.set(1, true);
 			}
 		}
 
@@ -351,10 +372,12 @@ public class LoginSignupWindow extends JFrame {
 
 	}
 
-	private boolean checkEmployeeLogin(String email, String pass, Order order)
+	private ArrayList<Object> checkEmployeeLogin(String email, String pass, Order order)
 			throws SQLException, AccessToDataBaseException, NotFoundException, Exception {
-		boolean ret = false;
+		ArrayList<Object> ret = new ArrayList<Object>();
 		EmployeeManagedOrders employee = isEmployeeExist(email, pass);
+		ret.add(employee);
+		ret.add(false);
 
 		if (employee != null) {
 			if (!employee.isStatus()) {
@@ -364,12 +387,11 @@ public class LoginSignupWindow extends JFrame {
 				profile.setUserType(employee.getEmployeeType());
 				order.setCustomer(new Customer());
 				order.getCustomer().setProfile(profile);
-				ret = true;
+				ret.set(0, employee);
 			} else {
-				JOptionPane.showMessageDialog(null, "Usted no puede iniciar sesion , esta cuenta esta bloqueada");
+
+				ret.set(1, true);
 			}
-		} else {
-			JOptionPane.showMessageDialog(null, "Usuario o contraseña incorreacta");
 		}
 		return ret;
 	}

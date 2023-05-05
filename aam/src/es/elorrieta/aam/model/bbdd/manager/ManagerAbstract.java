@@ -13,22 +13,24 @@ public abstract class ManagerAbstract<T> implements ManagerInterface<T> {
 	protected static final String TABLE_SHOPPINGCARTITEMS = "shoppingcartitems";
 	protected static final String TABLE_SHOPPINGCART = "shoppingcart";
 	protected static final String TABLE_CUSTOMERS = "customers";
+	protected static final String TABLE_EMPLOYEES = "employees";
+	protected static final String TABLE_ADDRESS = "address";
 
 	public ManagerAbstract(DBUtils dbUtils) {
 		this.dbUtils = dbUtils;
 	}
 
 	@Override
-	public abstract  List<T> selectAll() throws SQLException , NotFoundException, AccessToDataBaseException, Exception;
+	public abstract List<T> selectAll() throws SQLException, NotFoundException, AccessToDataBaseException, Exception;
 
 	@Override
-	public abstract  void insert(T t) throws SQLException , NotFoundException, AccessToDataBaseException, Exception;
+	public abstract void insert(T t) throws SQLException, NotFoundException, AccessToDataBaseException, Exception;
 
 	@Override
-	public  abstract T select(T t) throws SQLException , NotFoundException, AccessToDataBaseException, Exception;
+	public abstract T select(T t) throws SQLException, NotFoundException, AccessToDataBaseException, Exception;
 
 	@Override
-	public abstract  void update(T t) throws SQLException , NotFoundException, AccessToDataBaseException, Exception;
+	public abstract void update(T t) throws SQLException, NotFoundException, AccessToDataBaseException, Exception;
 
 	@Override
 	public abstract void delete(T t) throws SQLException, NotFoundException, AccessToDataBaseException, Exception;
