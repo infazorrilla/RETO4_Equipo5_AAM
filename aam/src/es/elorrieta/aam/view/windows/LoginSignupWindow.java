@@ -476,7 +476,6 @@ public class LoginSignupWindow extends JFrame {
 
 	private void refreshJtextFields() {
 		textField.setText("");
-
 		textFieldBirthDate.setText("");
 		passwordField.setText("");
 	}
