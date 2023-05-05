@@ -56,8 +56,7 @@ public class ManagerPayments extends ManagerAbstract<Payment> {
 		ResultSet resultSet = null;
 		try {
 			statement = dbUtils.connection.createStatement();
-			String query = "SELECT * FROM payments "
-					+ "WHERE `id_payment`= " + payment.getId();
+			String query = "SELECT * FROM payments ";
 			resultSet = statement.executeQuery(query);
 			if (resultSet.next()) {
 				if (ret == null) {

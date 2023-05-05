@@ -35,7 +35,7 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 		PreparedStatement preparedStatement = null;
 		try {
 			String query = "INSERT INTO orders " 
-					+ "(`id_customer`, `id_address`, `id_shoppingcart`, `id_payment`, `status`, `totalPrice`, `delivery_date`, `orderDate`) "
+					+ "(`id_customer`, `id_address`, `id_shoppingcart`, `id_payment`, `status`, `totalPrice`, `delivery_date`, `created_at`) "
 					+ "VALUES ('" + order.getCustomer() + "','" + order.getAddress() + "','" + order.getShoppingCart() + "','" + order.getPayment() + "','" 
 					+ order.getStatus() + "','" + order.getTotalPrice() + "','" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(order.getDeliveryDate()) + "','" 
 					+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(order.getOrderDate()) + "')";
