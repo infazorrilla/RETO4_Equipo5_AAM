@@ -30,7 +30,7 @@ public class ManagerPayments extends ManagerAbstract<Payment> {
 		try {
 			String query = "INSERT INTO payments " 
 					+ "(`iban`, `cvv`, `expirationDate`) "
-					+ "VALUES ('" + payment.getIban() + "', '" + payment.getCvv() + "', '" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(payment.getExpirationDate()) + "')";
+					+ "VALUES ('" + payment.getIban() + "','" + payment.getCvv() + "','" + new SimpleDateFormat("yyyy-MM-dd").format(payment.getExpirationDate()) + "')";
 			preparedStatement = dbUtils.connection.prepareStatement(query);
 			preparedStatement.execute();
 		} catch (SQLException sqle) {
@@ -57,7 +57,7 @@ public class ManagerPayments extends ManagerAbstract<Payment> {
 		ResultSet resultSet = null;
 		try {
 			statement = dbUtils.connection.createStatement();
-			String query = "SELECT * FROM payments WHERE `id_payment`='" + payment.getId() + "'";
+			String query = "SELECT `id_payment`, `iban`, `cvv`, `expirationDate` FROM payments WHERE `id_payment`='" + payment.getId() + "'";
 			resultSet = statement.executeQuery(query);
 			if (resultSet.next()) {
 				if (ret == null) {
@@ -99,7 +99,7 @@ public class ManagerPayments extends ManagerAbstract<Payment> {
 		PreparedStatement preparedStatement = null;
 		try {
 			String query = "UPDATE payments "
-					+ "SET `iban`='" + payment.getIban() + "', `cvv`='" + payment.getCvv() + "', `expirationDate`='" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(payment.getExpirationDate()) + "' "
+					+ "SET `iban`='" + payment.getIban() + "', `cvv`='" + payment.getCvv() + "', `expirationDate`='" + new SimpleDateFormat("yyyy-MM-dd").format(payment.getExpirationDate()) + "' "
 					+ "WHERE `id_payment` = '" + payment.getId() + "'";
 			preparedStatement = dbUtils.connection.prepareStatement(query);
 			preparedStatement.execute();

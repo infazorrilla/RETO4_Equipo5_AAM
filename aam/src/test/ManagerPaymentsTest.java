@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNull;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,7 @@ class ManagerPaymentsTest {
 	@Test
 	void testInsertSelectUpdateDelete() {
 		// testInsert()
-		// knowing that id_ = 4
+		payment.setId(1);
 		payment.setIban("123456789012345");
 		payment.setCvv("123");
 		Date expirationDate = new Date();
@@ -53,7 +54,8 @@ class ManagerPaymentsTest {
 		// the attributes of the objects are compared to see if they are equal
 		assertEquals(result.getIban(), payment.getIban());
 		assertEquals(result.getCvv(), payment.getCvv());
-		assertEquals(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(result.getExpirationDate()), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(payment.getExpirationDate()));
+		assertEquals(new SimpleDateFormat("yyyy-MM-dd").format(result.getExpirationDate()), 
+				new SimpleDateFormat("yyyy-MM-dd").format(expirationDate));
 		
 		// testUpdate()
 		payment.setId(result.getId());
@@ -72,7 +74,7 @@ class ManagerPaymentsTest {
 		
 		// search of update
 		try {
-			managerPayments.select(payment);
+			result = managerPayments.select(payment);
 		} catch (SQLException e) {
 			System.out.println("SQLException: " + e);
 		} catch (Exception e) {
@@ -83,7 +85,7 @@ class ManagerPaymentsTest {
 		assertEquals(result.getId(), 1);
 		assertEquals(result.getIban(), payment.getIban());
 		assertEquals(result.getCvv(), payment.getCvv());
-		assertEquals(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(result.getExpirationDate()), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(payment.getExpirationDate()));
+		assertEquals(new SimpleDateFormat("yyyy-MM-dd").format(result.getExpirationDate()), new SimpleDateFormat("yyyy-MM-dd").format(payment.getExpirationDate()));
 		
 		// testDelete()
 		// payment is deleted by id
