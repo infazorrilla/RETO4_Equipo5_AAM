@@ -5,7 +5,6 @@ import static org.junit.Assert.assertNull;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
@@ -26,7 +25,7 @@ class ManagerPaymentsTest {
 	@Test
 	void testInsertSelectUpdateDelete() {
 		// testInsert()
-		payment.setId(1);
+		payment.setId(50);
 		payment.setIban("123456789012345");
 		payment.setCvv("123");
 		Date expirationDate = new Date();
