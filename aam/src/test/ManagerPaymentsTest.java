@@ -25,7 +25,7 @@ class ManagerPaymentsTest {
 	@Test
 	void testInsertSelectUpdateDelete() {
 		// testInsert()
-		payment.setId(50);
+		payment.setId(1);
 		payment.setIban("123456789012345");
 		payment.setCvv("123");
 		Date expirationDate = new Date();
