@@ -15,6 +15,7 @@ public abstract class ManagerAbstract<T> implements ManagerInterface<T> {
 	protected static final String TABLE_CUSTOMERS = "customers";
 	protected static final String TABLE_EMPLOYEES = "employees";
 	protected static final String TABLE_ADDRESS = "address";
+	protected static final String TABLE_PRODUCT = "products";
 
 	public ManagerAbstract(DBUtils dbUtils) {
 		this.dbUtils = dbUtils;

@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import es.elorrieta.aam.model.bbdd.pojo.Order;
+import es.elorrieta.aam.controller.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
@@ -38,13 +39,32 @@ public class GenderWindow extends JFrame {
 		contentPane.add(jPanelCines);
 		jPanelCines.setLayout(null);
 
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(691, 102, 228, 328);
-		jPanelCines.add(btnNewButton);
+		JButton btnMale = new JButton("Hombre");
+		btnMale.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(294, 102, 248, 328);
-		jPanelCines.add(btnNewButton_1);
+				UserChoice userChoice = new UserChoice();
+				userChoice.setFemale(false);
+				dispose();
+				MenuWindow menu = new MenuWindow(order, userChoice);
+				menu.setVisible(true);
+			}
+		});
+		btnMale.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnMale.setBounds(691, 102, 228, 328);
+		jPanelCines.add(btnMale);
+
+		JButton btnFemale = new JButton("Mujer");
+		btnFemale.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnFemale.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				MenuWindow menu = new MenuWindow(order, new UserChoice());
+				menu.setVisible(true);
+			}
+		});
+		btnFemale.setBounds(294, 102, 248, 328);
+		jPanelCines.add(btnFemale);
 
 		JPanel panel = new JPanel();
 		panel.setForeground(new Color(0, 128, 0));
@@ -68,7 +88,7 @@ public class GenderWindow extends JFrame {
 		jPanelBarraSuperior.add(btnInicio);
 
 		btnUser = new JButton("");
-		btnUser.setIcon(new ImageIcon(GenderWindow.class.getResource("/images/10418806.png")));
+		btnUser.setIcon(new ImageIcon(GenderWindow.class.getResource("/es/images/10418806.png")));
 		btnUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (null != order.getCustomer()) {

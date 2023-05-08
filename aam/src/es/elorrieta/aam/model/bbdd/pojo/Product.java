@@ -1,5 +1,6 @@
 package es.elorrieta.aam.model.bbdd.pojo;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -19,13 +20,11 @@ public class Product implements Serializable {
 	private Brand brand = null;
 
 	// ATTRIBUTES
-	private Category category = null;
+
 	private Date date = null;
 	private Genders gender = null;
-
-	public enum Category {
-		Dress, Jeans, Tshirt, Shoes
-	}
+	private int category = 0;
+	private File image = null;
 
 	public enum Genders {
 		M, H
@@ -38,14 +37,6 @@ public class Product implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
 	}
 
 	public Date getDate() {
@@ -72,17 +63,33 @@ public class Product implements Serializable {
 		this.brand = brand;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(brand, category, date, gender, id, productItems);
-	}
-
 	public Genders getGender() {
 		return gender;
 	}
 
+	public int getCategory() {
+		return category;
+	}
+
 	public void setGender(Genders gender) {
 		this.gender = gender;
+	}
+
+	public void setCategory(int category) {
+		this.category = category;
+	}
+
+	public File getImage() {
+		return image;
+	}
+
+	public void setImage(File image) {
+		this.image = image;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(brand, category, date, gender, id, image, productItems);
 	}
 
 	@Override
@@ -95,15 +102,15 @@ public class Product implements Serializable {
 			return false;
 		Product other = (Product) obj;
 		return Objects.equals(brand, other.brand) && category == other.category && Objects.equals(date, other.date)
-				&& gender == other.gender && id == other.id && Objects.equals(productItems, other.productItems);
+				&& gender == other.gender && id == other.id && Objects.equals(image, other.image)
+				&& Objects.equals(productItems, other.productItems);
 	}
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", productItems=" + productItems + ", brand=" + brand + ", category=" + category
-				+ ", date=" + date + ", gender=" + gender + "]";
+		return "Product [id=" + id + ", productItems=" + productItems + ", brand=" + brand + ", date=" + date
+				+ ", gender=" + gender + ", category=" + category + ", image=" + image + "]";
 	}
 
 	
-
 }
