@@ -11,19 +11,27 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 
 import es.elorrieta.aam.controller.UserChoice;
+import es.elorrieta.aam.model.bbdd.exception.AccessToDataBaseException;
+import es.elorrieta.aam.model.bbdd.exception.NotFoundException;
+import es.elorrieta.aam.model.bbdd.manager.ManagerProducts;
 import es.elorrieta.aam.model.bbdd.pojo.Order;
+import es.elorrieta.aam.model.bbdd.pojo.Product;
+import es.elorrieta.aam.view.windows.panelFactory.Panels;
 
 public class MenuWindow extends JFrame {
 
@@ -43,6 +51,7 @@ public class MenuWindow extends JFrame {
 		setBounds(100, 100, 1223, 700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.repaint();
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -226,10 +235,10 @@ public class MenuWindow extends JFrame {
 		btnZara.setVisible(false);
 		btnZara.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				userChoice.setZara(true);
 				clearPanelItems(userChoice);
-				if (userChoice.getSelectedButton() == 0)
+				doGetAllProductOfSelectedBrand(MenuWindow.this, order, userChoice);
 
-					getAllProductOfSelectedBrand();
 			}
 
 		});
@@ -266,10 +275,7 @@ public class MenuWindow extends JFrame {
 		makeGifsForFemaleVisible(false);
 		makeGifsForManVisible(false);
 		makeBrandsButtonVisible(false);
-		userChoice.setDress(false);
-		userChoice.setJeans(false);
-		userChoice.setShoes(false);
-		userChoice.setTshirt(false);
+
 	}
 
 	private BufferedImage getimage(URL image) {
@@ -381,7 +387,86 @@ public class MenuWindow extends JFrame {
 		}
 	}
 
-	private void getAllProductOfSelectedBrand() {
+	private void doGetAllProductOfSelectedBrand(MenuWindow frame, Order order, UserChoice userChoice) {
+		try {
+			List<Product> products = getAllProductOfSelectedBrand(userChoice);
+			addProductsToPanel(frame, order, products);
+		} catch (SQLException e) {
+			System.out.println(e);
+			JOptionPane.showMessageDialog(contentPane, "Data Base Error. Contents cannot be displayed", "ERROR!!",
+					JOptionPane.ERROR_MESSAGE);
 
+		} catch (AccessToDataBaseException e) {
+			JOptionPane.showMessageDialog(contentPane, "Data Base Access. Coundn't connect to data base  ", "ERROR!!",
+					JOptionPane.ERROR_MESSAGE);
+		} catch (NotFoundException e) {
+			JOptionPane.showMessageDialog(contentPane, "Data Base is empty", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+
+		} catch (Exception e) {
+
+			JOptionPane.showMessageDialog(contentPane, "Generic error...", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
+
+	private List<Product> getAllProductOfSelectedBrand(UserChoice userChoice)
+			throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
+
+		return new ManagerProducts().doSelectAllByGenderSubCategoryBrand(userChoice.getSelectedGender(),
+				userChoice.getSelectedBrand(), userChoice.getSelectedSubCategory());
+
+	}
+
+	private void addProductsToPanel(MenuWindow frame, Order order, List<Product> products) {
+		int num = 0;
+
+		for (Product product : products) {
+			num++;
+			panelItems.add(returnsJpanelNumberX(num, order, product, frame));
+		}
+	}
+
+	private JPanel returnsJpanelNumberX(int num, Order order, Product product, MenuWindow frame) {
+		JPanel ret = null;
+		switch (num) {
+		case 1:
+			ret = new Panels().getJpanelOne(order, product, frame);
+			break;
+		case 2:
+			ret = new Panels().getJpanelTwo(order, product, frame);
+			break;
+		case 3:
+			ret = new Panels().getJpanelThree(order, product, frame);
+			break;
+		case 4:
+			ret = new Panels().getJpanelFour(order, product, frame);
+			break;
+		case 5:
+			ret = new Panels().getJpanelFive(order, product, frame);
+			break;
+		case 6:
+			ret = new Panels().getJpanelSix(order, product, frame);
+			break;
+		case 7:
+			ret = new Panels().getJpanelSeven(order, product, frame);
+			break;
+		case 8:
+			ret = new Panels().getJpanelEight(order, product, frame);
+			break;
+		case 9:
+			ret = new Panels().getJpanelNine(order, product, frame);
+			break;
+		case 10:
+			ret = new Panels().getJpanelTen(order, product, frame);
+			break;
+		case 11:
+			ret = new Panels().getJpanelEleven(order, product, frame);
+			break;
+		case 12:
+			ret = new Panels().getJpanelTwelve(order, product, frame);
+			break;
+		}
+
+		return ret;
 	}
 }
