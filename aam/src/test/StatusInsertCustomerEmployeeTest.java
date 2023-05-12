@@ -43,7 +43,6 @@ public class StatusInsertCustomerEmployeeTest {
 		
 		customer.setBirthDate(dataFormateada);
 		
-		
 		try {
 			managerCustomers.insert(customer);
 		} catch (SQLException e) {
