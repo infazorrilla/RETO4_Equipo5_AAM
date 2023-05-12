@@ -112,7 +112,7 @@ public class ManagerCustomers extends ManagerAbstract<Customer> {
 		PreparedStatement preparedStatement = null;
 		try {
 			String query = "INSERT INTO " + ManagerAbstract.TABLE_CUSTOMERS
-					+ "( `email`, `password`, `birthDate`) VALUES ('" + customer.getEmail() + "' , '"
+					+ "(`name`, `lastname`, `email`, `password`, `birthDate`) VALUES ('" + customer.getName() + "' , '" + customer.getLastName() + "' , '" + customer.getEmail() + "' , '"
 					+ customer.getPassword() + "' , '"
 					+ new SimpleDateFormat("yyyy-MM-dd").format(customer.getBirthDate()) + "')";
 			preparedStatement = dbUtils.connection.prepareStatement(query);

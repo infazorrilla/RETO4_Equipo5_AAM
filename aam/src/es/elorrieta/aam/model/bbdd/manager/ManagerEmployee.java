@@ -105,9 +105,31 @@ public class ManagerEmployee extends ManagerAbstract<EmployeeManagedOrders> {
 	}
 
 	@Override
-	public void insert(EmployeeManagedOrders t)
+	public void insert(EmployeeManagedOrders employeeManagedOrders)
 			throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
-		// TODO Auto-generated method stub
+		if (!dbUtils.isConnected())
+			dbUtils.connect();
+		if (dbUtils.connection == null) {
+			throw new AccessToDataBaseException("No Se ha podido acceder a la base de datos");
+		}
+		PreparedStatement preparedStatement = null;
+		try {
+			String query = "INSERT INTO `employees` "
+					+ "(`id_employee_type`, `name`, `lastname`, `email`, `password`, `birthDate`) VALUES ('"+ employeeManagedOrders.getEmployeeType() + "' , '" + employeeManagedOrders.getName() + "' , '" + employeeManagedOrders.getLastName() + "' , '" + employeeManagedOrders.getEmail() + "' , '"
+					+ employeeManagedOrders.getPassword() + "' , '"
+					+ new SimpleDateFormat("yyyy-MM-dd").format(employeeManagedOrders.getBirthDate()) + "')";
+			preparedStatement = dbUtils.connection.prepareStatement(query);
+			preparedStatement.execute();
+
+		} finally {
+			if (preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+				}
+			}
+			dbUtils.disconnect();
+		}
 
 	}
 
