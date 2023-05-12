@@ -26,7 +26,7 @@ class StatusCustomerEmployeeTest {
 		employeeManagedOrders = new EmployeeManagedOrders();
 		managerEmployee = new ManagerEmployee();
 	}
-	
+
 	@Test
 	void testStatusCustomer() {
 		customer.setEmail("customer2@gmail.com");

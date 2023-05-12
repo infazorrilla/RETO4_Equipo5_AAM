@@ -29,7 +29,7 @@ public class StatusInsertCustomerEmployeeTest {
 		employeeManagedOrders = new EmployeeManagedOrders();
 		managerEmployee = new ManagerEmployee();
 	}
-	
+
 	@Test
 	void testStatusCustomer() throws ParseException {
 		customer.setLastName("patata");
