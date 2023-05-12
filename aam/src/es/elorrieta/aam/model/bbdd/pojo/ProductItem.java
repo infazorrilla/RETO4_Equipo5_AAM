@@ -1,19 +1,15 @@
 package es.elorrieta.aam.model.bbdd.pojo;
 
-import java.io.File;
-import java.util.List;
 import java.util.Objects;
 
 public class ProductItem {
-	
+
 	private int id = 0;
 	private double price = 0;
 	private int stock = 0;
-	
-	private List<File> images = null;
-	private Product product = null;
 
-	
+	private Product product = null;
+	private String size = null;
 
 	public int getId() {
 		return id;
@@ -39,14 +35,6 @@ public class ProductItem {
 		this.stock = stock;
 	}
 
-	public List<File> getImages() {
-		return images;
-	}
-
-	public void setImages(List<File> images) {
-		this.images = images;
-	}
-
 	public Product getProduct() {
 		return product;
 	}
@@ -55,9 +43,17 @@ public class ProductItem {
 		this.product = product;
 	}
 
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, images, price, product, stock);
+		return Objects.hash(id, price, product, size, stock);
 	}
 
 	@Override
@@ -69,15 +65,14 @@ public class ProductItem {
 		if (getClass() != obj.getClass())
 			return false;
 		ProductItem other = (ProductItem) obj;
-		return id == other.id && Objects.equals(images, other.images)
-				&& Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price)
-				&& Objects.equals(product, other.product) && stock == other.stock;
+		return id == other.id && Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price)
+				&& Objects.equals(product, other.product) && Objects.equals(size, other.size) && stock == other.stock;
 	}
 
 	@Override
 	public String toString() {
-		return "ProductItem [id=" + id + ", price=" + price + ", stock=" + stock + ", images=" + images + ", product="
-				+ product + "]";
+		return "ProductItem [id=" + id + ", price=" + price + ", stock=" + stock + ", product=" + product + ", size="
+				+ size + "]";
 	}
 
 }

@@ -12,7 +12,7 @@ public class Brand implements Serializable {
 	private int id = 0;
 
 	// FK: the relationship between Brand and Product is 1 to 1 .
-	private Product product = null;
+	private List<Product> products = null;
 
 	// FK: the relationship between Brand and EmployeeManagedStore is 1 to many .
 	private List<EmployeeManagedStore> employeesManagedStore = null;
@@ -33,14 +33,6 @@ public class Brand implements Serializable {
 		this.id = id;
 	}
 
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
 	public Brands getValue() {
 		return value;
 	}
@@ -57,9 +49,17 @@ public class Brand implements Serializable {
 		this.employeesManagedStore = employeesManagedStore;
 	}
 
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(employeesManagedStore, id, product, value);
+		return Objects.hash(employeesManagedStore, id, products, value);
 	}
 
 	@Override
@@ -72,13 +72,13 @@ public class Brand implements Serializable {
 			return false;
 		Brand other = (Brand) obj;
 		return Objects.equals(employeesManagedStore, other.employeesManagedStore) && id == other.id
-				&& Objects.equals(product, other.product) && value == other.value;
+				&& Objects.equals(products, other.products) && value == other.value;
 	}
 
 	@Override
 	public String toString() {
-		return "Brand [id=" + id + ", product=" + product + ", value=" + value + ", employeesManagedStore="
-				+ employeesManagedStore + "]";
+		return "Brand [id=" + id + ", products=" + products + ", employeesManagedStore=" + employeesManagedStore
+				+ ", value=" + value + "]";
 	}
 
 }

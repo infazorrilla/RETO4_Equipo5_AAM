@@ -100,7 +100,7 @@ public class LoginSignupWindow extends JFrame {
 					} catch (NotFoundException e1) {
 						JOptionPane.showMessageDialog(contentPane, "Data Base is empty", "ERROR!!",
 								JOptionPane.ERROR_MESSAGE);
-						e1.printStackTrace();
+						
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(contentPane, "Generic error...", "ERROR!!",
 								JOptionPane.ERROR_MESSAGE);

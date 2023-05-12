@@ -126,9 +126,8 @@ public class ManagerProducts extends ManagerAbstract<Product> {
 		try {
 
 			statement = dbUtils.connection.createStatement();
-			String query = "SELECT `id_product`, `id_subCategory`, `id_brand`, `gender`, `image` FROM"
-					+ ManagerAbstract.TABLE_PRODUCT + " ` WHERE `id_brand` = '" + brand + "' AND `gender` = '" + gender
-					+ "' AND `id_subCategory` =  '" + subCategory + "' ";
+			String query = "SELECT `id_product`, `id_subCategory`, `id_brand`, `gender`, `image`, name, price FROM products  WHERE `id_brand` = '"
+					+ brand + "' AND `gender` = '" + gender + "' AND `id_subCategory` = '" + subCategory + "'";
 			resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
 				if (ret == null) {
@@ -141,7 +140,13 @@ public class ManagerProducts extends ManagerAbstract<Product> {
 				brand1.setId(resultSet.getInt("id_brand"));
 				myProduct.setBrand(brand1);
 				myProduct.setGender(Genders.valueOf(resultSet.getString("gender")));
-				myProduct.setImage(userFoto(resultSet.getBlob("image")));
+				myProduct.setImage(productImage(resultSet.getBlob("image")));
+				myProduct.setName(resultSet.getString("name"));
+				myProduct.setPrice(resultSet.getDouble("price"));
+				myProduct.setProductItems(new ManagerProductItems().selectAllByIdProduct(myProduct.getId()));
+				List<File> images = getImages(myProduct.getId());
+				myProduct.setImages(images);
+				ret.add(myProduct);
 			}
 		} finally {
 
@@ -162,8 +167,42 @@ public class ManagerProducts extends ManagerAbstract<Product> {
 		}
 		return ret;
 	}
+	private List<File> getImages(int id) throws SQLException {
+		List<File> ret = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
 
-	private File userFoto(Blob blob) {
+		try {
+
+			statement = dbUtils.connection.createStatement();
+			String query = "SELECT `image` FROM `images` WHERE `id_product` ='" + id + "' ";
+			resultSet = statement.executeQuery(query);
+			while (resultSet.next()) {
+				if (ret == null) {
+					ret = new ArrayList<File>();
+				}
+				ret.add(productImage(resultSet.getBlob("image")));
+			}
+		} finally {
+
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+				}
+
+			}
+
+		}
+		return ret;
+	}
+	private File productImage(Blob blob) {
 		File file = null;
 		if (null != blob) {
 			byte bytes[] = null;
@@ -193,13 +232,21 @@ public class ManagerProducts extends ManagerAbstract<Product> {
 		}
 		return file;
 	}
+	
 
 	private String generateUniqueFileName() {
 		String filename = "";
 		String datetime = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss").format(new java.util.Date());
 		datetime = datetime.replace("-", "");
 		datetime = datetime.replace(":", "");
-		filename = datetime;
+		filename = datetime + rndChar();
 		return filename;
+	}
+
+	private static char rndChar() {
+		int rnd = (int) (Math.random() * 52);
+		char base = (rnd < 26) ? 'A' : 'a';
+		return (char) (base + rnd % 26);
+
 	}
 }
