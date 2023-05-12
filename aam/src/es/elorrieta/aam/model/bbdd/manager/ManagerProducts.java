@@ -126,7 +126,7 @@ public class ManagerProducts extends ManagerAbstract<Product> {
 		try {
 
 			statement = dbUtils.connection.createStatement();
-			String query = "SELECT `id_product`, `id_subCategory`, `id_brand`, `gender`, `image`, name, price FROM products  WHERE `id_brand` = '"
+			String query = "SELECT `id_product`, `id_subCategory`, `id_brand`, `gender`, name, price FROM products  WHERE `id_brand` = '"
 					+ brand + "' AND `gender` = '" + gender + "' AND `id_subCategory` = '" + subCategory + "'";
 			resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
@@ -139,12 +139,12 @@ public class ManagerProducts extends ManagerAbstract<Product> {
 				Brand brand1 = new Brand();
 				brand1.setId(resultSet.getInt("id_brand"));
 				myProduct.setBrand(brand1);
-				myProduct.setGender(Genders.valueOf(resultSet.getString("gender")));
-				myProduct.setImage(productImage(resultSet.getBlob("image")));
 				myProduct.setName(resultSet.getString("name"));
 				myProduct.setPrice(resultSet.getDouble("price"));
+				myProduct.setGender(Genders.valueOf(resultSet.getString("gender")));
+
 				myProduct.setProductItems(new ManagerProductItems().selectAllByIdProduct(myProduct.getId()));
-				List<File> images = getImages(myProduct.getId());
+				List<File> images = getImages(myProduct.getId(), myProduct.getName());
 				myProduct.setImages(images);
 				ret.add(myProduct);
 			}
@@ -167,10 +167,12 @@ public class ManagerProducts extends ManagerAbstract<Product> {
 		}
 		return ret;
 	}
-	private List<File> getImages(int id) throws SQLException {
+
+	private List<File> getImages(int id, String name) throws SQLException {
 		List<File> ret = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
+		int num = 0;
 
 		try {
 
@@ -181,7 +183,8 @@ public class ManagerProducts extends ManagerAbstract<Product> {
 				if (ret == null) {
 					ret = new ArrayList<File>();
 				}
-				ret.add(productImage(resultSet.getBlob("image")));
+				num++;
+				ret.add(productImage(name + num + "", resultSet.getBlob("image")));
 			}
 		} finally {
 
@@ -202,14 +205,15 @@ public class ManagerProducts extends ManagerAbstract<Product> {
 		}
 		return ret;
 	}
-	private File productImage(Blob blob) {
+
+	private File productImage(String name, Blob blob) {
 		File file = null;
 		if (null != blob) {
 			byte bytes[] = null;
 			FileOutputStream fos = null;
 
 			try {
-				file = new File(generateUniqueFileName() + ".png");
+				file = new File(name + ".png");
 
 				fos = new FileOutputStream(file);
 
@@ -232,7 +236,6 @@ public class ManagerProducts extends ManagerAbstract<Product> {
 		}
 		return file;
 	}
-	
 
 	private String generateUniqueFileName() {
 		String filename = "";

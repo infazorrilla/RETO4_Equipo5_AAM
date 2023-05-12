@@ -35,7 +35,7 @@ public class Panels extends JPanel {
 		});
 
 		btnPanelOne.setIcon(new javax.swing.ImageIcon(
-				new LoginSignupValidation().getImage(product.getImage()).getScaledInstance(191, 290, WIDTH)));
+				new LoginSignupValidation().getImage(product.getImages().get(0)).getScaledInstance(191, 290, WIDTH)));
 		btnPanelOne.setBounds(0, 0, 191, 290);
 		panelOne.add(btnPanelOne);
 
@@ -65,7 +65,7 @@ public class Panels extends JPanel {
 			}
 		});
 		btnPanelTwo.setIcon(new javax.swing.ImageIcon(
-				new LoginSignupValidation().getImage(product.getImage()).getScaledInstance(191, 290, WIDTH)));
+				new LoginSignupValidation().getImage(product.getImages().get(0)).getScaledInstance(191, 290, WIDTH)));
 		btnPanelTwo.setBounds(0, 0, 191, 290);
 		panelTwo.add(btnPanelTwo);
 
@@ -95,7 +95,7 @@ public class Panels extends JPanel {
 			}
 		});
 		btnPanelThree.setIcon(new javax.swing.ImageIcon(
-				new LoginSignupValidation().getImage(product.getImage()).getScaledInstance(191, 290, WIDTH)));
+				new LoginSignupValidation().getImage(product.getImages().get(0)).getScaledInstance(191, 290, WIDTH)));
 		btnPanelThree.setBounds(0, 0, 191, 290);
 		panelThree.add(btnPanelThree);
 
@@ -125,7 +125,7 @@ public class Panels extends JPanel {
 			}
 		});
 		btnPanelFour.setIcon(new javax.swing.ImageIcon(
-				new LoginSignupValidation().getImage(product.getImage()).getScaledInstance(191, 290, WIDTH)));
+				new LoginSignupValidation().getImage(product.getImages().get(0)).getScaledInstance(191, 290, WIDTH)));
 		btnPanelFour.setBounds(0, 0, 191, 290);
 		panelFour.add(btnPanelFour);
 
@@ -155,7 +155,7 @@ public class Panels extends JPanel {
 			}
 		});
 		btnPanelFive.setIcon(new javax.swing.ImageIcon(
-				new LoginSignupValidation().getImage(product.getImage()).getScaledInstance(191, 290, WIDTH)));
+				new LoginSignupValidation().getImage(product.getImages().get(0)).getScaledInstance(191, 290, WIDTH)));
 		btnPanelFive.setBounds(0, 0, 191, 290);
 		panelFive.add(btnPanelFive);
 
@@ -185,7 +185,7 @@ public class Panels extends JPanel {
 			}
 		});
 		btnPanelSix.setIcon(new javax.swing.ImageIcon(
-				new LoginSignupValidation().getImage(product.getImage()).getScaledInstance(191, 290, WIDTH)));
+				new LoginSignupValidation().getImage(product.getImages().get(0)).getScaledInstance(191, 290, WIDTH)));
 		btnPanelSix.setBounds(0, 0, 191, 290);
 		panelSix.add(btnPanelSix);
 
@@ -215,7 +215,7 @@ public class Panels extends JPanel {
 			}
 		});
 		btnPanelSeven.setIcon(new javax.swing.ImageIcon(
-				new LoginSignupValidation().getImage(product.getImage()).getScaledInstance(191, 290, WIDTH)));
+				new LoginSignupValidation().getImage(product.getImages().get(0)).getScaledInstance(191, 290, WIDTH)));
 		btnPanelSeven.setBounds(0, 0, 191, 290);
 		panelSeven.add(btnPanelSeven);
 
@@ -245,7 +245,7 @@ public class Panels extends JPanel {
 			}
 		});
 		btnPanelEight.setIcon(new javax.swing.ImageIcon(
-				new LoginSignupValidation().getImage(product.getImage()).getScaledInstance(191, 290, WIDTH)));
+				new LoginSignupValidation().getImage(product.getImages().get(0)).getScaledInstance(191, 290, WIDTH)));
 		btnPanelEight.setBounds(0, 0, 191, 290);
 		panelEight.add(btnPanelEight);
 
@@ -275,7 +275,7 @@ public class Panels extends JPanel {
 			}
 		});
 		btnPanelNine.setIcon(new javax.swing.ImageIcon(
-				new LoginSignupValidation().getImage(product.getImage()).getScaledInstance(191, 290, WIDTH)));
+				new LoginSignupValidation().getImage(product.getImages().get(0)).getScaledInstance(191, 290, WIDTH)));
 		btnPanelNine.setBounds(0, 0, 191, 290);
 		panelNine.add(btnPanelNine);
 
@@ -305,7 +305,7 @@ public class Panels extends JPanel {
 			}
 		});
 		btnPanelTen.setIcon(new javax.swing.ImageIcon(
-				new LoginSignupValidation().getImage(product.getImage()).getScaledInstance(191, 290, WIDTH)));
+				new LoginSignupValidation().getImage(product.getImages().get(0)).getScaledInstance(191, 290, WIDTH)));
 		btnPanelTen.setBounds(0, 0, 191, 290);
 		panelTen.add(btnPanelTen);
 
@@ -337,7 +337,7 @@ public class Panels extends JPanel {
 			}
 		});
 		btnPanelEleven.setIcon(new javax.swing.ImageIcon(
-				new LoginSignupValidation().getImage(product.getImage()).getScaledInstance(191, 290, WIDTH)));
+				new LoginSignupValidation().getImage(product.getImages().get(0)).getScaledInstance(191, 290, WIDTH)));
 		btnPanelEleven.setBounds(0, 0, 191, 290);
 		panelEleven.add(btnPanelEleven);
 
@@ -367,7 +367,7 @@ public class Panels extends JPanel {
 			}
 		});
 		btnPanelTwelve.setIcon(new javax.swing.ImageIcon(
-				new LoginSignupValidation().getImage(product.getImage()).getScaledInstance(191, 290, WIDTH)));
+				new LoginSignupValidation().getImage(product.getImages().get(0)).getScaledInstance(191, 290, WIDTH)));
 		btnPanelTwelve.setBounds(0, 0, 191, 290);
 		panelTwelve.add(btnPanelTwelve);
 

@@ -70,7 +70,7 @@ public class LoginSignupWindow extends JFrame {
 		panel.setLayout(null);
 
 		lblGif = new JLabel("");
-		lblGif.setIcon(new ImageIcon(LoginSignupWindow.class.getResource("/images/2020-fashion-trends.gif")));
+		lblGif.setIcon(new ImageIcon(LoginSignupWindow.class.getResource("/es/images/2020-fashion-trends.gif")));
 
 		lblGif.setBounds(600, 52, 597, 561);
 		panel.add(lblGif);
@@ -100,7 +100,7 @@ public class LoginSignupWindow extends JFrame {
 					} catch (NotFoundException e1) {
 						JOptionPane.showMessageDialog(contentPane, "Data Base is empty", "ERROR!!",
 								JOptionPane.ERROR_MESSAGE);
-						
+
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(contentPane, "Generic error...", "ERROR!!",
 								JOptionPane.ERROR_MESSAGE);
@@ -189,14 +189,14 @@ public class LoginSignupWindow extends JFrame {
 		panel.add(passwordField);
 
 		lblMailIcon = new JLabel("");
-		lblMailIcon.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mail.png"))
+		lblMailIcon.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/es/images/mail.png"))
 				.getImage().getScaledInstance(54, 45, Image.SCALE_SMOOTH)));
 
 		lblMailIcon.setBounds(91, 256, 54, 45);
 		panel.add(lblMailIcon);
 
 		lblPass = new JLabel("");
-		lblPass.setIcon(new ImageIcon(LoginSignupWindow.class.getResource("/images/pass.png")));
+		lblPass.setIcon(new ImageIcon(LoginSignupWindow.class.getResource("/es/images/pass.png")));
 		lblPass.setBounds(91, 344, 54, 46);
 		panel.add(lblPass);
 	}
@@ -227,7 +227,7 @@ public class LoginSignupWindow extends JFrame {
 		lblPass.setBounds(615, 369, 59, 42);
 		lblMailIcon.setBounds(615, 285, 59, 46);
 		lblIconCalendar = new JLabel("");
-		lblIconCalendar.setIcon(new ImageIcon(LoginSignupWindow.class.getResource("/images/calendar.png")));
+		lblIconCalendar.setIcon(new ImageIcon(LoginSignupWindow.class.getResource("/es/images/calendar.png")));
 		lblIconCalendar.setBounds(618, 199, 56, 46);
 
 		panel.add(lblIconCalendar);

@@ -80,11 +80,21 @@ public class MenuWindow extends JFrame {
 		panelheader.add(btnGoBack);
 
 		JButton btnProfile = new JButton("");
-		btnProfile.setBounds(1127, 8, 54, 41);
+		btnProfile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
+		btnProfile.setBackground(new Color(255, 255, 255));
+		btnProfile.setIcon(new ImageIcon(MenuWindow.class.getResource("/es/images/2331970.png")));
+		btnProfile.setBounds(1118, 8, 68, 41);
 		panelheader.add(btnProfile);
 
 		JButton btnShopCart = new JButton("");
-		btnShopCart.setBounds(1042, 9, 54, 40);
+		btnShopCart.setBackground(new Color(255, 255, 255));
+		btnShopCart.setIcon(new ImageIcon(MenuWindow.class.getResource("/es/images/10418806.png")));
+		btnShopCart.setBounds(1043, 9, 53, 40);
 		panelheader.add(btnShopCart);
 
 		JPanel panelContainer = new JPanel();

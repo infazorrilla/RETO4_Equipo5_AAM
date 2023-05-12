@@ -25,12 +25,15 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import es.elorrieta.aam.controller.ContollerShoppingCart;
+import es.elorrieta.aam.controller.*;
 import es.elorrieta.aam.controller.LoginSignupValidation;
 import es.elorrieta.aam.model.bbdd.exception.AccessToDataBaseException;
 import es.elorrieta.aam.model.bbdd.exception.NotFoundException;
 import es.elorrieta.aam.model.bbdd.manager.ManagerProductItems;
 import es.elorrieta.aam.model.bbdd.pojo.*;
+
 import es.elorrieta.aam.model.bbdd.pojo.Product;
+import es.elorrieta.aam.view.windows.MenuWindow;
 
 public class AddToShopCartWindow extends JFrame {
 
@@ -73,7 +76,7 @@ public class AddToShopCartWindow extends JFrame {
 		lblImgLeft.setBackground(new Color(204, 153, 0));
 
 		lblImgLeft.setIcon(new javax.swing.ImageIcon(
-				new LoginSignupValidation().getImage(product.getImage()).getScaledInstance(300, 499, WIDTH)));
+				new LoginSignupValidation().getImage(product.getImages().get(0)).getScaledInstance(300, 499, WIDTH)));
 		lblImgLeft.setBounds(85, 42, 300, 499);
 		panel.add(lblImgLeft);
 
@@ -227,9 +230,10 @@ public class AddToShopCartWindow extends JFrame {
 		panel.add(lblProductName);
 
 		lblProductPrice = new JLabel("66.99");
+		lblProductPrice.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProductPrice.setText(product.getPrice() + "" + "€");
 		lblProductPrice.setFont(new Font("Source Sans Pro Black", Font.PLAIN, 18));
-		lblProductPrice.setBounds(925, 81, 46, 14);
+		lblProductPrice.setBounds(910, 71, 96, 24);
 		panel.add(lblProductPrice);
 		JPanel panelFooter = new JPanel();
 		panelFooter.setForeground(new Color(255, 204, 51));
@@ -353,6 +357,10 @@ public class AddToShopCartWindow extends JFrame {
 	private void addToShoppingCart(Order order, Product product) {
 		if (sizeIsSelected()) {
 			doAddToShoppingCart(order, product);
+			JOptionPane.showMessageDialog(null, "Tu compra se añadido correctamente al carrito");
+			dispose();
+			MenuWindow menuWindow = new MenuWindow(order, new UserChoice());
+			menuWindow.setVisible(true);
 		} else
 			JOptionPane.showMessageDialog(null, "Selecciona tu talla!!!");
 	}
