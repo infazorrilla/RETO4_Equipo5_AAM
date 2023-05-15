@@ -36,16 +36,12 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 		PreparedStatement preparedStatement = null;
 		try {
 			String query = "INSERT INTO orders " 
-					+ "(`id_customer`, `id_address`, `id_shoppingcart`, `id_payment`, `status`, `totalPrice`, `delivery_date`, `created_at`) "
-					+ "VALUES ('" + order.getCustomer() + "','" + order.getAddress() + "','" + order.getShoppingCart() + "','" + order.getPayment() + "','" 
-					+ order.getStatus() + "','" + order.getTotalPrice() + "','" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(order.getDeliveryDate()) + "','" 
+					+ "(`id_address`, `id_shoppingcart`, `id_payment`, `status`, `totalPrice`, `delivery_date`, `created_at`) "
+					+ "VALUES ('" + order.getAddress() + "','" + order.getShoppingCart() + "','" + order.getPayment() + "','" 
+					+ order.getStatus() + "','" + order.getTotalPrice() + "','" + new SimpleDateFormat("yyyy-MM-dd").format(order.getDeliveryDate()) + "','" 
 					+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(order.getOrderDate()) + "')";
 			preparedStatement = dbUtils.connection.prepareStatement(query);
 			preparedStatement.execute();
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			if (preparedStatement != null) {
 				try {
@@ -67,7 +63,7 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 		ResultSet resultSet = null;
 		try {
 			statement = dbUtils.connection.createStatement();
-			String query = "SELECT * FROM orders WHERE `id_order`=" + order.getId() + "'";
+			String query = "SELECT `id_order`, `id_customer`, `id_address`, `id_shoppingcart`, `status`, `totalPrice`, `delivery_date`, `created_at` FROM orders WHERE `id_order`='" + order.getId() + "'";
 			resultSet = statement.executeQuery(query);
 			if (resultSet.next()) {
 				if (ret == null) {
@@ -93,10 +89,6 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 				Timestamp orderDate = resultSet.getTimestamp("orderDate");
 				ret.setOrderDate(new Date(orderDate.getTime()));
 			}
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			if (resultSet != null) {
 				try {
@@ -123,14 +115,10 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 		PreparedStatement preparedStatement = null;
 		try {
 			String query = "UPDATE orders "
-					+ "SET `status`='" + order.getStatus() + "', `totalPrice`='" + order.getTotalPrice() + "', `orderDate`='" + order.getOrderDate()
+					+ "SET `status`='" + order.getStatus() + "', `totalPrice`='" + order.getTotalPrice() + "', `created_at`='" + order.getOrderDate()
 					+ "WHERE `id_order` = '" + order.getId() + "'";
 			preparedStatement = dbUtils.connection.prepareStatement(query);
 			preparedStatement.execute();
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			if (preparedStatement != null) {
 				try {
@@ -152,10 +140,6 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 			String query = "DELETE FROM orders WHERE `id_order` = '" + order.getId() + "'";
 			preparedStatement = dbUtils.connection.prepareStatement(query);
 			preparedStatement.execute();
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			if (preparedStatement != null) {
 				try {
@@ -205,15 +189,11 @@ public class ManagerOrders extends ManagerAbstract<Order> {
 				order.setTotalPrice(resultSet.getDouble("totalPrice"));
 				Timestamp deliveryDate = resultSet.getTimestamp("delivery_date");
 				order.setDeliveryDate(new Date(deliveryDate.getTime()));
-				Timestamp orderDate = resultSet.getTimestamp("orderDate");
+				Timestamp orderDate = resultSet.getTimestamp("created_at");
 				order.setOrderDate(new Date(orderDate.getTime()));
 				
 				ret.add(order);
 			}
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			if (resultSet != null) {
 				try {

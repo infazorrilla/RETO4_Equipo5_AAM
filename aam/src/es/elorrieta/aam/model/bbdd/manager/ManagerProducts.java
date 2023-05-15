@@ -37,10 +37,6 @@ public class ManagerProducts extends ManagerAbstract<Product> {
 					+ product.getCategory() + product.getBrand() + "','" + product.getGender() + "')";
 			preparedStatement = dbUtils.connection.prepareStatement(query);
 			preparedStatement.execute();
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			if (preparedStatement != null) {
 				try {
@@ -71,10 +67,6 @@ public class ManagerProducts extends ManagerAbstract<Product> {
 				ret.setId(resultSet.getInt("id_product"));
 
 			}
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			if (resultSet != null) {
 				try {

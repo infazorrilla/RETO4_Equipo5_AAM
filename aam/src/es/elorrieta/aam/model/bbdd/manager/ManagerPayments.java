@@ -33,10 +33,6 @@ public class ManagerPayments extends ManagerAbstract<Payment> {
 					+ "VALUES ('" + payment.getIban() + "','" + payment.getCvv() + "','" + new SimpleDateFormat("yyyy-MM-dd").format(payment.getExpirationDate()) + "')";
 			preparedStatement = dbUtils.connection.prepareStatement(query);
 			preparedStatement.execute();
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			if (preparedStatement != null) {
 				try {
@@ -69,10 +65,6 @@ public class ManagerPayments extends ManagerAbstract<Payment> {
 				Timestamp expirationDate = resultSet.getTimestamp("expirationDate");
 				ret.setExpirationDate(new Date(expirationDate.getTime()));
 			}
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			if (resultSet != null) {
 				try {
@@ -103,10 +95,6 @@ public class ManagerPayments extends ManagerAbstract<Payment> {
 					+ "WHERE `id_payment` = '" + payment.getId() + "'";
 			preparedStatement = dbUtils.connection.prepareStatement(query);
 			preparedStatement.execute();
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			if (preparedStatement != null) {
 				try {
@@ -128,10 +116,6 @@ public class ManagerPayments extends ManagerAbstract<Payment> {
 			String query = "DELETE FROM payments WHERE `id_payment` = '" + payment.getId() + "'";
 			preparedStatement = dbUtils.connection.prepareStatement(query);
 			preparedStatement.execute();
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			if (preparedStatement != null) {
 				try {
@@ -172,10 +156,6 @@ public class ManagerPayments extends ManagerAbstract<Payment> {
 				
 				ret.add(payment);
 			}
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
 		} finally {
 			if (resultSet != null) {
 				try {
