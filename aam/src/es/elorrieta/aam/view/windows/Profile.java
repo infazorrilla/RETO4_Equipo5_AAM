@@ -131,8 +131,8 @@ public class Profile extends JFrame {
 				}
 			}
 		});
-		btnDeleteAccount.setBackground(new Color(255, 255, 255));
-		btnDeleteAccount.setForeground(new Color(128, 64, 0));
+		btnDeleteAccount.setBackground(new Color(153, 102, 0));
+		btnDeleteAccount.setForeground(new Color(255, 255, 255));
 		btnDeleteAccount.setFont(new Font("Source Sans Pro", Font.BOLD, 14));
 		btnDeleteAccount.setBounds(36, 458, 183, 39);
 		panel.add(btnDeleteAccount);
@@ -186,7 +186,6 @@ public class Profile extends JFrame {
 										"Se han realizado correctamente las modificaiones ");
 								new Profile(order);
 
-
 							}
 						} else {
 
@@ -207,7 +206,7 @@ public class Profile extends JFrame {
 									JOptionPane.showMessageDialog(contentPane,
 											"Data Base Error. Contents cannot be displayed", "ERROR!!",
 											JOptionPane.ERROR_MESSAGE);
-									
+
 								} catch (AccessToDataBaseException e1) {
 									JOptionPane.showMessageDialog(contentPane,
 											"Data Base Access. Coundn't connect to data base  ", "ERROR!!",
@@ -215,7 +214,7 @@ public class Profile extends JFrame {
 								} catch (NotFoundException e1) {
 									JOptionPane.showMessageDialog(contentPane, "Data Base is empty", "ERROR!!",
 											JOptionPane.ERROR_MESSAGE);
-									
+
 								} catch (Exception e1) {
 									JOptionPane.showMessageDialog(contentPane, "Generic error...", "ERROR!!",
 											JOptionPane.ERROR_MESSAGE);
@@ -229,10 +228,10 @@ public class Profile extends JFrame {
 				}
 			}
 		});
-		btnNewButton_1.setBackground(new Color(238, 130, 238));
-		btnNewButton_1.setForeground(new Color(128, 64, 0));
+		btnNewButton_1.setBackground(new Color(153, 102, 0));
+		btnNewButton_1.setForeground(new Color(255, 255, 255));
 		btnNewButton_1.setFont(new Font("Source Sans Pro", Font.BOLD, 14));
-		btnNewButton_1.setBounds(38, 392, 181, 31);
+		btnNewButton_1.setBounds(38, 384, 181, 39);
 		panel.add(btnNewButton_1);
 
 		JButton btnEditFoto = new JButton("");
@@ -248,19 +247,21 @@ public class Profile extends JFrame {
 			}
 		});
 		btnEditFoto.setBackground(new Color(255, 255, 255));
-		btnEditFoto.setIcon(new ImageIcon(Profile.class.getResource("/images/3838756.png")));
+		btnEditFoto.setIcon(new ImageIcon(Profile.class.getResource("/es/images/3838756.png")));
 		btnEditFoto.setBounds(182, 283, 54, 49);
 		panel.add(btnEditFoto);
 
 		JPanel panelheader = new JPanel();
-		panelheader.setBackground(new Color(255, 128, 0));
+		panelheader.setBackground(new Color(255, 204, 51));
 		panelheader.setForeground(new Color(255, 128, 0));
 		panelheader.setBounds(0, 0, 1197, 52);
 		panel.add(panelheader);
 		panelheader.setLayout(null);
 
 		JButton btnExit = new JButton("Cerrar Sesion");
-		btnExit.setFont(new Font("Source Sans Pro", Font.BOLD, 13));
+		btnExit.setForeground(new Color(255, 255, 255));
+		btnExit.setBackground(new Color(153, 102, 0));
+		btnExit.setFont(new Font("Verdana", Font.BOLD, 13));
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -274,10 +275,12 @@ public class Profile extends JFrame {
 
 			}
 		});
-		btnExit.setBounds(1045, 11, 130, 30);
+		btnExit.setBounds(1045, 0, 130, 52);
 		panelheader.add(btnExit);
 
-		JButton btnGoBack = new JButton("Atras");
+		JButton btnGoBack = new JButton("");
+		btnGoBack.setBackground(new Color(255, 255, 255));
+		btnGoBack.setIcon(new ImageIcon(Profile.class.getResource("/es/images/flecha (1).jpg")));
 		btnGoBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GenderWindow genderWin = new GenderWindow(order);
@@ -286,24 +289,24 @@ public class Profile extends JFrame {
 			}
 		});
 		btnGoBack.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnGoBack.setBounds(22, 16, 89, 23);
+		btnGoBack.setBounds(30, 0, 92, 52);
 		panelheader.add(btnGoBack);
 
 		JPanel panelFooter = new JPanel();
-		panelFooter.setBackground(new Color(254, 167, 5));
-		panelFooter.setBounds(0, 612, 1207, 49);
+		panelFooter.setBackground(new Color(255, 204, 51));
+		panelFooter.setBounds(0, 612, 1197, 49);
 		panel.add(panelFooter);
 
 		lblFoto = new JLabel("");
 		lblFoto.setBounds(36, 123, 183, 183);
 		panel.add(lblFoto);
-		lblFoto.setIcon(new ImageIcon(Profile.class.getResource("/images/istockphoto-1298261537-612x612.jpg")));
+		lblFoto.setIcon(new ImageIcon(Profile.class.getResource("/es/images/istockphoto-1298261537-612x612.jpg")));
 		lblFoto.setBackground(new Color(0, 0, 0));
 		lblFoto.setForeground(new Color(0, 0, 0));
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel
-				.setIcon(new ImageIcon(Profile.class.getResource("/images/mona-eendra-vC8wj_Kphak-unsplash (1).jpg")));
+		lblNewLabel.setIcon(
+				new ImageIcon(Profile.class.getResource("/es/images/mona-eendra-vC8wj_Kphak-unsplash (1).jpg")));
 		lblNewLabel.setBounds(0, 51, 278, 560);
 		panel.add(lblNewLabel);
 
@@ -536,7 +539,13 @@ public class Profile extends JFrame {
 		ret.set(0, employee);
 		return ret;
 	}
-
+	/**
+	 * Retrieves customer information from the order and jtextfields .
+	 *
+	 * @param order the order containing the customer information
+	 * @return a list of objects containing the customer information and a flag indicating if all address fields are completed
+	 * @throws ParseException if there is an error parsing the birth date
+	 */
 	private List<Object> getCustomerInfo(Order order) throws ParseException {
 		List<Object> ret = new ArrayList<>();
 
@@ -575,7 +584,11 @@ public class Profile extends JFrame {
 		ret.set(0, customer);
 		return ret;
 	}
-
+	/**
+	 * Checks if all address fields are completed.
+	 *
+	 * @return true if all address fields are completed, false otherwise
+	 */
 	private boolean areAllAddressFieldsCompleted() {
 		boolean ret = false;
 		if (!textFieldAddress.getText().isEmpty() && !textFieldzip.getText().isEmpty()
@@ -586,7 +599,12 @@ public class Profile extends JFrame {
 		return ret;
 
 	}
-
+	/**
+	 * Prompts the user to select an image file using a file chooser dialog.
+	 *
+	 * @param event the action event that triggers the file selection
+	 * @return the selected image file, or null if no valid image file is selected
+	 */
 	public File getImageFromUser(ActionEvent event) {
 		File ret = null;
 		JFileChooser fileChooser = new JFileChooser();
@@ -603,7 +621,13 @@ public class Profile extends JFrame {
 		}
 		return ret;
 	}
-
+	/**
+	 * Displays a message dialog with the given message and title, asking the user for a confirmation.
+	 *
+	 * @param message the message to display in the dialog
+	 * @param title   the title of the dialog
+	 * @return 1 if the user confirms the message, 0 otherwise
+	 */
 	private int askUser(String message, String title) {
 		int ret = 0;
 		int reply = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION);
@@ -612,7 +636,15 @@ public class Profile extends JFrame {
 		}
 		return ret;
 	}
-
+	/**
+	 * Checks if all the provided information (date, email, password) is correct based on the validation results.
+	 *
+	 * @param validate the LoginSignupValidation object used for validation
+	 * @param date     the date to validate
+	 * @param email    the email to validate
+	 * @param pass     the password to validate
+	 * @return true if all the information is correct, false otherwise
+	 */
 	private boolean areAllInfoCorrect(LoginSignupValidation validate, String date, String email, String pass) {
 		boolean ret = false;
 		if (validate.isValidDate(date) && validate.isValidPassword(pass) && validate.isValidEmail(email)) {
@@ -621,27 +653,51 @@ public class Profile extends JFrame {
 		return ret;
 
 	}
-
-	private boolean setWarningsDateEmailPass(LoginSignupValidation validate, String date, String email, String pass) {
+	/**
+	 * Sets the warnings for the date, email, and password fields based on validation results.
+	 *
+	 * @param validate the LoginSignupValidation object used for validation
+	 * @param date     the date to validate and display the warning for
+	 * @param email    the email to validate and display the warning for
+	 * @param pass     the password to validate and display the warning for
+	 */
+	private void setWarningsDateEmailPass(LoginSignupValidation validate, String date, String email, String pass) {
 		makeDateWrningVisible(validate, date);
 		makeEmailWarningVisible(validate, email);
 		makePassWarningVisible(validate, pass);
-		return false;
 
 	}
 
+	/**
+	 * Makes the birth date warning label visible if the provided date is invalid.
+	 *
+	 * @param validate the LoginSignupValidation object used for date validation
+	 * @param date     the date to validate and display the warning for
+	 */
 	private void makeDateWrningVisible(LoginSignupValidation validate, String date) {
 		if (!validate.isValidDate(date)) {
 			lblBirthDateWarning.setVisible(true);
 		}
 	}
 
+	/**
+	 * Makes the email warning label visible if the provided email is invalid.
+	 *
+	 * @param validate the LoginSignupValidation object used for email validation
+	 * @param email    the email to validate and display the warning for
+	 */
 	private void makeEmailWarningVisible(LoginSignupValidation validate, String email) {
 		if (!validate.isValidEmail(email)) {
 			lblEmailWarning.setVisible(true);
 		}
 	}
 
+	/**
+	 * Makes the password warning label visible if the provided password is invalid.
+	 *
+	 * @param validate the LoginSignupValidation object used for password validation
+	 * @param pass     the password to validate and display the warning for
+	 */
 	private void makePassWarningVisible(LoginSignupValidation validate, String pass) {
 		if (!validate.isValidPassword(pass)) {
 			lblPassWarning.setVisible(true);
@@ -649,6 +705,10 @@ public class Profile extends JFrame {
 		}
 	}
 
+	/**
+	 * Makes all the warning labels invisible. This method hides the warning labels
+	 * related to birth date, email, and password.
+	 */
 	private void makeAllWarningsInvisible() {
 		lblBirthDateWarning.setVisible(false);
 		lblEmailWarning.setVisible(false);

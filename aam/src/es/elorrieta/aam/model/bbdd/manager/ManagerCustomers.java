@@ -112,9 +112,9 @@ public class ManagerCustomers extends ManagerAbstract<Customer> {
 		PreparedStatement preparedStatement = null;
 		try {
 			String query = "INSERT INTO " + ManagerAbstract.TABLE_CUSTOMERS
-					+ "(`name`, `lastname`, `email`, `password`, `birthDate`) VALUES ('" + customer.getName() + "' , '" + customer.getLastName() + "' , '" + customer.getEmail() + "' , '"
-					+ customer.getPassword() + "' , '"
-					+ new SimpleDateFormat("yyyy-MM-dd").format(customer.getBirthDate()) + "')";
+					+ "(`name`, `lastname`, `email`, `password`, `birthDate`) VALUES ('" + customer.getName() + "' , '"
+					+ customer.getLastName() + "' , '" + customer.getEmail() + "' , '" + customer.getPassword()
+					+ "' , '" + new SimpleDateFormat("yyyy-MM-dd").format(customer.getBirthDate()) + "')";
 			preparedStatement = dbUtils.connection.prepareStatement(query);
 			preparedStatement.execute();
 
@@ -324,7 +324,7 @@ public class ManagerCustomers extends ManagerAbstract<Customer> {
 		}
 	}
 
-	private Address checkAddress(Address address)
+	public Address checkAddress(Address address)
 			throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		Address ret = null;
 		if (address != null) {

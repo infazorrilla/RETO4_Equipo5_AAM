@@ -72,7 +72,7 @@ public class LoginSignupWindow extends JFrame {
 		lblGif = new JLabel("");
 		lblGif.setIcon(new ImageIcon(LoginSignupWindow.class.getResource("/es/images/2020-fashion-trends.gif")));
 
-		lblGif.setBounds(600, 52, 597, 561);
+		lblGif.setBounds(600, 63, 597, 540);
 		panel.add(lblGif);
 
 		textField = new JTextField();
@@ -80,7 +80,10 @@ public class LoginSignupWindow extends JFrame {
 		panel.add(textField);
 		textField.setColumns(10);
 
-		btnLogin = new JButton("login");
+		btnLogin = new JButton("Login");
+		btnLogin.setForeground(new Color(255, 255, 255));
+		btnLogin.setBackground(new Color(153, 102, 0));
+		btnLogin.setFont(new Font("Verdana", Font.BOLD, 15));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String email = textField.getText();
@@ -133,33 +136,39 @@ public class LoginSignupWindow extends JFrame {
 				}
 			}
 		});
-		btnLogin.setBounds(228, 417, 104, 38);
+		btnLogin.setBounds(223, 419, 125, 46);
 		panel.add(btnLogin);
 
 		lblHeader = new JLabel("Log In");
+		lblHeader.setForeground(new Color(0, 0, 0));
 		lblHeader.setHorizontalAlignment(SwingConstants.CENTER);
-		lblHeader.setFont(new Font("Arial Black", Font.BOLD, 19));
+		lblHeader.setFont(new Font("Arial Black", Font.BOLD, 25));
 		lblHeader.setBounds(208, 148, 146, 46);
 		panel.add(lblHeader);
 
 		JPanel panelheader = new JPanel();
-		panelheader.setBackground(new Color(255, 128, 0));
+		panelheader.setBackground(new Color(255, 204, 51));
 		panelheader.setForeground(new Color(255, 128, 0));
-		panelheader.setBounds(0, 0, 1197, 52);
+		panelheader.setBounds(0, 0, 1197, 63);
 		panel.add(panelheader);
 		panelheader.setLayout(null);
 
 		btnASignup = new JButton("SIGNUP");
+		btnASignup.setForeground(new Color(255, 255, 255));
+		btnASignup.setBackground(new Color(153, 102, 0));
+		btnASignup.setFont(new Font("Verdana", Font.BOLD, 16));
 		btnASignup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changesForSignUp();
 
 			}
 		});
-		btnASignup.setBounds(1045, 11, 130, 30);
+		btnASignup.setBounds(1021, 0, 130, 52);
 		panelheader.add(btnASignup);
 
-		btnBack = new JButton("ATRAS");
+		btnBack = new JButton("");
+		btnBack.setBackground(new Color(255, 255, 255));
+		btnBack.setIcon(new ImageIcon(LoginSignupWindow.class.getResource("/es/images/flecha (1).jpg")));
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -175,12 +184,12 @@ public class LoginSignupWindow extends JFrame {
 				}
 			}
 		});
-		btnBack.setBounds(25, 11, 118, 30);
+		btnBack.setBounds(23, 0, 91, 63);
 		panelheader.add(btnBack);
 
 		JPanel panelFooter = new JPanel();
-		panelFooter.setBackground(new Color(255, 128, 0));
-		panelFooter.setBounds(0, 612, 1207, 49);
+		panelFooter.setBackground(new Color(255, 204, 51));
+		panelFooter.setBounds(0, 598, 1207, 63);
 		panel.add(panelFooter);
 
 		passwordField = new JPasswordField();
@@ -287,7 +296,17 @@ public class LoginSignupWindow extends JFrame {
 		lblMailIcon.setBounds(91, 256, 54, 45);
 
 	}
-
+	/**
+	 * Checks the login credentials provided by the user and performs appropriate actions based on the result.
+	 *
+	 * @param email The email entered by the user.
+	 * @param pass The password entered by the user.
+	 * @param order The Order object associated with the login.
+	 * @throws SQLException if a database access error occurs.
+	 * @throws AccessToDataBaseException if there is an issue with accessing the database.
+	 * @throws NotFoundException if the requested data is not found.
+	 * @throws Exception if an error occurs during the process.
+	 */
 	private void checkLogin(String email, String pass, Order order)
 			throws SQLException, AccessToDataBaseException, NotFoundException, Exception {
 
@@ -321,6 +340,20 @@ public class LoginSignupWindow extends JFrame {
 
 	}
 
+	/**
+	 * Checks if a customer with the given email and password exists in the
+	 * database.
+	 *
+	 * @param email The email of the customer.
+	 * @param pass  The password of the customer.
+	 * @return The Customer object representing the customer if found, or null if
+	 *         not found.
+	 * @throws SQLException              if a database access error occurs.
+	 * @throws AccessToDataBaseException if there is an issue with accessing the
+	 *                                   database.
+	 * @throws NotFoundException         if the requested data is not found.
+	 * @throws Exception                 if an error occurs during the process.
+	 */
 	private Customer isCustomerExist(String email, String pass)
 			throws SQLException, AccessToDataBaseException, NotFoundException, Exception {
 
@@ -334,6 +367,22 @@ public class LoginSignupWindow extends JFrame {
 
 	}
 
+	/**
+	 * Checks if a customer with the given email and password exists in the database
+	 * and performs login-related actions.
+	 *
+	 * @param email The email of the customer.
+	 * @param pass  The password of the customer.
+	 * @param order The Order object associated with the customer.
+	 * @return An ArrayList containing the Customer object representing the customer
+	 *         if found, or null if not found, and a boolean value indicating
+	 *         whether the customer is already logged in , blocked or dosn't exist.
+	 * @throws SQLException              if a database access error occurs.
+	 * @throws AccessToDataBaseException if there is an issue with accessing the
+	 *                                   database.
+	 * @throws NotFoundException         if the requested data is not found.
+	 * @throws Exception                 if an error occurs during the process.
+	 */
 	private ArrayList<Object> checkCustomerLogin(String email, String pass, Order order)
 			throws SQLException, AccessToDataBaseException, NotFoundException, Exception {
 		ArrayList<Object> ret = new ArrayList<Object>();
@@ -358,6 +407,20 @@ public class LoginSignupWindow extends JFrame {
 		return ret;
 	}
 
+	/**
+	 * Checks if an employee with the given email and password exists in the
+	 * database.
+	 *
+	 * @param email The email of the employee.
+	 * @param pass  The password of the employee.
+	 * @return The EmployeeManagedOrders object representing the employee if found,
+	 *         or null if not found.
+	 * @throws SQLException              if a database access error occurs.
+	 * @throws AccessToDataBaseException if there is an issue with accessing the
+	 *                                   database.
+	 * @throws NotFoundException         if the requested data is not found.
+	 * @throws Exception                 if an error occurs during the process.
+	 */
 	private EmployeeManagedOrders isEmployeeExist(String email, String pass)
 			throws SQLException, AccessToDataBaseException, NotFoundException, Exception {
 
@@ -372,6 +435,21 @@ public class LoginSignupWindow extends JFrame {
 
 	}
 
+	/**
+	 * Checks the login credentials for an employee and returns an ArrayList
+	 * containing the employee object and a flag indicating the login status.
+	 *
+	 * @param email The email of the employee.
+	 * @param pass  The password of the employee.
+	 * @param order The Order object associated with the login.
+	 * @return An ArrayList containing the employee object and a flag indicating the
+	 *         login status (loggedin ,blocked or dosnt exist ).
+	 * @throws SQLException              if a database access error occurs.
+	 * @throws AccessToDataBaseException if there is an issue with accessing the
+	 *                                   database.
+	 * @throws NotFoundException         if the requested data is not found.
+	 * @throws Exception                 if an error occurs during the process.
+	 */
 	private ArrayList<Object> checkEmployeeLogin(String email, String pass, Order order)
 			throws SQLException, AccessToDataBaseException, NotFoundException, Exception {
 		ArrayList<Object> ret = new ArrayList<Object>();
@@ -396,26 +474,54 @@ public class LoginSignupWindow extends JFrame {
 		return ret;
 	}
 
-	private boolean setWarningsDateEmailPass(LoginSignupValidation validate, String date, String email, String pass) {
+	/**
+	 * Sets the warnings for date, email, and password based on the provided
+	 * validation object and values.
+	 *
+	 * @param validate The LoginSignupValidation object used for validation.
+	 * @param date     The date to be validated.
+	 * @param email    The email to be validated.
+	 * @param pass     The password to be validated.
+	 */
+	private void setWarningsDateEmailPass(LoginSignupValidation validate, String date, String email, String pass) {
 		makeDateWrningVisible(validate, date);
 		makeEmailWarningVisible(validate, email);
 		makePassWarningVisible(validate, pass);
-		return false;
 
 	}
 
+	/**
+	 * Makes the date warning label visible if the provided date is invalid.
+	 *
+	 * @param validate The LoginSignupValidation object used for date validation.
+	 * @param date     The date to be validated.
+	 */
 	private void makeDateWrningVisible(LoginSignupValidation validate, String date) {
 		if (!validate.isValidDate(date)) {
 			lblDateWarning.setVisible(true);
 		}
 	}
 
+	/**
+	 * Makes the email warning label visible if the provided email is invalid.
+	 *
+	 * @param validate The LoginSignupValidation object used for email validation.
+	 * @param email    The email to be validated.
+	 */
 	private void makeEmailWarningVisible(LoginSignupValidation validate, String email) {
 		if (!validate.isValidEmail(email)) {
 			lblEmailWarning.setVisible(true);
 		}
 	}
 
+	/**
+	 * Makes the password warning labels visible if the provided password is
+	 * invalid.
+	 *
+	 * @param validate The LoginSignupValidation object used for password
+	 *                 validation.
+	 * @param pass     The password to be validated.
+	 */
 	private void makePassWarningVisible(LoginSignupValidation validate, String pass) {
 		if (!validate.isValidPassword(pass)) {
 			lblPassPartOneWarn.setVisible(true);
@@ -423,6 +529,21 @@ public class LoginSignupWindow extends JFrame {
 		}
 	}
 
+	/**
+	 * Checks the sign-up information provided (email, date, password) and performs
+	 * the necessary actions based on the validation and user existence checks.
+	 *
+	 * @param email The email provided during sign-up.
+	 * @param date  The birth date provided during sign-up.
+	 * @param pass  The password provided during sign-up.
+	 * @throws SQLException              if there is an error in the SQL operation.
+	 * @throws AccessToDataBaseException if there is an error accessing the
+	 *                                   database.
+	 * @throws NotFoundException         if the user is not found.
+	 * @throws ParseException            if there is an error parsing the date
+	 *                                   string.
+	 * @throws Exception                 for any other generic exception.
+	 */
 	private void checkSigUp(String email, String date, String pass)
 			throws SQLException, AccessToDataBaseException, NotFoundException, ParseException, Exception {
 		LoginSignupValidation validate = new LoginSignupValidation();
@@ -443,6 +564,19 @@ public class LoginSignupWindow extends JFrame {
 
 	}
 
+	/**
+	 * Checks if a user with the provided email and password exists in the database,
+	 * first checks if is a customer , the result is null checks if is an employee
+	 *
+	 * @param email The email of the user to check.
+	 * @param pass  The password of the user to check.
+	 * @return true if the user exists, false otherwise.
+	 * @throws SQLException              if there is an error in the SQL operation.
+	 * @throws AccessToDataBaseException if there is an error accessing the
+	 *                                   database.
+	 * @throws NotFoundException         if the user is not found.
+	 * @throws Exception                 for any other generic exception.
+	 */
 	private boolean isUserExsit(String email, String pass)
 			throws SQLException, AccessToDataBaseException, NotFoundException, Exception {
 		boolean ret = false;
@@ -454,6 +588,16 @@ public class LoginSignupWindow extends JFrame {
 		return ret;
 	}
 
+	/**
+	 * Checks if all the provided information (date, email, password) is correct
+	 *
+	 * 
+	 * @param validate The LoginSignupValidation object used for validation.
+	 * @param date     The date string to be checked.
+	 * @param email    The email string to be checked.
+	 * @param pass     The password string to be checked.
+	 * @return true if all the information is correct, false otherwise.
+	 */
 	private boolean areAllInfoCorrect(LoginSignupValidation validate, String date, String email, String pass) {
 		boolean ret = false;
 		if (validate.isValidDate(date) && validate.isValidPassword(pass) && validate.isValidEmail(email)) {
@@ -463,6 +607,21 @@ public class LoginSignupWindow extends JFrame {
 
 	}
 
+	/**
+	 * Inserts a new customer into the database with the provided email, birth date,
+	 * and password.
+	 *
+	 * @param email The email address of the customer.
+	 * @param date  The birth date of the customer in the format "dd/MM/yyyy".
+	 * @param pass  The password of the customer.
+	 * @throws ParseException            if the birth date string cannot be parsed
+	 *                                   into a valid date.
+	 * @throws SQLException              if there is an error in the SQL operation.
+	 * @throws AccessToDataBaseException if there is an error accessing the
+	 *                                   database.
+	 * @throws NotFoundException         if the required data is not found.
+	 * @throws Exception                 for any other generic exception.
+	 */
 	private void insertCustomer(String email, String date, String pass)
 			throws ParseException, SQLException, AccessToDataBaseException, NotFoundException, Exception {
 		ManagerCustomers managerCustomer = new ManagerCustomers();
@@ -474,6 +633,9 @@ public class LoginSignupWindow extends JFrame {
 
 	}
 
+	/**
+	 * Clears the text fields by setting their text values to an empty string.
+	 */
 	private void refreshJtextFields() {
 		textField.setText("");
 		textFieldBirthDate.setText("");

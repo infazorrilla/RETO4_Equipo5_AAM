@@ -12,6 +12,7 @@ import java.util.List;
 import es.elorrieta.aam.model.bbdd.exception.AccessToDataBaseException;
 import es.elorrieta.aam.model.bbdd.exception.NotFoundException;
 import es.elorrieta.aam.model.bbdd.pojo.ShoppingCart;
+import es.elorrieta.aam.model.bbdd.pojo.ShoppingCartItem;
 import es.elorrieta.aam.model.bbdd.utils.DBUtils;
 
 public class ManagerShoppingCart extends ManagerAbstract<ShoppingCart> {
@@ -21,7 +22,8 @@ public class ManagerShoppingCart extends ManagerAbstract<ShoppingCart> {
 	}
 
 	@Override
-	public void insert(ShoppingCart shoppingCart) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
+	public void insert(ShoppingCart shoppingCart)
+			throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 
 		if (!dbUtils.isConnected())
 			dbUtils.connect();
@@ -29,8 +31,7 @@ public class ManagerShoppingCart extends ManagerAbstract<ShoppingCart> {
 		try {
 
 			String query = "INSERT INTO " + ManagerAbstract.TABLE_SHOPPINGCART
-					+ "( `totalPrice`, `descount` , `created_at`) VALUES ('" + shoppingCart.getTotalPrice() + "','"
-					+ shoppingCart.getDescount() + "', '"
+					+ "( `totalPrice` , `created_at`) VALUES ('" + shoppingCart.getTotalPrice() + "', '"
 					+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(shoppingCart.getCreatedAt()) + "' )";
 			preparedStatement = dbUtils.connection.prepareStatement(query);
 			preparedStatement.execute();
@@ -48,7 +49,8 @@ public class ManagerShoppingCart extends ManagerAbstract<ShoppingCart> {
 	}
 
 	@Override
-	public ShoppingCart select(ShoppingCart shoppingCart) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
+	public ShoppingCart select(ShoppingCart shoppingCart)
+			throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		if (!dbUtils.isConnected())
 			dbUtils.connect();
 		ShoppingCart ret = null;
@@ -93,8 +95,27 @@ public class ManagerShoppingCart extends ManagerAbstract<ShoppingCart> {
 
 	}
 
+	public ShoppingCart insertShopCartAndShopCartItems(ShoppingCart shoppingCart)
+			throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
+		insert(shoppingCart);
+		ShoppingCart shopCart = select(shoppingCart);
+		shopCart.setShoppingCartItems(shoppingCart.getShoppingCartItems());
+		insertShopCartItems(shopCart);
+		return shopCart;
+	}
+
+	private void insertShopCartItems(ShoppingCart shoppingCart)
+			throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
+		for (ShoppingCartItem shoppingCartItem : shoppingCart.getShoppingCartItems()) {
+			shoppingCartItem.setShoppingCart(shoppingCart);
+			new ManagerShoppingCartItems().insertShopCartItem(shoppingCartItem);
+		}
+
+	}
+
 	@Override
-	public void update(ShoppingCart shoppingCart) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
+	public void update(ShoppingCart shoppingCart)
+			throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		if (!dbUtils.isConnected())
 			dbUtils.connect();
 		Statement statement = null;
@@ -118,7 +139,8 @@ public class ManagerShoppingCart extends ManagerAbstract<ShoppingCart> {
 	}
 
 	@Override
-	public void delete(ShoppingCart shoppingCart) throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
+	public void delete(ShoppingCart shoppingCart)
+			throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 		if (!dbUtils.isConnected())
 			dbUtils.connect();
 		PreparedStatement preparedStatement = null;

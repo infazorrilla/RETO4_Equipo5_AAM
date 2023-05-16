@@ -46,6 +46,31 @@ public class ManagerShoppingCartItems extends ManagerAbstract<ShoppingCartItem> 
 		}
 	}
 
+	public void insertShopCartItem(ShoppingCartItem shoppingCartItem)
+			throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
+		if (!dbUtils.isConnected())
+			dbUtils.connect();
+		PreparedStatement preparedStatement = null;
+		try {
+
+			String query = "INSERT INTO " + ManagerAbstract.TABLE_SHOPPINGCARTITEMS
+					+ "(`id_shoppingcart`, id_product_item ,  `price`, `quantity`) VALUES ('"
+					+ shoppingCartItem.getShoppingCart().getId() + "','" + shoppingCartItem.getProductItem().getId()
+					+ "','" + shoppingCartItem.getPrice() + "','" + shoppingCartItem.getQuantity() + "')";
+			preparedStatement = dbUtils.connection.prepareStatement(query);
+			preparedStatement.execute();
+
+		} finally {
+			if (preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+				}
+			}
+			dbUtils.disconnect();
+		}
+	}
+
 	@Override
 	public ShoppingCartItem select(ShoppingCartItem shoppingCartItem)
 			throws SQLException, NotFoundException, AccessToDataBaseException, Exception {

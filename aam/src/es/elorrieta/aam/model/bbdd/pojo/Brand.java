@@ -4,6 +4,12 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * represents a brand
+ * 
+ * @author Admin
+ *
+ */
 public class Brand implements Serializable {
 
 	private static final long serialVersionUID = -2589051523281319846L;

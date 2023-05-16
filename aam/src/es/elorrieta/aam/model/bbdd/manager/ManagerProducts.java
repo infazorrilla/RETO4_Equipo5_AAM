@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -142,7 +141,6 @@ public class ManagerProducts extends ManagerAbstract<Product> {
 				myProduct.setName(resultSet.getString("name"));
 				myProduct.setPrice(resultSet.getDouble("price"));
 				myProduct.setGender(Genders.valueOf(resultSet.getString("gender")));
-
 				myProduct.setProductItems(new ManagerProductItems().selectAllByIdProduct(myProduct.getId()));
 				List<File> images = getImages(myProduct.getId(), myProduct.getName());
 				myProduct.setImages(images);
@@ -235,21 +233,5 @@ public class ManagerProducts extends ManagerAbstract<Product> {
 
 		}
 		return file;
-	}
-
-	private String generateUniqueFileName() {
-		String filename = "";
-		String datetime = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss").format(new java.util.Date());
-		datetime = datetime.replace("-", "");
-		datetime = datetime.replace(":", "");
-		filename = datetime + rndChar();
-		return filename;
-	}
-
-	private static char rndChar() {
-		int rnd = (int) (Math.random() * 52);
-		char base = (rnd < 26) ? 'A' : 'a';
-		return (char) (base + rnd % 26);
-
 	}
 }

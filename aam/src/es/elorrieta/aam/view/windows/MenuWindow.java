@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -45,6 +46,8 @@ public class MenuWindow extends JFrame {
 	private JButton btnPullAndBear;
 	private JButton btnBershka;
 	private JButton btnZara;
+	private JButton btnDresses;
+	private ArrayList<JPanel> jpanels;
 
 	public MenuWindow(Order order, UserChoice userChoice) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,7 +70,9 @@ public class MenuWindow extends JFrame {
 		contentPane.add(panelheader);
 		panelheader.setLayout(null);
 
-		JButton btnGoBack = new JButton("Atras");
+		JButton btnGoBack = new JButton("");
+		btnGoBack.setIcon(new ImageIcon(MenuWindow.class.getResource("/es/images/flecha (1).jpg")));
+		btnGoBack.setBackground(new Color(255, 255, 255));
 		btnGoBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -76,26 +81,42 @@ public class MenuWindow extends JFrame {
 			}
 		});
 		btnGoBack.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnGoBack.setBounds(29, 11, 95, 30);
+		btnGoBack.setBounds(44, 0, 93, 63);
 		panelheader.add(btnGoBack);
+
+		JButton btnShopCart = new JButton("");
+		btnShopCart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ShoppingCartWindow shopCart = new ShoppingCartWindow(MenuWindow.this, order, userChoice);
+				shopCart.setVisible(true);
+
+			}
+		});
+		btnShopCart.setBackground(new Color(255, 255, 255));
+		btnShopCart.setIcon(new ImageIcon(MenuWindow.class.getResource("/es/images/2331970.png")));
+		btnShopCart.setBounds(1111, 7, 53, 56);
+		panelheader.add(btnShopCart);
 
 		JButton btnProfile = new JButton("");
 		btnProfile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
+				if (null != order.getCustomer()) {
+					if (order.getCustomer().getProfile().isOn()) {
+						dispose();
+						Profile profile = new Profile(order);
+						profile.setVisible(true);
+					}
+				} else {
+					LoginSignupWindow LoginSignUpWindow = new LoginSignupWindow(order);
+					dispose();
+					LoginSignUpWindow.setVisible(true);
+				}
 			}
 		});
 		btnProfile.setBackground(new Color(255, 255, 255));
-		btnProfile.setIcon(new ImageIcon(MenuWindow.class.getResource("/es/images/2331970.png")));
-		btnProfile.setBounds(1118, 8, 68, 41);
+		btnProfile.setIcon(new ImageIcon(MenuWindow.class.getResource("/es/images/10418806.png")));
+		btnProfile.setBounds(1021, 7, 53, 56);
 		panelheader.add(btnProfile);
-
-		JButton btnShopCart = new JButton("");
-		btnShopCart.setBackground(new Color(255, 255, 255));
-		btnShopCart.setIcon(new ImageIcon(MenuWindow.class.getResource("/es/images/10418806.png")));
-		btnShopCart.setBounds(1043, 9, 53, 40);
-		panelheader.add(btnShopCart);
 
 		JPanel panelContainer = new JPanel();
 		panelContainer.setBackground(new Color(255, 255, 255));
@@ -137,7 +158,9 @@ public class MenuWindow extends JFrame {
 		panelContainer.add(panel);
 		panel.setLayout(null);
 
-		JButton btnDresses = new JButton("Vestidos");
+		btnDresses = new JButton("Vestidos");
+		btnDresses.setForeground(new Color(255, 255, 255));
+		btnDresses.setBackground(new Color(153, 102, 0));
 		btnDresses.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				makeChanges();
@@ -153,6 +176,8 @@ public class MenuWindow extends JFrame {
 		panel.add(btnDresses);
 
 		JButton btnTshirts = new JButton("Camisitas");
+		btnTshirts.setForeground(new Color(255, 255, 255));
+		btnTshirts.setBackground(new Color(153, 102, 0));
 		btnTshirts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				makeChanges();
@@ -167,6 +192,8 @@ public class MenuWindow extends JFrame {
 		panel.add(btnTshirts);
 
 		JButton btnJeans = new JButton("Pantalones");
+		btnJeans.setForeground(new Color(255, 255, 255));
+		btnJeans.setBackground(new Color(153, 102, 0));
 		btnJeans.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				makeChanges();
@@ -181,6 +208,8 @@ public class MenuWindow extends JFrame {
 		panel.add(btnJeans);
 
 		JButton btnShoes = new JButton("Zapatillas");
+		btnShoes.setForeground(new Color(255, 255, 255));
+		btnShoes.setBackground(new Color(153, 102, 0));
 		btnShoes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				makeChangesForShoes();
@@ -195,17 +224,18 @@ public class MenuWindow extends JFrame {
 		panel.add(btnShoes);
 
 		JPanel panelGender = new JPanel();
-		panelGender.setBackground(new Color(255, 255, 204));
+		panelGender.setBackground(new Color(255, 255, 255));
 		panelGender.setForeground(new Color(255, 255, 204));
 		panelGender.setBounds(0, 62, 1207, 48);
 		panelContainer.add(panelGender);
 		panelGender.setLayout(null);
 
 		JButton btnFemale = new JButton("Mujer");
+		btnFemale.setForeground(new Color(255, 255, 255));
+		btnFemale.setBackground(new Color(153, 102, 0));
 		btnFemale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				UserChoice userChoice = new UserChoice();
+				removePanelsFromPanelItems();
 				userChoice.setFemale(true);
 				makeGifsForFemaleVisible(true);
 				makeGifsForManVisible(false);
@@ -214,20 +244,19 @@ public class MenuWindow extends JFrame {
 				userChoice.setJeans(false);
 				userChoice.setShoes(false);
 				userChoice.setTshirt(false);
+				btnDresses.setText("Vestidos");
 			}
 		});
 		btnFemale.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		btnFemale.setBounds(124, 14, 110, 23);
+		btnFemale.setBounds(415, 6, 110, 39);
 		panelGender.add(btnFemale);
 
 		JButton btnMale = new JButton("Hombre");
+		btnMale.setForeground(new Color(255, 255, 255));
+		btnMale.setBackground(new Color(153, 102, 0));
 		btnMale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				UserChoice userChoice = new UserChoice();
 				userChoice.setFemale(false);
-				panel.setBackground(new Color(204, 153, 102));
-				panelGender.setBackground(new Color(255, 255, 255));
 				makeGifsForFemaleVisible(false);
 				makeGifsForManVisible(true);
 				makeBrandsButtonVisible(false);
@@ -235,10 +264,13 @@ public class MenuWindow extends JFrame {
 				userChoice.setJeans(false);
 				userChoice.setShoes(false);
 				userChoice.setTshirt(false);
+				btnDresses.setText("Trajes");
+				removePanelsFromPanelItems();
+
 			}
 		});
 		btnMale.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		btnMale.setBounds(300, 16, 104, 23);
+		btnMale.setBounds(695, 6, 104, 39);
 		panelGender.add(btnMale);
 
 		btnZara = new JButton("");
@@ -246,6 +278,9 @@ public class MenuWindow extends JFrame {
 		btnZara.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				userChoice.setZara(true);
+				userChoice.setHM(false);
+				userChoice.setBershka(false);
+				userChoice.setPullAndBear(false);
 				clearPanelItems(userChoice);
 				doGetAllProductOfSelectedBrand(MenuWindow.this, order, userChoice);
 
@@ -257,6 +292,16 @@ public class MenuWindow extends JFrame {
 		panelItems.add(btnZara);
 
 		btnHM = new JButton("");
+		btnHM.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				userChoice.setHM(true);
+				userChoice.setZara(false);
+				userChoice.setBershka(false);
+				userChoice.setPullAndBear(false);
+				clearPanelItems(userChoice);
+				doGetAllProductOfSelectedBrand(MenuWindow.this, order, userChoice);
+			}
+		});
 		btnHM.setVisible(false);
 		btnHM.setBounds(513, 185, 244, 105);
 
@@ -321,10 +366,12 @@ public class MenuWindow extends JFrame {
 	}
 
 	private void makeGifsForManVisible(boolean value) {
-
 		lblGifMan.setVisible(value);
 	}
-
+/**
+ * sets the visibility of all four buttons
+ * @param value true or false
+ */
 	private void makeBrandsButtonVisible(boolean value) {
 		btnZara.setVisible(value);
 		btnHM.setVisible(value);
@@ -337,10 +384,12 @@ public class MenuWindow extends JFrame {
 			makeGifsForFemaleVisible(true);
 			makeGifsForManVisible(false);
 			makeBrandsButtonVisible(false);
+			btnDresses.setText("Vestidos");
 		} else {
 			makeGifsForFemaleVisible(false);
 			makeGifsForManVisible(true);
 			makeBrandsButtonVisible(false);
+			btnDresses.setText("Trajes");
 		}
 	}
 
@@ -351,7 +400,9 @@ public class MenuWindow extends JFrame {
 		makeGifsForFemaleVisible(false);
 		makeGifsForManVisible(false);
 	}
-
+/**
+ * This method is used to change the action command (name) of four buttons: btnBershka, btnPullAndBear, btnHM, and btnZara.
+ */
 	private void changeButtonsName() {
 
 		btnBershka.setActionCommand("nike");
@@ -363,6 +414,13 @@ public class MenuWindow extends JFrame {
 		btnZara.setActionCommand("newBalance");
 	}
 
+	/**
+	 * takes a boolean parameter value. Based on the value of value, the method sets
+	 * different images to four buttons (btnZara, btnHM, btnPullAndBear, and
+	 * btnBershka).
+	 * 
+	 * @param value true or false
+	 */
 	private void setImages(boolean value) {
 		if (value) {
 			ImageIcon imageIcon = new ImageIcon(fitimage(getimage(MenuWindow.class.getResource("/es/images/ZARA.jpg")),
@@ -400,7 +458,7 @@ public class MenuWindow extends JFrame {
 	private void doGetAllProductOfSelectedBrand(MenuWindow frame, Order order, UserChoice userChoice) {
 		try {
 			List<Product> products = getAllProductOfSelectedBrand(userChoice);
-			addProductsToPanel(frame, order, products);
+			addProductsToPanel(frame, order, products, userChoice);
 		} catch (SQLException e) {
 			System.out.println(e);
 			JOptionPane.showMessageDialog(contentPane, "Data Base Error. Contents cannot be displayed", "ERROR!!",
@@ -413,12 +471,33 @@ public class MenuWindow extends JFrame {
 			JOptionPane.showMessageDialog(contentPane, "Data Base is empty", "ERROR!!", JOptionPane.ERROR_MESSAGE);
 
 		} catch (Exception e) {
-
+			System.out.println(e);
 			JOptionPane.showMessageDialog(contentPane, "Generic error...", "ERROR!!", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
 
+	/**
+	 * 
+	 *
+	 * This method takes in a UserChoice object (userChoice) and retrieves all
+	 * products that belong to the selected brand. It calls the
+	 * doSelectAllByGenderSubCategoryBrand() method from the ManagerProducts class,
+	 * passing in the selected gender, brand, and subcategory from the userChoice
+	 * object. The method returns a List of Product objects representing all the
+	 * products of the selected brand.
+	 *
+	 * @param userChoice the UserChoice object containing the selected gender,
+	 *                   brand, and subcategory
+	 * @return a List of Product objects representing all products of the selected
+	 *         brand
+	 * @throws SQLException              if an error occurs while accessing the
+	 *                                   database
+	 * @throws NotFoundException         if the requested data is not found
+	 * @throws AccessToDataBaseException if there is an issue with accessing the
+	 *                                   database
+	 * @throws Exception                 for any other unexpected exception
+	 */
 	private List<Product> getAllProductOfSelectedBrand(UserChoice userChoice)
 			throws SQLException, NotFoundException, AccessToDataBaseException, Exception {
 
@@ -427,56 +506,112 @@ public class MenuWindow extends JFrame {
 
 	}
 
-	private void addProductsToPanel(MenuWindow frame, Order order, List<Product> products) {
-		int num = 0;
+	/**
+	 * Adds products to the panelItems .
+	 * 
+	 * This method takes in a MenuWindow object (frame), an Order object (order), a
+	 * List of Product objects (products), and a UserChoice object (userChoice). It
+	 * iterates over the products list, assigns a number (num) to each product, and
+	 * calls the returnsJpanelNumberX() method to obtain a JPanel based on the
+	 * number and other parameters. If the returned JPanel is not null, it adds the
+	 * panel to both the panelItems list and the jpanels list.
+	 *
+	 * @param frame      the MenuWindow object to be passed to the
+	 *                   returnsJpanelNumberX() method
+	 * @param order      the Order object to be passed to the returnsJpanelNumberX()
+	 *                   method
+	 * @param products   the List of Product objects to be iterated over
+	 * @param userChoice the UserChoice object to be passed to the
+	 *                   returnsJpanelNumberX() method
+	 */
 
+	private void addProductsToPanel(MenuWindow frame, Order order, List<Product> products, UserChoice userChoice) {
+		int num = 0;
+		jpanels = new ArrayList<JPanel>();
 		for (Product product : products) {
 			num++;
-			panelItems.add(returnsJpanelNumberX(num, order, product, frame));
+			JPanel panel = returnsJpanelNumberX(num, order, product, frame, userChoice);
+			if (panel != null) {
+				panelItems.add(panel);
+				jpanels.add(panel);
+			}
 		}
 	}
 
-	private JPanel returnsJpanelNumberX(int num, Order order, Product product, MenuWindow frame) {
+	/**
+	 * Returns a specific JPanel based on the given number.
+	 * 
+	 * This method takes in a number (num), an Order object (order), a Product
+	 * object (product), a MenuWindow object (frame), and a UserChoice object
+	 * (userChoice), and returns a JPanel corresponding to the given number. The
+	 * returned JPanel is obtained by calling the appropriate method from the Panels
+	 * class based on the number. If the number is invalid or out of range (not
+	 * between 1 and 12), the method returns null.
+	 *
+	 * @param num        the number representing the desired JPanel
+	 * @param order      the Order object to be passed to the Panels methods
+	 * @param product    the Product object to be passed to the Panels methods
+	 * @param frame      the MenuWindow object to be passed to the Panels methods
+	 * @param userChoice the UserChoice object to be passed to the Panels methods
+	 * @return the JPanel corresponding to the given number, or null if the number
+	 *         is invalid
+	 */
+	private JPanel returnsJpanelNumberX(int num, Order order, Product product, MenuWindow frame,
+			UserChoice userChoice) {
 		JPanel ret = null;
 		switch (num) {
 		case 1:
-			ret = new Panels().getJpanelOne(order, product, frame);
+			ret = new Panels().getJpanelOne(order, product, frame, userChoice);
 			break;
 		case 2:
-			ret = new Panels().getJpanelTwo(order, product, frame);
+			ret = new Panels().getJpanelTwo(order, product, frame, userChoice);
 			break;
 		case 3:
-			ret = new Panels().getJpanelThree(order, product, frame);
+			ret = new Panels().getJpanelThree(order, product, frame, userChoice);
 			break;
 		case 4:
-			ret = new Panels().getJpanelFour(order, product, frame);
+			ret = new Panels().getJpanelFour(order, product, frame, userChoice);
 			break;
 		case 5:
-			ret = new Panels().getJpanelFive(order, product, frame);
+			ret = new Panels().getJpanelFive(order, product, frame, userChoice);
 			break;
 		case 6:
-			ret = new Panels().getJpanelSix(order, product, frame);
+			ret = new Panels().getJpanelSix(order, product, frame, userChoice);
 			break;
 		case 7:
-			ret = new Panels().getJpanelSeven(order, product, frame);
+			ret = new Panels().getJpanelSeven(order, product, frame, userChoice);
 			break;
 		case 8:
-			ret = new Panels().getJpanelEight(order, product, frame);
+			ret = new Panels().getJpanelEight(order, product, frame, userChoice);
 			break;
 		case 9:
-			ret = new Panels().getJpanelNine(order, product, frame);
+			ret = new Panels().getJpanelNine(order, product, frame, userChoice);
 			break;
 		case 10:
-			ret = new Panels().getJpanelTen(order, product, frame);
+			ret = new Panels().getJpanelTen(order, product, frame, userChoice);
 			break;
 		case 11:
-			ret = new Panels().getJpanelEleven(order, product, frame);
+			ret = new Panels().getJpanelEleven(order, product, frame, userChoice);
 			break;
 		case 12:
-			ret = new Panels().getJpanelTwelve(order, product, frame);
+			ret = new Panels().getJpanelTwelve(order, product, frame, userChoice);
 			break;
 		}
 
 		return ret;
+	}
+
+	/**
+	 * Removes panels from the panelItems list.
+	 * 
+	 * This method iterates over the jpanels list and removes each panel from the
+	 * panelItems list. If the jpanels list is null, no panels are removed.
+	 */
+	private void removePanelsFromPanelItems() {
+		if (jpanels != null) {
+			for (JPanel panel : jpanels) {
+				panelItems.remove(panel);
+			}
+		}
 	}
 }

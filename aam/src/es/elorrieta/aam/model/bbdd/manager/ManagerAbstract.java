@@ -7,6 +7,12 @@ import es.elorrieta.aam.model.bbdd.exception.AccessToDataBaseException;
 import es.elorrieta.aam.model.bbdd.exception.NotFoundException;
 import es.elorrieta.aam.model.bbdd.utils.DBUtils;
 
+/**
+ * An abstract class that implements the ManagerInterface and provides common
+ * functionality for manager classes.
+ *
+ * @param <T> the type of the objects managed by the manager
+ */
 public abstract class ManagerAbstract<T> implements ManagerInterface<T> {
 
 	protected DBUtils dbUtils = null;

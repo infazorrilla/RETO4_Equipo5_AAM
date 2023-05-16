@@ -1,23 +1,14 @@
 package es.elorrieta.aam.model.bbdd.manager;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import es.elorrieta.aam.model.bbdd.exception.AccessToDataBaseException;
 import es.elorrieta.aam.model.bbdd.exception.NotFoundException;
-import es.elorrieta.aam.model.bbdd.pojo.Brand;
-import es.elorrieta.aam.model.bbdd.pojo.Product;
 import es.elorrieta.aam.model.bbdd.pojo.ProductItem;
-import es.elorrieta.aam.model.bbdd.pojo.Product.Genders;
 import es.elorrieta.aam.model.bbdd.utils.DBUtils;
 
 public class ManagerProductItems extends ManagerAbstract<ProductItem> {
@@ -93,7 +84,7 @@ public class ManagerProductItems extends ManagerAbstract<ProductItem> {
 				productItem.setPrice(resultSet.getDouble("price"));
 				productItem.setStock(resultSet.getInt("stock"));
 				productItem.setSize(resultSet.getString("size"));
-
+				ret.add(productItem);
 			}
 		} finally {
 

@@ -1,6 +1,12 @@
 package es.elorrieta.aam.controller;
 
+/**
+ * Represents a user's choice for selecting gender, clothing category, and brand
+ * preferences.
+ * 
+ */
 public class UserChoice {
+
 	private boolean isFemale = true;
 
 	private boolean isDress = false;

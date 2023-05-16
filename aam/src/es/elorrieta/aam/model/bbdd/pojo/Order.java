@@ -33,7 +33,7 @@ public class Order  implements Serializable {
 	private Status status = null;
 	
 	public enum Status {
-		Pending, AwaitingShipment, Shipped, Cancelled
+		Pending, awaiting_shipment, Shipped, Cancelled
 
 	}
 	

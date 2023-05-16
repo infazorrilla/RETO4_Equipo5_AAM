@@ -8,6 +8,7 @@ import es.elorrieta.aam.model.bbdd.pojo.Order;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class WelcomeWindow {
 
@@ -33,8 +34,9 @@ public class WelcomeWindow {
 		frame.getContentPane().add(panelBienvenida);
 		panelBienvenida.setLayout(null);
 
-		JButton jButtonBienvenida = new JButton("");
-		jButtonBienvenida.addActionListener(new ActionListener() {
+		JButton btnWelcomeWindow = new JButton("");
+		btnWelcomeWindow.setIcon(new ImageIcon(WelcomeWindow.class.getResource("/es/images/entradaig (1).gif")));
+		btnWelcomeWindow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GenderWindow genderWindow = new GenderWindow(new Order());
 				frame.dispose();
@@ -44,7 +46,7 @@ public class WelcomeWindow {
 			}
 		});
 
-		jButtonBienvenida.setBounds(0, 0, 1207, 661);
-		panelBienvenida.add(jButtonBienvenida);
+		btnWelcomeWindow.setBounds(0, 0, 1207, 661);
+		panelBienvenida.add(btnWelcomeWindow);
 	}
 }

@@ -4,6 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * The Address class represents an address of a customer or an employee and
+ * implements the Serializable interface.
+ * 
+ * @author Admin
+ *
+ */
 public class Address implements Serializable {
 
 	private static final long serialVersionUID = 166467952426775958L;
@@ -101,5 +108,4 @@ public class Address implements Serializable {
 				+ ", province=" + province + ", country=" + country + ", createdAt=" + createdAt + "]";
 	}
 
-	
 }

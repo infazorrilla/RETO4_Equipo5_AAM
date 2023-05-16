@@ -13,7 +13,17 @@ import es.elorrieta.aam.controller.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
+/**
+ * represents a JFrame window that allows the user to select gender. Male or
+ * female. The window also includes a navigation bar at the top with buttons to
+ * Access to profile and users management if the user is an administrator.
+ * 
+ * @author Admin
+ *
+ */
 public class GenderWindow extends JFrame {
 
 	private static final long serialVersionUID = 6919893765005151313L;
@@ -34,12 +44,14 @@ public class GenderWindow extends JFrame {
 		contentPane.setLayout(null);
 
 		JPanel jPanelCines = new JPanel();
-		jPanelCines.setBackground(new Color(255, 255, 204));
-		jPanelCines.setBounds(0, 63, 1207, 538);
+		jPanelCines.setBackground(new Color(255, 255, 255));
+		jPanelCines.setBounds(0, 71, 1207, 519);
 		contentPane.add(jPanelCines);
 		jPanelCines.setLayout(null);
 
-		JButton btnMale = new JButton("Hombre");
+		JButton btnMale = new JButton("");
+		btnMale.setBackground(new Color(255, 255, 255));
+		btnMale.setIcon(new ImageIcon(GenderWindow.class.getResource("/es/images/try (3).gif")));
 		btnMale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -51,10 +63,12 @@ public class GenderWindow extends JFrame {
 			}
 		});
 		btnMale.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnMale.setBounds(691, 102, 228, 328);
+		btnMale.setBounds(690, 73, 248, 384);
 		jPanelCines.add(btnMale);
 
-		JButton btnFemale = new JButton("Mujer");
+		JButton btnFemale = new JButton("");
+		btnFemale.setBackground(new Color(255, 255, 255));
+		btnFemale.setIcon(new ImageIcon(GenderWindow.class.getResource("/es/images/girl (1).gif")));
 		btnFemale.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnFemale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -63,28 +77,49 @@ public class GenderWindow extends JFrame {
 				menu.setVisible(true);
 			}
 		});
-		btnFemale.setBounds(294, 102, 248, 328);
+		btnFemale.setBounds(293, 73, 248, 384);
 		jPanelCines.add(btnFemale);
+
+		JLabel lblNewLabel = new JLabel("Mujer");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Verdana", Font.BOLD, 18));
+		lblNewLabel.setBounds(357, 468, 123, 29);
+		jPanelCines.add(lblNewLabel);
+
+		JLabel lblNewLabel_1 = new JLabel("Hombre");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setFont(new Font("Verdana", Font.BOLD, 18));
+		lblNewLabel_1.setBounds(766, 468, 112, 29);
+		jPanelCines.add(lblNewLabel_1);
 
 		JPanel panel = new JPanel();
 		panel.setForeground(new Color(0, 128, 0));
 		panel.setBackground(new Color(255, 204, 51));
-		panel.setBounds(0, 599, 1207, 62);
+		panel.setBounds(0, 590, 1207, 71);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
 		JPanel jPanelBarraSuperior = new JPanel();
-		jPanelBarraSuperior.setBounds(0, 0, 1207, 62);
+		jPanelBarraSuperior.setBounds(0, 0, 1207, 71);
 		contentPane.add(jPanelBarraSuperior);
 		jPanelBarraSuperior.setBackground(new Color(248, 212, 64));
 		jPanelBarraSuperior.setLayout(null);
 
 		JButton btnInicio = new JButton("");
+		btnInicio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				WelcomeWindow welcomeWin = new WelcomeWindow();
+				dispose();
+				welcomeWin.frame.setVisible(true);
+			}
+		});
+		btnInicio.setIcon(new ImageIcon(GenderWindow.class.getResource("/es/images/flecha (1).jpg")));
 
 		btnInicio.setForeground(new Color(255, 255, 255));
 		btnInicio.setFont(new Font("Arial Black", Font.BOLD, 14));
-		btnInicio.setBackground(new Color(0, 0, 0));
-		btnInicio.setBounds(10, 0, 90, 50);
+		btnInicio.setBackground(new Color(255, 255, 255));
+		btnInicio.setBounds(36, 11, 90, 50);
 		jPanelBarraSuperior.add(btnInicio);
 
 		btnUser = new JButton("");
@@ -111,6 +146,8 @@ public class GenderWindow extends JFrame {
 		jPanelBarraSuperior.add(btnUser);
 
 		btnCustomers = new JButton("Gestionar Usuarios ");
+		btnCustomers.setForeground(new Color(255, 255, 255));
+		btnCustomers.setBackground(new Color(153, 102, 0));
 		btnCustomers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -120,12 +157,19 @@ public class GenderWindow extends JFrame {
 			}
 		});
 		btnCustomers.setVisible(false);
-		btnCustomers.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnCustomers.setBounds(830, 11, 216, 39);
+		btnCustomers.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnCustomers.setBounds(830, 11, 216, 50);
 		jPanelBarraSuperior.add(btnCustomers);
 		doMakeBtnsVisible(order);
 	}
 
+	/**
+	 * takes an Order object as a parameter and checks if the associated customer's
+	 * profile is turned on and has a user type of 1 (administrator). if the user is
+	 * an administartor makes button gestionar usuarios visible
+	 * 
+	 * @param order
+	 */
 	private void doMakeBtnsVisible(Order order) {
 		if (null != order.getCustomer()) {
 			if (order.getCustomer().getProfile().isOn() && order.getCustomer().getProfile().getUserType() == 1) {
@@ -136,6 +180,12 @@ public class GenderWindow extends JFrame {
 		}
 	}
 
+	/**
+	 * takes a boolean parameter value. It sets the visibility of a button
+	 * (btnCustomers) based on the value of the boolean parameter.
+	 * 
+	 * @param value
+	 */
 	private void makeBtnsVisible(boolean value) {
 		btnCustomers.setVisible(value);
 

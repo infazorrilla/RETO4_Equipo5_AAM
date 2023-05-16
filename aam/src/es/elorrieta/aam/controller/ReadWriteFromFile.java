@@ -14,7 +14,11 @@ import es.elorrieta.aam.model.bbdd.pojo.Customer;
 
 public class ReadWriteFromFile {
 	public void writeToFile(List<Customer> customers) {
-
+		/**
+		 * Writes a list of customers to a file.
+		 *
+		 * @param customers the list of customers to be written to the file
+		 */
 		FileOutputStream fileOutputStream = null;
 		ObjectOutputStream objectOutputStream = null;
 		try {
@@ -54,6 +58,12 @@ public class ReadWriteFromFile {
 
 	}
 
+	/**
+	 * Reads a list of customers from a file and returns it.
+	 *
+	 * @return the list of customers read from the file, or {@code null} if an error
+	 *         occurs
+	 */
 	public List<Customer> readFromFile() {
 		List<Customer> ret = null;
 		FileInputStream fileInputStream = null;

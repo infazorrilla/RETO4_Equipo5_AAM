@@ -2,8 +2,15 @@ package es.elorrieta.aam.model.bbdd.pojo;
 
 import java.io.Serializable;
 
-public class Customer extends Person  implements Serializable{
-
+/**
+ * represents a customer , extends the Person class and implements the
+ * Serializable interface. It inherits the properties and methods of the Person
+ * class
+ * 
+ * @author Admin
+ *
+ */
+public class Customer extends Person implements Serializable {
 
 	private static final long serialVersionUID = -3269494051008982311L;
 
@@ -30,6 +37,5 @@ public class Customer extends Person  implements Serializable{
 				+ ", Password()=" + getPassword() + ", isStatus()=" + isStatus() + ",Image()=" + getImage()
 				+ ",Profile()=" + getProfile() + "]";
 	}
-
 
 }
