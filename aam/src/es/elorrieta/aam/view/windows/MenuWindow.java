@@ -368,10 +368,12 @@ public class MenuWindow extends JFrame {
 	private void makeGifsForManVisible(boolean value) {
 		lblGifMan.setVisible(value);
 	}
-/**
- * sets the visibility of all four buttons
- * @param value true or false
- */
+
+	/**
+	 * sets the visibility of all four buttons
+	 * 
+	 * @param value true or false
+	 */
 	private void makeBrandsButtonVisible(boolean value) {
 		btnZara.setVisible(value);
 		btnHM.setVisible(value);
@@ -400,9 +402,11 @@ public class MenuWindow extends JFrame {
 		makeGifsForFemaleVisible(false);
 		makeGifsForManVisible(false);
 	}
-/**
- * This method is used to change the action command (name) of four buttons: btnBershka, btnPullAndBear, btnHM, and btnZara.
- */
+
+	/**
+	 * This method is used to change the action command (name) of four buttons:
+	 * btnBershka, btnPullAndBear, btnHM, and btnZara.
+	 */
 	private void changeButtonsName() {
 
 		btnBershka.setActionCommand("nike");
@@ -460,7 +464,6 @@ public class MenuWindow extends JFrame {
 			List<Product> products = getAllProductOfSelectedBrand(userChoice);
 			addProductsToPanel(frame, order, products, userChoice);
 		} catch (SQLException e) {
-			System.out.println(e);
 			JOptionPane.showMessageDialog(contentPane, "Data Base Error. Contents cannot be displayed", "ERROR!!",
 					JOptionPane.ERROR_MESSAGE);
 
@@ -471,7 +474,6 @@ public class MenuWindow extends JFrame {
 			JOptionPane.showMessageDialog(contentPane, "Data Base is empty", "ERROR!!", JOptionPane.ERROR_MESSAGE);
 
 		} catch (Exception e) {
-			System.out.println(e);
 			JOptionPane.showMessageDialog(contentPane, "Generic error...", "ERROR!!", JOptionPane.ERROR_MESSAGE);
 		}
 
